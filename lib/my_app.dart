@@ -1,3 +1,4 @@
+import 'package:exercise_app/core/bloc/app_bloc.dart';
 import 'package:exercise_app/core/di/injection_container.dart';
 import 'package:exercise_app/core/routing/app_router.dart';
 import 'package:exercise_app/core/services/local_storage_service.dart';
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
     final localStorageService = locater<LocalStorageService>(); 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => OnBoardingBloc(localStorageService))
+        BlocProvider(create: (context) => AppBloc(localStorageService)..add(AppStarted())),
+        BlocProvider(create: (context) => OnBoardingBloc(localStorageService)),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
