@@ -14,28 +14,18 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  //  void initState() {
-  //   super.initState();
-  //   Future.delayed(Duration(seconds: 2), () {
-  //     context.router.replace(MyHomePageRoute(title: ''));
-  //   });
-  // }
+   void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 2), () {    
+      if(!mounted) return ;
+      context.read<AppBloc>().add(AppStarted()); 
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AppBloc, AppState>(
-      listener: (context, state) {
-        // TODO: implement listener
-        if(state is AppUnonboarded){
-          context.router.replace(OnboardingScreenRoute());
-        }
-        else if (state is AppAuthenticated) {          
-          context.router.replace(MyHomePageRoute(title: 'Home'));
-        }
-      },
-      child: Scaffold(
-        backgroundColor: Colors.blue,
-        body: Center(child: Text("Splash Screen")),
-      ),
+    return Scaffold(
+      backgroundColor: Colors.blue,
+      body: Center(child: Text("Splash Screen")),
     );
   }
 }
