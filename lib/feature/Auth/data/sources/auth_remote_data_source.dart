@@ -22,7 +22,7 @@ class AuthRemoteDataSource {
 
   Future <User?> login(String email, String password) async{
     try{
-      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+      final credential = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, 
         password: password
       );    

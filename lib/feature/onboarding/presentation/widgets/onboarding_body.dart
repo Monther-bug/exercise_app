@@ -1,23 +1,28 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/feature/onboarding/bloc/on_boarding_bloc.dart';
 import 'package:exercise_app/feature/onboarding/presentation/widgets/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OnboardingBody extends StatelessWidget {
+class OnboardingBody extends StatefulWidget {
   const OnboardingBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final PageController pageController = PageController();
-     final ValueNotifier<int> currentPage = ValueNotifier<int>(0);   
-      @override
-      void dispose() {
-        pageController.dispose();
-        currentPage.dispose();
-        //super.dispose();
-      }
+  State<OnboardingBody> createState() => _OnboardingBodyState();
+}
+
+class _OnboardingBodyState extends State<OnboardingBody> {
+  final PageController pageController = PageController();
+  final ValueNotifier<int> currentPage = ValueNotifier<int>(0);  
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    currentPage.dispose();
+    super.dispose();
+  }
+
+  @override  
+  Widget build(BuildContext context) {           
     return  Scaffold(
       body: PageView(
         controller: pageController,
