@@ -10,12 +10,6 @@ part 'on_boarding_state.dart';
 class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
   final LocalStorageService localStorageService;
   OnBoardingBloc(this.localStorageService) : super(OnBoardingInitial()) {
-
-    // on<CheckOnboarding>((event, emit) async{
-    //   final hasSeen = await localStorageService.hasSeenOnboarding();
-    //   emit(OnBoardingChecked(hasSeen));
-    // });
-
     on<CompleteOnboarding>((event, emit) async{
       await localStorageService.markOnboardingComplete();
       emit(OnboardingCompleted());

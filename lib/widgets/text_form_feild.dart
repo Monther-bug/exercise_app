@@ -12,7 +12,7 @@ class Customtextfeild extends StatelessWidget {
   final TextInputAction textInputAction;
   final bool obscureText;
   final Widget? prefixIcon;
-    final Widget? suffixIcon;
+  final Widget? suffixIcon;
   final List<TextInputFormatter>? inputFormatters;
   final TextDirection? textDirection;
   final String? Function(String?)? validator;
@@ -21,6 +21,8 @@ class Customtextfeild extends StatelessWidget {
   final double? height;
   final bool? enabled;
   final void Function()? ontap;
+  final bool? borderEnabled;
+
 
 
  
@@ -41,7 +43,8 @@ class Customtextfeild extends StatelessWidget {
     this.color,
     this.height,
     this.enabled,
-    this.ontap
+    this.ontap,
+    this.borderEnabled
  
   });
 
@@ -89,27 +92,28 @@ class Customtextfeild extends StatelessWidget {
       prefixIcon: prefixIcon, 
       suffixIcon: suffixIcon,         
       fillColor:color?? theme.colorScheme.background,
-      filled: true,        
+      filled: true,  
+          
       enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
-      borderSide: BorderSide(
-        color: Colors.transparent, // Your #a8a7ae or #dddce0 color
-        width: 1.0,
-      ),
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(
+          color: Colors.transparent, // Your #a8a7ae or #dddce0 color
+          width: 1.0,
+       ),
       ),
       focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(16),
       borderSide: BorderSide(
-        color: theme.colorScheme.outline, // Usually a stronger color for focus
+        color: Colors.transparent, // Usually a stronger color for focus
         width: 2.0, // Often slightly thicker to indicate focus
       )),
-      border: 
-      OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),          
-        borderSide: BorderSide(
-          color: theme.colorScheme.outline,
-        )//Hides the border 
-      ),                                        
+      // border: 
+      // OutlineInputBorder(
+      //   borderRadius: BorderRadius.circular(16),          
+      //   borderSide: BorderSide(
+      //     color: theme.colorScheme.outline,
+      //   )//Hides the border 
+      // ),                                        
       ),
     );
   }

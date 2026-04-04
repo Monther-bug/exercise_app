@@ -2,10 +2,6 @@ import 'package:exercise_app/core/di/injection_container.dart';
 import 'package:exercise_app/core/routing/app_router.dart';
 import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/services/local_storage_service.dart';
-import 'package:exercise_app/feature/Auth/data/repository/auth_repository_imp.dart';
-import 'package:exercise_app/feature/Auth/data/sources/auth_remote_data_source.dart';
-import 'package:exercise_app/feature/Auth/domain/usecases/login_usecase.dart';
-import 'package:exercise_app/feature/Auth/domain/usecases/sign_up_usecase.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/feature/onboarding/bloc/on_boarding_bloc.dart';
 import 'package:flutter/material.dart';
@@ -19,18 +15,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localStorageService = locater<LocalStorageService>();
+    final localStorageService = locater<LocalStorageService>(); 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => OnBoardingBloc(localStorageService)),
-        BlocProvider(
-          create: (context) => AuthBloc(
-            AuthRepositoryImp(AuthRemoteDataSource()),
-            LoginUsecase(AuthRepositoryImp(AuthRemoteDataSource())),
-            SignUpUsecase(AuthRepositoryImp(AuthRemoteDataSource())),
-            localStorageService
-          ),
-        ),
+        BlocProvider(create: (_) => OnBoardingBloc(localStorageService)),
+        BlocProvider(create: (_) => locater<AuthBloc>()),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -48,6 +37,9 @@ class MyApp extends StatelessWidget {
               }   
               else if (state is Unauthenticated){
                 appRouter.replace(LoginScreenRoute());
+              }
+              if(state is AuthSuccess){
+                appRouter.replace(MyHomePageRoute(title: ''));
               }
               
             },
