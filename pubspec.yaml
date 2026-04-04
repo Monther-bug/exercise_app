@@ -36,10 +36,15 @@ dependencies:
   cupertino_icons: ^1.0.8
   get_it: ^9.2.1
   auto_route: ^8.1.0
-  flutter_screenutil: ^5.9.3
+  # flutter_screenutil removed
   flutter_native_splash: ^2.4.7
   shared_preferences: ^2.2.3  
   flutter_bloc: ^9.1.1
+  firebase_core: ^3.4.0
+  firebase_auth: ^5.2.0
+  google_fonts: ^6.3.3
+  screentasia: ^1.2.0
+
 
 dev_dependencies:
   flutter_test:

@@ -9,6 +9,8 @@ class AppRouter extends $AppRouter  {
   List<AutoRoute> get routes => [
     AutoRoute(page: SplashScreenRoute.page , path: '/',initial: true),
     AutoRoute(page: MyHomePageRoute.page, path: '/home' ),
-    AutoRoute(page: OnboardingScreenRoute.page, )
+    AutoRoute(page: OnboardingScreenRoute.page, ),
+    AutoRoute(page: LoginScreenRoute.page, ),
+    AutoRoute(page: SignUpScreenRoute.page, )
   ];
 }
