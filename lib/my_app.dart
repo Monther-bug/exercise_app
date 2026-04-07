@@ -3,6 +3,9 @@ import 'package:exercise_app/core/routing/app_router.dart';
 import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/services/local_storage_service.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
+import 'package:exercise_app/feature/home/data/repositories/exercise_repository.dart';
+import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
+import 'package:exercise_app/feature/home/presentation/bloc/exercise_bloc.dart';
 import 'package:exercise_app/feature/onboarding/bloc/on_boarding_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,17 +18,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localStorageService = locater<LocalStorageService>(); 
+    final localStorageService = locator<LocalStorageService>(); 
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => OnBoardingBloc(localStorageService)),
-        BlocProvider(create: (_) => locater<AuthBloc>()),
+        BlocProvider(create: (_)=> locator<ExerciseBloc>()..add(DisplayExercise())),
+        BlocProvider(create: (_) => locator<AuthBloc>()),
       ],
       child: MultiBlocListener(
         listeners: [
         
           BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {  
+              
               if(state is AppUnonboarded){
                 appRouter.replace(OnboardingScreenRoute());
               }
@@ -35,12 +40,13 @@ class MyApp extends StatelessWidget {
               if(state is Authenticated){
                 appRouter.replace(MyHomePageRoute(title: ''));
               }   
-              else if (state is Unauthenticated){
+              else if (state is Unauthenticated){                
                 appRouter.replace(LoginScreenRoute());
               }
               if(state is AuthSuccess){
                 appRouter.replace(MyHomePageRoute(title: ''));
               }
+              
               
             },
           ),
