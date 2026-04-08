@@ -39,8 +39,7 @@ class _OnboardingBodyState extends State<OnboardingBody> {
           return FloatingActionButton(
             onPressed: () {
               if (value == 2) {          
-                context.read<OnBoardingBloc>().add(CompleteOnboarding());
-               // AutoRouter.of(context).replace( MyHomePageRoute(title: ''));
+                context.read<OnBoardingBloc>().add(CompleteOnboarding());              
               } else {
                 // Navigate to next page
                 pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);

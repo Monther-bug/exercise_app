@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                   padding:  EdgeInsets.all(8.0),
                   child: Container(
                     height: 50.hp,
-                    width: 40.wp,
+                    // width: 40.wp,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(2.wp),
@@ -103,7 +103,8 @@ class LoginScreen extends StatelessWidget {
                                   icon: Icon(value
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                    color: AppColors.primary,)),
+                                    color: AppColors.primary,
+                                    size: context.isMobile? 4.wp:2.wp)),
                               );
                             }
                           ),

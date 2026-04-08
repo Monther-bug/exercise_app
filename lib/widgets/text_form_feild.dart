@@ -87,7 +87,7 @@ class Customtextfeild extends StatelessWidget {
            12.sp:
            context.isTablet?14.sp
            :16.sp,
-          height: height?? 1.2, 
+          height: height?? 1, 
         ),         
       prefixIcon: prefixIcon, 
       suffixIcon: suffixIcon,         

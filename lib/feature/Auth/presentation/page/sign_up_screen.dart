@@ -32,7 +32,7 @@ class SignUpScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Container(
-                  width: 40.wp,
+                  //width: 40.wp,
                   height: 60.hp,
                   decoration: BoxDecoration(
                     color: AppColors.neutural,
@@ -113,10 +113,15 @@ class SignUpScreen extends StatelessWidget {
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.done,
                               obscureText: value,
-                              suffixIcon: Icon(value
+                              suffixIcon: IconButton(icon: Icon(value
                               ?Icons.visibility
-                              :Icons.visibility_off,
-                              color: AppColors.primary,),
+                              :Icons.visibility_off,                              
+                              color: AppColors.primary,
+                              size: context.isMobile? 4.wp:2.wp),
+                              onPressed:(){
+                                obscureNotifier.value =
+                                !obscureNotifier.value;
+                              } ,),
                             );
                           }
                         ),

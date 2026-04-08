@@ -32,7 +32,7 @@ Future<void> init() async {
     () => SignUpUsecase(locator<AuthRepository>()),
   );
 
-  locator.registerFactory<AuthBloc>(
+  locator.registerLazySingleton<AuthBloc>(
     () => AuthBloc(
       locator<AuthRepository>(),
       locator<LoginUsecase>(),

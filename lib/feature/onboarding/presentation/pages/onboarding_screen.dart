@@ -7,19 +7,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<OnBoardingBloc, OnBoardingState>(
-      listener: (context, state) {
-        if (state is OnboardingCompleted) {
-        context.read<AuthBloc>().add(OnboardingFinished());
-        //context.router.replace(MyHomePageRoute(title: 'Home'));
-      }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<OnBoardingBloc, OnBoardingState>(
+          listener: (context, state) {
+            if (state is OnboardingCompleted) {
+              context.read<AuthBloc>().add(OnboardingFinished());
+              
+            }
+          },
+        ),
+        BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if(state is Authenticated || state is Unauthenticated){
+              context.router.replace(MyHomePageRoute(title: ''));
+            }
+          },
+        ),
+      ],
       child: (OnboardingBody()),
     );
   }

@@ -15,37 +15,18 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
   ExerciseBloc(this.repository) : super(ExerciseInitial()) {
     on<DisplayExercise>((event, emit) async{
       emit(ExerciseLoading());
-      try{
-        final data = await repository.getExercise();
-        if(data.isEmpty){
-          emit(ExerciseEmpty());
-        }
-        else{
-           emit(ExerciseLoaded(data));
-        }       
-      }catch(e){
-        if(e is DioException && e.error is NetworkFailure){
-          emit(ExerciseError((e.error as NetworkFailure).message));
-        }
-        else{
-          emit(ExerciseError(e.toString()));
-        }
-      }
-    });
+      
+        final result = await repository.getExercise();           
+        result.fold(
+        (failure) => emit(ExerciseError(failure.message)),
+        (exercises) {if (exercises.isEmpty) {
+            emit(ExerciseEmpty());
+          } else {
+            emit(ExerciseLoaded(exercises));
+          }
+        });
     
-    // Future<void> fetch() async{
-    //   emit(ExerciseLoading());
-    //   try{
-    //     final data = await repository.getExercise();
-    //     emit(ExerciseLoaded(data));
-    //   }catch(e){
-    //     if(e is DioException && e.error is NetworkFailure){
-    //       emit(ExerciseError((e.error as NetworkFailure).message));
-    //     }
-    //     else{
-    //       emit(ExerciseError('Somthing went wrong'));
-    //     }
-    //   }
-    // }
+    });
+  
   }
 }

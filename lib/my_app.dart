@@ -23,31 +23,23 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => OnBoardingBloc(localStorageService)),
         BlocProvider(create: (_)=> locator<ExerciseBloc>()..add(DisplayExercise())),
-        BlocProvider(create: (_) => locator<AuthBloc>()),
+        BlocProvider(create: (_) => locator<AuthBloc>()..add(AppStarted())),
       ],
       child: MultiBlocListener(
-        listeners: [
-        
+        listeners: [        
           BlocListener<AuthBloc, AuthState>(
-            listener: (context, state) {  
+            listener: (context, state) { 
               
-              if(state is AppUnonboarded){
-                appRouter.replace(OnboardingScreenRoute());
-              }
-              else if (state is Appboarded){
-                context.read<AuthBloc>().add(AuthCheck());
-              }    
-              if(state is Authenticated){
-                appRouter.replace(MyHomePageRoute(title: ''));
-              }   
-              else if (state is Unauthenticated){                
-                appRouter.replace(LoginScreenRoute());
-              }
-              if(state is AuthSuccess){
-                appRouter.replace(MyHomePageRoute(title: ''));
-              }
-              
-              
+              // if(state is Authenticated || 
+              //    state is Unauthenticated ||
+              //    state is AppUnonboarded ||
+              //    state is Appboarded){
+              //     appRouter.reevaluateGuards();
+              // }               
+              // if(state is AuthSuccess){
+              //   appRouter.replace(MyHomePageRoute(title: ''));
+              // }  
+              appRouter.reevaluateGuards();                   
             },
           ),
         ],
