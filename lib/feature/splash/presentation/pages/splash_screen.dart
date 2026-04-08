@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/theme/app_text_styles.dart';
 
@@ -20,7 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(Duration(seconds: 2), () {    
       if(!mounted) return ;
-      context.read<AuthBloc>().add(AppStarted()); 
+      //context.read<AuthBloc>().add(AppStarted()); 
+      context.pushRoute(MyHomePageRoute(title: ''));
     });
   }
   @override

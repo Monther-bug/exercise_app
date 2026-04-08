@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:flutter/material.dart';
-// ...existing code...
 import 'package:google_fonts/google_fonts.dart';
+import 'package:screentasia/screentasia.dart';
 
 class AppTextStyles {
 

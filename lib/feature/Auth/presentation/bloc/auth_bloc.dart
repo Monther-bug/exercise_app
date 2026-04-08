@@ -26,10 +26,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if(!hasSeenOnboarding){
         emit(AppUnonboarded());
       }
-      else{emit(Appboarded());}
+      else{emit(Appboarded());
+      add(AuthCheck());}
     });
     on<OnboardingFinished>((event, emit){
         emit(Appboarded());
+        add(AuthCheck());
+        
       });
 
     on<AuthCheck> ((event, emit) async{
