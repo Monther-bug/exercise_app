@@ -1,16 +1,15 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dio/dio.dart';
-import 'package:exercise_app/core/network/api_client.dart';
-import 'package:exercise_app/core/network/network_failure.dart';
 import 'package:exercise_app/core/routing/app_router.gr.dart';
-import 'package:exercise_app/core/services/local_storage_service.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/theme/app_text_styles.dart';
+import 'package:exercise_app/core/utils/responsive_extension.dart';
+import 'package:exercise_app/feature/error/presentation/empty_view.dart';
 import 'package:exercise_app/feature/error/presentation/global_error_view.dart';
-import 'package:exercise_app/feature/home/data/repositories/exercise_repository.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
-import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
 import 'package:exercise_app/feature/home/presentation/bloc/exercise_bloc.dart';
+import 'package:exercise_app/feature/home/presentation/bloc/search_bloc.dart';
+import 'package:exercise_app/feature/home/presentation/widgets/build_list_widget.dart';
+import 'package:exercise_app/widgets/text_form_feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:screentasia/screentasia.dart';
@@ -30,60 +29,66 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-        // actions: [IconButton(onPressed: (){
-        //   context.read<ExerciseBloc>().add(DisplayExercise());}
-        //   , icon:Icon(Icons.list))],
-      ),
-      body: BlocBuilder<ExerciseBloc, ExerciseState>(
-        builder: (context, state) {        
-         
+    return BlocListener<ExerciseBloc, ExerciseState>(
+      listener: (context, state) {
+         if (state is ExerciseError) {
+          String message = state.error;
+          context.pushRoute(GlobalErrorViewRoute(message: message));
+        }  
+        if (state is ExerciseEmpty) {
+        context.pushRoute(EmptyViewRoute());
+        }
+      },
+       child:  Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          toolbarHeight: 10.hp,
+          // title: Padding(padding: EdgeInsets.all(1.wp), child: 
+          // SearchBar(
+           
+          // )),
+          title: Customtextfeild(
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.search,
+              prefixIcon:  Icon(
+                Icons.search, 
+                color: AppColors.primary,
+                size: context.isMobile? 4.wp:2.wp),
+              hintText: 'Search',
+              onChanged: (value){
+                context.read<SearchBloc>().add(SearchingEvent(value));
+              },
+              onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
+              borderRadius: 1,
+            ),
+        ),
+        body: 
+        BlocBuilder<SearchBloc, SearchState>(
+          builder: (context, state) {
+            if (state is SearchLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is Searchfailed) {
+              return GlobalErrorView(message: state.message);
+            } else if (state is SearchEmpty) {
+              return EmptyView();
+            } else if (state is SearchSuccessful) {
+              final list = state.data;
+              return BuildListWidget(list: list);              
+            }
           
-          if(state is ExerciseLoaded){
-            var list = state.exercises;
-            return ListView.builder(
-              itemCount: list.length,
-              itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  
-                  decoration: BoxDecoration(
-                    color: AppColors.neutural,
-                    borderRadius: BorderRadius.circular(2.wp),
-                    boxShadow: [BoxShadow(
-                      color: AppColors.shadow.withOpacity(0.3),
-                            blurRadius: 4,
-                            spreadRadius: 0,
-                            offset: const Offset(2, 2),
-                    )]
-                
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      title: Text(list[index].name,style: AppTextStyles.titleMedium,),
-                      subtitle: Text(list[index].muscle, style: AppTextStyles.bodyMedium),
-                    ),
-                  ),
-                ),
-              ),
+            return BlocBuilder<ExerciseBloc, ExerciseState>(
+              builder: (context, state) {
+                if (state is ExerciseLoaded) {
+                  var list = state.exercises;
+                  return BuildListWidget(list: list);
+                }                
+                return Center(child: CircularProgressIndicator());
+              },
             );
-          }    
-          else if(state is ExerciseError){
-            String message = state.error;
-            context.pushRoute(GlobalErrorViewRoute(message: message));
-          }      
-          else if(state is ExerciseEmpty){
-            context.pushRoute(EmptyViewRoute());
           }
-          return Center(child: CircularProgressIndicator(),);
-        },
-        
-        
-      ),
+       )
+       )
     );
   }
 }
+

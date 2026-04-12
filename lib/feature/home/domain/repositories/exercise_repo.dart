@@ -6,5 +6,5 @@ import 'package:fpdart/fpdart.dart';
 
 abstract class ExerciseRepository{
   // Future<List<ExerciseEntity>> getExercise();
-  Future<Either<NetworkFailure, List<ExerciseEntity>>> getExercise();
+  Future<Either<NetworkFailure, List<ExerciseEntity>>> getExercise(String? name);
 }

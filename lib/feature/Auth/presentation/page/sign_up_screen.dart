@@ -20,14 +20,14 @@ class SignUpScreen extends StatelessWidget {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     final TextEditingController nameController = TextEditingController();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final ValueNotifier<bool> obscureNotifier = ValueNotifier<bool>(true);
     return Center(
       child: SizedBox(
         width: context.isMobile ? 100.wp : 75.wp,
         child: Scaffold(
           body: Form(
-            key: _formKey,
+            key: formKey,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
@@ -146,7 +146,7 @@ class SignUpScreen extends StatelessWidget {
                           
                             return ElevatedButton(
                               onPressed: () {
-                                if(_formKey.currentState!.validate()){
+                                if(formKey.currentState!.validate()){
                                   context.read<AuthBloc>().add(
                                   SignUpSubmitted(
                                     name: nameController.text,

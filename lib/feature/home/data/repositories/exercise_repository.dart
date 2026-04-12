@@ -14,12 +14,19 @@ class ExerciseRepositoryImp implements ExerciseRepository{
   final ApiClient apiClient;
   ExerciseRepositoryImp(this.apiClient);
   @override
-    Future<Either<NetworkFailure, List<ExerciseEntity>>> getExercise() async {       
+    Future<Either<NetworkFailure, List<ExerciseEntity>>> getExercise(String? name) async {       
   try {
-    final dio = apiClient.getDio();    
+    final dio = apiClient.getDio(); 
+    final Map<String, dynamic> params= {};
+    if(name != null && name.isNotEmpty){
+      params['name'] = name;    
+    }
+    else{
+      params['muscle'] = 'biceps';
+    }
     final response = await dio.get(
       'exercises',
-      queryParameters: {'muscle': 'biceps'},
+      queryParameters: params
     );
     final List<dynamic> data = response.data;    
     final exercises = data.map((json) => ExerciseModel.fromJson(json)).toList().cast<ExerciseEntity>();
