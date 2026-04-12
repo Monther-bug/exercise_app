@@ -1,3 +1,4 @@
+import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +23,10 @@ class Customtextfeild extends StatelessWidget {
   final bool? enabled;
   final void Function()? ontap;
   final bool? borderEnabled;
+  final void Function(String)? onChanged;
+  final void Function(String)? onFieldSubmitted;
+  final double? borderRadius;
+  
 
 
 
@@ -44,14 +49,20 @@ class Customtextfeild extends StatelessWidget {
     this.height,
     this.enabled,
     this.ontap,
-    this.borderEnabled
+    this.borderEnabled,
+    this.onChanged,
+    this.onFieldSubmitted,
+    this.borderRadius,
+    
  
   });
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return TextFormField(      
+    return TextFormField(
+      onFieldSubmitted: onFieldSubmitted,
+      onChanged: onChanged,     
       onTap:ontap ,
       enabled: enabled,
       controller: controller,
@@ -66,7 +77,7 @@ class Customtextfeild extends StatelessWidget {
       hintText:hintText ,
       hintStyle: 
         TextStyle(
-          color:Colors.grey , 
+          color:AppColors.greyText , 
           fontSize:
           context.isMobile
           ? 11.sp.ap(
@@ -95,14 +106,14 @@ class Customtextfeild extends StatelessWidget {
       filled: true,  
           
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(borderRadius?? 16),
         borderSide: BorderSide(
           color: Colors.transparent, // Your #a8a7ae or #dddce0 color
           width: 1.0,
        ),
       ),
       focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(borderRadius?? 16),
       borderSide: BorderSide(
         color: Colors.transparent, // Usually a stronger color for focus
         width: 2.0, // Often slightly thicker to indicate focus

@@ -1,8 +1,6 @@
-import 'dart:ui';
-import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:screentasia/screentasia.dart';
+
 
 class AppTextStyles {
 
@@ -47,7 +45,7 @@ class AppTextStyles {
   static TextStyle get bodySmall =>
      TextStyle(
       fontFamily: _fontFamily,
-      fontSize: 12,
+      fontSize: 10,
       color: Colors.black,
       
   );

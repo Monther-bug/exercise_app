@@ -31,5 +31,7 @@ class AppStarted extends AuthEvent {}
 
 class OnboardingFinished extends AuthEvent {}
 
+class GoogleSignInRequested extends AuthEvent{}
+
 
 

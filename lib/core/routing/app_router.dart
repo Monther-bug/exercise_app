@@ -10,7 +10,7 @@ class AppRouter extends $AppRouter  {
   @override
   List<AutoRoute> get routes => [
     AutoRoute(page: SplashScreenRoute.page , path: '/',initial: true),
-    AutoRoute(page: MyHomePageRoute.page, path: '/home', guards: [OnboardingGuard() ,AuthGuard()] ),
+    AutoRoute(page: MyHomePageRoute.page, path: '/home',guards: [OnboardingGuard() ,AuthGuard()] ),
     AutoRoute(page: OnboardingScreenRoute.page, ),
     AutoRoute(page: LoginScreenRoute.page, ),
     AutoRoute(page: SignUpScreenRoute.page, ),

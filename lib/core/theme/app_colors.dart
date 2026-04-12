@@ -6,5 +6,6 @@ class AppColors {
   static const Color neutural = Color(0xFFFFFFFF);
   
   static const Color greyText =  Color.fromARGB(255,186,188,186);    
-  static const Color shadow = Color.fromARGB(255,112,112,112);                                                  
+  static const Color shadow = Color.fromARGB(255,112,112,112);   
+                                                 
 }

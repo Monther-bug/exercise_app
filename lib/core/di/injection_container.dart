@@ -5,18 +5,23 @@ import 'package:exercise_app/core/services/shared_preferences_service.dart';
 import 'package:exercise_app/feature/Auth/data/repository/auth_repository_imp.dart';
 import 'package:exercise_app/feature/Auth/data/sources/auth_remote_data_source.dart';
 import 'package:exercise_app/feature/Auth/domain/repository/auth_repository.dart';
+import 'package:exercise_app/feature/Auth/domain/usecases/google_sign_in_usecase.dart';
 import 'package:exercise_app/feature/Auth/domain/usecases/login_usecase.dart';
 import 'package:exercise_app/feature/Auth/domain/usecases/sign_up_usecase.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/feature/home/data/repositories/exercise_repository.dart';
 import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
 import 'package:exercise_app/feature/home/presentation/bloc/exercise_bloc.dart';
+import 'package:exercise_app/feature/home/presentation/bloc/search_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final locator = GetIt.instance;
+bool _isInitialized = false;
 
 Future<void> init() async {
+  if (_isInitialized) return;
+
   final sharedPrefs = await SharedPreferences.getInstance();
   locator.registerLazySingleton<LocalStorageService>(() => SharedPreferencesService(sharedPrefs));
   locator.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSource());
@@ -31,23 +36,35 @@ Future<void> init() async {
   locator.registerLazySingleton<SignUpUsecase>(
     () => SignUpUsecase(locator<AuthRepository>()),
   );
-
-  locator.registerLazySingleton<AuthBloc>(
-    () => AuthBloc(
-      locator<AuthRepository>(),
-      locator<LoginUsecase>(),
-      locator<SignUpUsecase>(),
-      locator<LocalStorageService>(),
-    ),
+  locator.registerLazySingleton<GoogleSignInUsecase>(
+    () => GoogleSignInUsecase(locator<AuthRepository>()),
   );
 
+  if (!locator.isRegistered<AuthBloc>()) {
+    locator.registerLazySingleton<AuthBloc>(
+      () => AuthBloc(
+        locator<AuthRepository>(),
+        locator<LoginUsecase>(),
+        locator<SignUpUsecase>(),
+        locator<LocalStorageService>(),
+        locator<GoogleSignInUsecase>()
+      ),
+    );
+  }
+
   locator.registerLazySingleton<Dio>(() => Dio());
-  locator.registerLazySingleton<ApiClient>(() => ApiClient());
-  locator<ApiClient>().getDio();
+
+  locator.registerLazySingleton<ApiClient>(() => ApiClient());  
+  
   locator.registerLazySingleton<ExerciseRepository>(
     () => ExerciseRepositoryImp(locator<ApiClient>()),
   );
   locator.registerFactory<ExerciseBloc>(
     () => ExerciseBloc(locator<ExerciseRepository>())
   );
+  locator.registerFactory<SearchBloc>(
+    () => SearchBloc(locator<ExerciseRepository>())
+  );
+
+  _isInitialized = true;
 }

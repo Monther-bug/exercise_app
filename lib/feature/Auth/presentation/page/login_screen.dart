@@ -18,21 +18,21 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final ValueNotifier<bool> obscureNotifier = ValueNotifier<bool>(true);
     return Center(
       child: SizedBox(
         width: context.isMobile ? 100.wp : 75.wp,
         child: Scaffold(
           body: Form(
-            key: _formKey,
+            key: formKey,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Padding(
                   padding:  EdgeInsets.all(8.0),
                   child: Container(
-                    height: 50.hp,
+                    height:context.isMobile?100.hp: 60.hp,
                     // width: 40.wp,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -47,8 +47,9 @@ class LoginScreen extends StatelessWidget {
                       ],
                     ),
                     child: Padding(
-                      padding:  EdgeInsets.all(1.wp),
+                      padding:  EdgeInsets.all(2.wp),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Login page',
@@ -73,6 +74,12 @@ class LoginScreen extends StatelessWidget {
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
                             validator: FormValidators.validateEmail,
+                            hintText: 'name@domain.com',
+                            prefixIcon: Icon(
+                              Icons.email,
+                              size: context.isMobile? 4.wp:2.wp,
+                              color: AppColors.greyText,
+                            ),
                           ),
                           SizedBox(height: 2.hp),
                           Row(
@@ -95,6 +102,12 @@ class LoginScreen extends StatelessWidget {
                                 controller: passwordController,
                                 keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
+                                hintText: 'Password',
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  size: context.isMobile? 4.wp:2.wp,
+                                  color: AppColors.greyText ,
+                                ),
                                 suffixIcon: IconButton(
                                   onPressed: (){
                                     obscureNotifier.value =
@@ -117,7 +130,7 @@ class LoginScreen extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('Logged in')),
                           ); // Success!
-                            } else if (state is AuthFailure) {
+                            } else if (state is AuthFailure) {                              
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text(state.error)),
                               );
@@ -127,38 +140,88 @@ class LoginScreen extends StatelessWidget {
                               if (state is AuthLoading){
                                 return Center(child: CircularProgressIndicator());
                               }   
-                              return ElevatedButton(
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                  context.read<AuthBloc>().add(
-                                    LoginSubmitted(
-                                      email: emailController.text,
-                                      password: passwordController.text,
+                              return Column(
+                                children: [
+
+                                  SizedBox(
+                                    width: double.infinity ,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        if (formKey.currentState?.validate()?? false) {
+                                        context.read<AuthBloc>().add(
+                                          LoginSubmitted(
+                                            email: emailController.text,
+                                            password: passwordController.text,
+                                          ),
+                                        );
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(                                      
+                                        backgroundColor:
+                                            AppColors.secondary, // Background color
+                                        foregroundColor: AppColors.neutural, // Splash/text default color
+                                        // minimumSize: Size(double.infinity, 50), // Responsive height placeholder
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(context.isMobile? 4.wp: 2.wp),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding:  EdgeInsets.symmetric(horizontal: 2.wp),
+                                        child: Text(
+                                          'Login',
+                                          style: AppTextStyles.titleSmall.copyWith(
+                                            color: AppColors.primary
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  );
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      AppColors.secondary, // Background color
-                                  foregroundColor: AppColors.neutural, // Splash/text default color
-                                  // minimumSize: Size(double.infinity, 50), // Responsive height placeholder
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(1.wp),
                                   ),
-                                ),
-                                child: Text(
-                                  'Login',
-                                  style: AppTextStyles.titleSmall.copyWith(
-                                    color: AppColors.neutural
-                                  ),
-                                ),
+                                  SizedBox(height: 3.hp,),
+                                  Row(children: [
+                                    Expanded(child: Divider(
+                                      thickness:context.isMobile? 0.2.wp: 0.08.wp,
+                                      color: AppColors.greyText.withOpacity(0.5),
+                                    )),                                    
+                                    Padding(
+                                      padding:  EdgeInsets.symmetric(horizontal: 1.wp),
+                                      child: Text('OR CONNECT WITH',
+                                      style: AppTextStyles.titleSmall.copyWith(
+                                        color : AppColors.greyText,
+                                        fontSize: context.isMobile? 9: 10
+                                      ),),
+                                    ),
+                                    Expanded(child: Divider(
+                                      thickness: context.isMobile? 0.2.wp: 0.08.wp,
+                                      color: AppColors.greyText.withOpacity(0.5),
+                                    )),
+                                  ],),
+                                  SizedBox(height: 3.hp,),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(onPressed: (){
+                                      context.read<AuthBloc>().add(GoogleSignInRequested());                                      
+                                    },
+                                    style:  ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            AppColors.neutural, // Background color
+                                        //foregroundColor: AppColors.neutural, // Splash/text default color                                     
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(context.isMobile? 4.wp: 2.wp),
+                                        ),
+                                      ),
+                                    child: Text(
+                                        'Google',
+                                        style: AppTextStyles.titleSmall)
+                                                                    ),
+                                  )
+                                ],
                               );
                             },
                           ),
     
-                          SizedBox(height: 2.hp),
+                          SizedBox(height: 3.hp),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 "don't have an account? ",
@@ -172,7 +235,7 @@ class LoginScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   'Sign up',
-                                  style: AppTextStyles.bodySmall.copyWith(
+                                  style: AppTextStyles.titleSmall.copyWith(
                                     color: AppColors.primary
                                   ),
                                 ),

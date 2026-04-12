@@ -26,7 +26,7 @@ class ApiClient{
           //   options.headers['Authorization'] = 'Bearer $token';
           // }
         } catch(e){
-          print("DEBUG: Failed to retrieve token from storage: $e");
+          ///print("DEBUG: Failed to retrieve token from storage: $e");
         }            
         return handler.next(options);  
       },

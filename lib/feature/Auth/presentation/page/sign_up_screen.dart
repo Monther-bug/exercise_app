@@ -20,20 +20,20 @@ class SignUpScreen extends StatelessWidget {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     final TextEditingController nameController = TextEditingController();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final ValueNotifier<bool> obscureNotifier = ValueNotifier<bool>(true);
     return Center(
       child: SizedBox(
         width: context.isMobile ? 100.wp : 75.wp,
         child: Scaffold(
           body: Form(
-            key: _formKey,
+            key: formKey,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Container(
                   //width: 40.wp,
-                  height: 60.hp,
+                  height:context.isMobile?100.hp:  60.hp,
                   decoration: BoxDecoration(
                     color: AppColors.neutural,
                     borderRadius: BorderRadius.circular(2.wp),
@@ -47,8 +47,9 @@ class SignUpScreen extends StatelessWidget {
                     ],
                   ),
                   child: Padding(
-                    padding:  EdgeInsets.all(1.wp),
+                    padding:  EdgeInsets.all(2.wp),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           'Sign Up page',
@@ -73,6 +74,12 @@ class SignUpScreen extends StatelessWidget {
                           keyboardType: TextInputType.name,
                           textInputAction: TextInputAction.next,
                           validator: FormValidators.validateName,
+                           hintText: 'Name',
+                                prefixIcon: Icon(
+                                  Icons.person,
+                                  size: context.isMobile? 4.wp:2.wp,
+                                  color: AppColors.greyText ,
+                                ),
                         ),
                         SizedBox(height: 2.hp),
                         Row(
@@ -91,6 +98,12 @@ class SignUpScreen extends StatelessWidget {
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
                           validator: FormValidators.validateEmail,
+                           hintText: 'name@domain.com',
+                            prefixIcon: Icon(
+                              Icons.email,
+                              size: context.isMobile? 4.wp:2.wp,
+                              color: AppColors.greyText,
+                            ),
                         ),
                         SizedBox(height: 2.hp),
                         Row(
@@ -122,6 +135,12 @@ class SignUpScreen extends StatelessWidget {
                                 obscureNotifier.value =
                                 !obscureNotifier.value;
                               } ,),
+                               hintText: 'Password',
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  size: context.isMobile? 4.wp:2.wp,
+                                  color: AppColors.greyText ,
+                                ),
                             );
                           }
                         ),
@@ -144,31 +163,34 @@ class SignUpScreen extends StatelessWidget {
                               return CircularProgressIndicator();
                             }
                           
-                            return ElevatedButton(
-                              onPressed: () {
-                                if(_formKey.currentState!.validate()){
-                                  context.read<AuthBloc>().add(
-                                  SignUpSubmitted(
-                                    name: nameController.text,
-                                    email: emailController.text,
-                                    password: passwordController.text,
+                            return SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if(formKey.currentState!.validate()){
+                                    context.read<AuthBloc>().add(
+                                    SignUpSubmitted(
+                                      name: nameController.text,
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                    ),
+                                  );
+                                  }                                
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      AppColors.secondary,// Background color
+                                  foregroundColor:
+                                      AppColors.secondary, // Splash/text default color                                
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(context.isMobile? 4.wp: 2.wp),
                                   ),
-                                );
-                                }                                
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    AppColors.secondary,// Background color
-                                foregroundColor:
-                                    AppColors.secondary, // Splash/text default color                                
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(1.wp),
                                 ),
-                              ),
-                              child: Text(
-                                'Sign Up',
-                                style: AppTextStyles.titleSmall.copyWith(
-                                  color: AppColors.primary,
+                                child: Text(
+                                  'Sign Up',
+                                  style: AppTextStyles.titleSmall.copyWith(
+                                    color: AppColors.primary,
+                                  ),
                                 ),
                               ),
                             );
@@ -176,6 +198,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 2.hp),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               "Already have an account? ",
@@ -189,7 +212,7 @@ class SignUpScreen extends StatelessWidget {
                               },
                               child: Text(
                                 'login',
-                                style: AppTextStyles.bodySmall.copyWith(
+                                style: AppTextStyles.titleSmall.copyWith(
                                   color: AppColors.primary
                                 ),
                               ),

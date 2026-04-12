@@ -1,11 +1,10 @@
 import 'package:exercise_app/core/di/injection_container.dart';
 import 'package:exercise_app/core/routing/app_router.dart';
-import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/services/local_storage_service.dart';
+import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
-import 'package:exercise_app/feature/home/data/repositories/exercise_repository.dart';
-import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
 import 'package:exercise_app/feature/home/presentation/bloc/exercise_bloc.dart';
+import 'package:exercise_app/feature/home/presentation/bloc/search_bloc.dart';
 import 'package:exercise_app/feature/onboarding/bloc/on_boarding_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +23,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => OnBoardingBloc(localStorageService)),
         BlocProvider(create: (_)=> locator<ExerciseBloc>()..add(DisplayExercise())),
         BlocProvider(create: (_) => locator<AuthBloc>()..add(AppStarted())),
+        BlocProvider(create: (_) => locator<SearchBloc>()),
+        
+
       ],
       child: MultiBlocListener(
         listeners: [        
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+            colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
           ),
         ),
       ),

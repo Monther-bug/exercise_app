@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -7,17 +8,36 @@ class AuthRemoteDataSource {
 
   Future<UserCredential?> signInWithGoogle() async{
     try{
+      if (kIsWeb) {
+        final provider = GoogleAuthProvider();
+        return await _firebaseAuth.signInWithPopup(provider);
+      }
+
       final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
 
-      final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+      if (googleUser == null) {
+        return null;
+      }
+
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(idToken: googleAuth.idToken);
 
       return await _firebaseAuth.signInWithCredential(credential);
     }on FirebaseAuthException catch (e) {
-    throw Exception('Google Sign-In failed [${e.code}]: ${e.message}');
-    }catch (e) {
-    throw Exception('An unknown error occurred: $e');
+    final code = e.code.toLowerCase();        
+    if (code.contains('closed') || 
+        code.contains('cancel') || 
+        code.contains('abort')) {
+      return null; 
+    }
+    rethrow; 
+  } catch (e) {
+    final err = e.toString().toLowerCase();
+    if (err.contains('cancel') || err.contains('closed')) {
+      return null;
+    }
+    rethrow;
   }
   }
 
@@ -40,7 +60,7 @@ class AuthRemoteDataSource {
 
   Future <User?> login(String email, String password) async{
     try{
-      final credential = await _firebaseAuth.signInWithEmailAndPassword(
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: email, 
         password: password
       );    
