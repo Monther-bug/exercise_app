@@ -45,7 +45,7 @@ class AppTextStyles {
   static TextStyle get bodySmall =>
      TextStyle(
       fontFamily: _fontFamily,
-      fontSize: 12,
+      fontSize: 10,
       color: Colors.black,
       
   );

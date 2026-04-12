@@ -77,7 +77,7 @@ class Customtextfeild extends StatelessWidget {
       hintText:hintText ,
       hintStyle: 
         TextStyle(
-          color:AppColors.primary , 
+          color:AppColors.greyText , 
           fontSize:
           context.isMobile
           ? 11.sp.ap(

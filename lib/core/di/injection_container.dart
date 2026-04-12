@@ -5,6 +5,7 @@ import 'package:exercise_app/core/services/shared_preferences_service.dart';
 import 'package:exercise_app/feature/Auth/data/repository/auth_repository_imp.dart';
 import 'package:exercise_app/feature/Auth/data/sources/auth_remote_data_source.dart';
 import 'package:exercise_app/feature/Auth/domain/repository/auth_repository.dart';
+import 'package:exercise_app/feature/Auth/domain/usecases/google_sign_in_usecase.dart';
 import 'package:exercise_app/feature/Auth/domain/usecases/login_usecase.dart';
 import 'package:exercise_app/feature/Auth/domain/usecases/sign_up_usecase.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
@@ -35,6 +36,9 @@ Future<void> init() async {
   locator.registerLazySingleton<SignUpUsecase>(
     () => SignUpUsecase(locator<AuthRepository>()),
   );
+  locator.registerLazySingleton<GoogleSignInUsecase>(
+    () => GoogleSignInUsecase(locator<AuthRepository>()),
+  );
 
   if (!locator.isRegistered<AuthBloc>()) {
     locator.registerLazySingleton<AuthBloc>(
@@ -43,6 +47,7 @@ Future<void> init() async {
         locator<LoginUsecase>(),
         locator<SignUpUsecase>(),
         locator<LocalStorageService>(),
+        locator<GoogleSignInUsecase>()
       ),
     );
   }

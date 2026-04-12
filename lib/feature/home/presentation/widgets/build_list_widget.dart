@@ -1,5 +1,6 @@
 import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/theme/app_text_styles.dart';
+import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:screentasia/screentasia.dart';
 
@@ -32,6 +33,11 @@ class BuildListWidget extends StatelessWidget {
             child: ListTile(
               title: Text(list[index].name,style: AppTextStyles.titleMedium,),
               subtitle: Text(list[index].muscle, style: AppTextStyles.bodyMedium),
+              trailing: IconButton(
+                onPressed: (){}, 
+                icon: Icon(Icons.arrow_forward_ios,
+                size: context.isMobile? 4.wp: 2.wp,
+                color: AppColors.primary,),),
                          
             ),
           ),

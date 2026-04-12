@@ -2,6 +2,7 @@
 import 'package:exercise_app/core/services/local_storage_service.dart';
 import 'package:exercise_app/feature/Auth/domain/entities/user_entity.dart';
 import 'package:exercise_app/feature/Auth/domain/repository/auth_repository.dart';
+import 'package:exercise_app/feature/Auth/domain/usecases/google_sign_in_usecase.dart';
 import 'package:exercise_app/feature/Auth/domain/usecases/login_usecase.dart';
 import 'package:exercise_app/feature/Auth/domain/usecases/sign_up_usecase.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +16,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
   final LoginUsecase loginUsecase;
   final SignUpUsecase signUpUsecase;
+  final GoogleSignInUsecase googleSignInUsecase;
   AuthBloc(  
     this.authRepository,
     this.loginUsecase,
     this.signUpUsecase,
-    this._storage
+    this._storage,
+    this.googleSignInUsecase
   ): super(AuthInitial()) {
     on<AppStarted>((event, emit) async{
       final hasSeenOnboarding = await _storage.hasSeenOnboarding();
@@ -75,7 +78,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthFailure(e.toString()));
       }
     });
-
+    on<GoogleSignInRequested>((event, emit) async{
+      emit(AuthLoading());
+      try{
+        final user = await googleSignInUsecase();
+        if(user != null ){
+          emit (AuthSuccess(user));
+        }
+        else{
+          // User canceled sign-in flow.          
+         emit(Unauthenticated());
+        }
+      }  catch (e) {
+        final error = e.toString().toLowerCase();  
+        if (error.contains('canceled') || error.contains('closed')) {
+          emit(Unauthenticated()); 
+          return;
+        }
+        emit(AuthFailure(e.toString())); // Only show real errors
+      }
+    });
     on<LogoutRequested>((event,emit) async{
       emit(AuthLoading());
       try{
@@ -86,5 +108,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
       
     });
+
+    
   }
 }

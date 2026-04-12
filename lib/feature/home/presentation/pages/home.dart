@@ -3,6 +3,7 @@ import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/theme/app_text_styles.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
+import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/feature/error/presentation/empty_view.dart';
 import 'package:exercise_app/feature/error/presentation/global_error_view.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
@@ -61,6 +62,13 @@ class _MyHomePageState extends State<MyHomePage> {
               onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
               borderRadius: 1,
             ),
+          leading: IconButton(
+            onPressed: (){context.read<AuthBloc>().add(LogoutRequested());}, 
+            icon: Icon(
+              Icons.login_outlined,
+              size: context.isMobile? 4.wp: 2.wp,
+              color: AppColors.primary,
+            )),
         ),
         body: 
         BlocBuilder<SearchBloc, SearchState>(
