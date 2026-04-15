@@ -4,6 +4,7 @@ import 'package:exercise_app/core/services/local_storage_service.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/feature/home/presentation/bloc/exercise_bloc.dart';
+import 'package:exercise_app/feature/home/presentation/bloc/favorites_bloc.dart';
 import 'package:exercise_app/feature/home/presentation/bloc/search_bloc.dart';
 import 'package:exercise_app/feature/onboarding/bloc/on_boarding_bloc.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_)=> locator<ExerciseBloc>()..add(DisplayExercise())),
         BlocProvider(create: (_) => locator<AuthBloc>()..add(AppStarted())),
         BlocProvider(create: (_) => locator<SearchBloc>()),
+        BlocProvider(create: (_) => FavoritesBloc()..add(LoadFavorites())),
         
 
       ],

@@ -47,7 +47,7 @@ class ExerciseDetails extends StatelessWidget {
                 children: [
                  
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(16), // 👈 clean radius
+                    borderRadius: BorderRadius.circular(16), 
                     child: Image.asset(
                       AppImages.exercise,
                       width: context.isMobile ? 60.wp : 30.wp,
