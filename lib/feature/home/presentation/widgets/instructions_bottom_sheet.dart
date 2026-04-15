@@ -6,7 +6,7 @@ import 'package:screentasia/screentasia.dart';
 
 void showInstructionsBottomSheet (
   BuildContext context,
-  String Instructions){
+  String instructions){
     showModalBottomSheet(
       context: context, 
       shape: RoundedRectangleBorder(
@@ -23,7 +23,7 @@ void showInstructionsBottomSheet (
                       style: AppTextStyles.titleMedium,
                     ),
                 SizedBox(height: 1.hp),
-                Text(Instructions, 
+                Text(instructions, 
                   style: AppTextStyles.bodyMedium) ,
               ],
             ),

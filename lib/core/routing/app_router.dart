@@ -16,6 +16,7 @@ class AppRouter extends $AppRouter  {
     AutoRoute(page: SignUpScreenRoute.page, ),
     AutoRoute(page: GlobalErrorViewRoute.page, ),
     AutoRoute(page: EmptyViewRoute.page, ),
-    AutoRoute(page: ExerciseDetailsRoute.page,)
+    AutoRoute(page: ExerciseDetailsRoute.page,),
+    AutoRoute(page: FavoritesPageRoute.page,)
   ];
 }

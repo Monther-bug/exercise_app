@@ -9,11 +9,13 @@ import 'package:exercise_app/feature/Auth/domain/usecases/google_sign_in_usecase
 import 'package:exercise_app/feature/Auth/domain/usecases/login_usecase.dart';
 import 'package:exercise_app/feature/Auth/domain/usecases/sign_up_usecase.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
+import 'package:exercise_app/feature/home/data/model/exercise_local_model.dart';
 import 'package:exercise_app/feature/home/data/repositories/exercise_repository.dart';
 import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
 import 'package:exercise_app/feature/home/presentation/bloc/exercise_bloc.dart';
 import 'package:exercise_app/feature/home/presentation/bloc/search_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final locator = GetIt.instance;
@@ -65,6 +67,10 @@ Future<void> init() async {
   locator.registerFactory<SearchBloc>(
     () => SearchBloc(locator<ExerciseRepository>())
   );
+
+   Hive.registerAdapter(ExerciseLocalModelAdapter());
+  final box = await Hive.openBox<ExerciseLocalModel>('favorites');
+  locator.registerLazySingleton<Box<ExerciseLocalModel>>(() => box);
 
   _isInitialized = true;
 }

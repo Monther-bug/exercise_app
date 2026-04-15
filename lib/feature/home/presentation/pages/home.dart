@@ -68,6 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
               size: context.isMobile? 4.wp: 2.wp,
               color: AppColors.primary,
             )),
+            actions: [IconButton(
+            onPressed: (){context.pushRoute(FavoritesPageRoute());}, 
+            icon: Icon(
+              Icons.favorite,
+              size: context.isMobile? 4.wp: 2.wp,
+              color: AppColors.primary,
+            )),],
         ),
         body: 
         BlocBuilder<SearchBloc, SearchState>(
