@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
+import 'package:exercise_app/core/theme/app_images.dart';
 import 'package:exercise_app/core/theme/app_text_styles.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
@@ -48,7 +49,7 @@ class ExerciseDetails extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(16), // 👈 clean radius
                     child: Image.asset(
-                      'assets/exercise.png',
+                      AppImages.exercise,
                       width: context.isMobile ? 60.wp : 30.wp,
                     ),
                   ),
