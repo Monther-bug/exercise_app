@@ -18,7 +18,8 @@ factory ExerciseModel.fromJson(Map<String, dynamic> json) {
       type: json['type'] ?? '',
       muscle: json['muscle'] ?? '',
       difficulty: json['difficulty']?? '',
-      equipments: json['equipment'] ?? '',
+      // equipments: json['equipments'] ?? '',
+      equipments: List<String>.from(json['equipments']??[]),
       instructions: json['instructions'] ?? '',
       safetyInfo: json['safety_info'] ?? ''
     );
