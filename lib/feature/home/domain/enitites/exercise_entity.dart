@@ -4,7 +4,7 @@ class ExerciseEntity {
   final String muscle;
   final String difficulty;
   final String instructions;
-  final String equipments;
+  final List<String> equipments;
   final String safetyInfo;
    
   ExerciseEntity({
