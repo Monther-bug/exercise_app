@@ -18,15 +18,15 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(        
-        leading: IconButton(
-          onPressed: (){
-            context.popRoute();
-          }, 
-          icon: Icon(
-            Icons.arrow_back_ios,
-            size: context.isMobile? 4.wp: 2.wp,
-            color: AppColors.primary,
-          )),
+        // leading: IconButton(
+        //   onPressed: (){
+        //     context.popRoute();
+        //   }, 
+        //   icon: Icon(
+        //     Icons.arrow_back_ios,
+        //     size: context.isMobile? 4.wp: 2.wp,
+        //     color: AppColors.primary,
+        //   )),
         title: Text(' Favorites',
           style: AppTextStyles.titleMedium.copyWith(
             color: AppColors.primary

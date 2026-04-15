@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 2), () {    
       if(!mounted) return ;
       //context.read<AuthBloc>().add(AppStarted()); 
-      context.pushRoute(MyHomePageRoute(title: ''));
+      context.pushRoute(DashboardPageRoute());
     });
   }
   @override
