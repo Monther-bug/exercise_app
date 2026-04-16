@@ -38,53 +38,50 @@ class BuildListWidget extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: EdgeInsets.all(1.wp),
+            padding: EdgeInsets.all(context.isMobile?0.5.wp: 1.wp),
             child: ListTile(
               title: Text(list[index].name, style: AppTextStyles.titleMedium),
               subtitle: Text(
                 list[index].muscle,
                 style: AppTextStyles.bodyMedium,
               ),
-              trailing: SizedBox(
-                 //width: context.isMobile ? 10.wp : 5.wp,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if(favorite?? true)
-                    BlocBuilder<FavoritesBloc, FavoritesState>(                    
-                      builder: (context, state) {  
-                        bool isFav = false;
-                        if(state is FavoritesLoaded){
-                          isFav = state.exercise.any((e) => e.name == list[index].name);
-                        }                                        
-                        return IconButton(
-                          onPressed: () {
-                           context.read<FavoritesBloc>().add(ToggleFavorites(exercise: list[index]));                             
-                          },
-                          icon: Icon(isFav
-                            ? Icons.favorite:
-                            Icons.favorite_border_outlined,
-                            size: context.isMobile ? 4.wp : 2.wp,
-                            color: AppColors.primary,
-                          )
-                        );                        
-                      },
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if(favorite?? true)
+                  BlocBuilder<FavoritesBloc, FavoritesState>(                    
+                    builder: (context, state) {  
+                      bool isFav = false;
+                      if(state is FavoritesLoaded){
+                        isFav = state.exercise.any((e) => e.name == list[index].name);
+                      }                                        
+                      return IconButton(
+                        onPressed: () {
+                         context.read<FavoritesBloc>().add(ToggleFavorites(exercise: list[index]));                             
+                        },
+                        icon: Icon(isFav
+                          ? Icons.favorite:
+                          Icons.favorite_border_outlined,
+                          size: context.isMobile ? 2.wp : 2.wp,
+                          color: AppColors.primary,
+                        )
+                      );                        
+                    },
+                  ),
+              
+                  IconButton(
+                    onPressed: () {
+                      context.pushRoute(
+                        ExerciseDetailsRoute(exerciseOBG: list[index]),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      size: context.isMobile ? 2.wp : 2.wp,
+                      color: AppColors.primary,
                     ),
-                
-                    IconButton(
-                      onPressed: () {
-                        context.pushRoute(
-                          ExerciseDetailsRoute(exerciseOBG: list[index]),
-                        );
-                      },
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: context.isMobile ? 4.wp : 2.wp,
-                        color: AppColors.primary,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

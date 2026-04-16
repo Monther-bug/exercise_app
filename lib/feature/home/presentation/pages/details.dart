@@ -28,11 +28,11 @@ class ExerciseDetails extends StatelessWidget {
           }, 
           icon: Icon(
             Icons.arrow_back_ios,
-            size: context.isMobile? 4.wp: 2.wp,
+            size: context.isMobile? 2.wp: 2.wp,
             color: AppColors.primary,
           )),
         title: Text('Exercise Details',
-          style: AppTextStyles.titleMedium.copyWith(
+          style: AppTextStyles.titleLarge.copyWith(
             color: AppColors.primary
           )      
         ),          

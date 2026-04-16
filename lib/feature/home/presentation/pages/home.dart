@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               prefixIcon:  Icon(
                 Icons.search, 
                 color: AppColors.primary,
-                size: context.isMobile? 4.wp:2.wp),
+                size: context.isMobile? 1.5.wp:2.wp),
               hintText: 'Search',
               onChanged: (value){
                 context.read<SearchBloc>().add(SearchingEvent(value));
@@ -72,7 +72,8 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: (){context.read<AuthBloc>().add(LogoutRequested());}, 
             icon: Icon(
               Icons.login_outlined,
-              size: context.isMobile? 4.wp: 2.wp,
+              //context.isMobile? 4.wp: 2.wp,
+              size: 2.wp,
               color: AppColors.primary,
             )),],
         ),

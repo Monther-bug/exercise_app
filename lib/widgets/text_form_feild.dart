@@ -78,26 +78,27 @@ class Customtextfeild extends StatelessWidget {
       hintStyle: 
         TextStyle(
           color:AppColors.greyText , 
-          fontSize:
-          context.isMobile
-          ? 11.sp.ap(
-              adaptivePercentage:
-                  const AdaptivePercentage(
-                    tablet:
-                        80,
-                    desktop:
-                        60,
-                  ),
-            )
-          : 12
+          fontSize:12
+          // context.isMobile
+          // ? 12
+          // // .ap(
+          // //     adaptivePercentage:
+          // //         const AdaptivePercentage(
+          // //           tablet:
+          // //               80,
+          // //           desktop:
+          // //               60,
+          // //         ),
+          // //   )
+          // : 12
         ),
       errorStyle: 
         TextStyle(
           color: Theme.of(context).colorScheme.error,
           fontSize:context.isMobile?
-           12.sp:
-           context.isTablet?14.sp
-           :16.sp,
+           12:
+           context.isTablet?14
+           :14,
           height: height?? 1, 
         ),         
       prefixIcon: prefixIcon, 

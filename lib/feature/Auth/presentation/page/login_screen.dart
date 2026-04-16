@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                 child: Padding(
                   padding:  EdgeInsets.all(8.0),
                   child: Container(
-                    height:context.isMobile?100.hp: 60.hp,
+                    height:context.isMobile?100.hp: 65.hp,
                     // width: 40.wp,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                       padding:  EdgeInsets.all(2.wp),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: [                        
                           Text(
                             'Login page',
                             style: AppTextStyles.titleLarge.copyWith(
@@ -77,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                             hintText: 'name@domain.com',
                             prefixIcon: Icon(
                               Icons.email,
-                              size: context.isMobile? 4.wp:2.wp,
+                              size: context.isMobile? 1.5.wp:2.wp,
                               color: AppColors.greyText,
                             ),
                           ),
@@ -105,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                                 hintText: 'Password',
                                 prefixIcon: Icon(
                                   Icons.lock,
-                                  size: context.isMobile? 4.wp:2.wp,
+                                  size: context.isMobile? 1.5.wp:2.wp,
                                   color: AppColors.greyText ,
                                 ),
                                 suffixIcon: IconButton(
@@ -117,7 +117,7 @@ class LoginScreen extends StatelessWidget {
                                     ? Icons.visibility
                                     : Icons.visibility_off,
                                     color: AppColors.primary,
-                                    size: context.isMobile? 4.wp:2.wp)),
+                                    size: context.isMobile? 1.5.wp:2.wp)),
                               );
                             }
                           ),
@@ -125,11 +125,13 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(height: 2.hp),
                           BlocConsumer<AuthBloc, AuthState>(
                             listener: (context, state) {
-                              if (state is AuthSuccess) {
-                          context.router.replace(MyHomePageRoute(title: ''));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Logged in')),
-                          ); // Success!
+                            if (state is AuthSuccess) {                                
+                              context.router.replace(MyHomePageRoute(title: ''));
+                              if(state.source == AuthSource.login){
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Logged in')),
+                              ); // Success!
+                              }                          
                             } else if (state is AuthFailure) {                              
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text(state.error)),

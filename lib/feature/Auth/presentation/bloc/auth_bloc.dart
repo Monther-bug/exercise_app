@@ -54,7 +54,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try{
         final user = await loginUsecase(event.email, event.password);
         if(user!= null){
-          emit(AuthSuccess(user));
+          emit(AuthSuccess(user:user,  source: AuthSource.login));
         }
         else{
           emit(AuthFailure("Login failed"));
@@ -69,7 +69,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try{
         final user = await signUpUsecase(event.name,event.email, event.password);
         if(user!= null){
-          emit(AuthSuccess(user));
+          emit(AuthSuccess(user: user, source: AuthSource.signUp));
         }
         else{
           emit(AuthFailure('Sign up failed'));
@@ -83,7 +83,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try{
         final user = await googleSignInUsecase();
         if(user != null ){
-          emit (AuthSuccess(user));
+          emit (AuthSuccess(user :user,source: AuthSource.google));
         }
         else{
           // User canceled sign-in flow.          

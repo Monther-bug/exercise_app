@@ -14,7 +14,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 final appRouter = AppRouter();
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Locale? locale;
+ 
+  const MyApp({super.key,
+  this.locale});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp.router(
-          routerConfig: appRouter.config(),
+          routerConfig: appRouter.config(),         
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

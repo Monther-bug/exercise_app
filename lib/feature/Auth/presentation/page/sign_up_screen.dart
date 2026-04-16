@@ -33,7 +33,7 @@ class SignUpScreen extends StatelessWidget {
               child: Center(
                 child: Container(
                   //width: 40.wp,
-                  height:context.isMobile?100.hp:  60.hp,
+                  height:context.isMobile?100.hp:  70.hp,
                   decoration: BoxDecoration(
                     color: AppColors.neutural,
                     borderRadius: BorderRadius.circular(2.wp),
@@ -61,7 +61,7 @@ class SignUpScreen extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'name',
+                              'Name',
                               style: AppTextStyles.titleSmall.copyWith(
                                 color: AppColors.primary
                               ),
@@ -76,8 +76,8 @@ class SignUpScreen extends StatelessWidget {
                           validator: FormValidators.validateName,
                            hintText: 'Name',
                                 prefixIcon: Icon(
-                                  Icons.person,
-                                  size: context.isMobile? 4.wp:2.wp,
+                                  Icons.person,                                  
+                                  size: context.isMobile? 1.5.wp:2.wp,
                                   color: AppColors.greyText ,
                                 ),
                         ),
@@ -100,8 +100,8 @@ class SignUpScreen extends StatelessWidget {
                           validator: FormValidators.validateEmail,
                            hintText: 'name@domain.com',
                             prefixIcon: Icon(
-                              Icons.email,
-                              size: context.isMobile? 4.wp:2.wp,
+                              Icons.email,                              
+                              size: context.isMobile? 1.5.wp:2.wp,
                               color: AppColors.greyText,
                             ),
                         ),
@@ -129,16 +129,16 @@ class SignUpScreen extends StatelessWidget {
                               suffixIcon: IconButton(icon: Icon(value
                               ?Icons.visibility
                               :Icons.visibility_off,                              
-                              color: AppColors.primary,
-                              size: context.isMobile? 4.wp:2.wp),
+                              color: AppColors.primary,                              
+                              size: context.isMobile? 1.5.wp:2.wp,),
                               onPressed:(){
                                 obscureNotifier.value =
                                 !obscureNotifier.value;
                               } ,),
                                hintText: 'Password',
                                 prefixIcon: Icon(
-                                  Icons.lock,
-                                  size: context.isMobile? 4.wp:2.wp,
+                                  Icons.lock,                                  
+                                  size: context.isMobile? 1.5.wp:2.wp,
                                   color: AppColors.greyText ,
                                 ),
                             );
@@ -149,9 +149,11 @@ class SignUpScreen extends StatelessWidget {
                         BlocConsumer<AuthBloc, AuthState>(
                           listener: (context, state) {
                             if(state is AuthSuccess){
-                              ScaffoldMessenger.of(context).showSnackBar(
+                              if(state.source == AuthSource.signUp){
+                                ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('Signed up'))
                               );
+                              }                             
                             } else if(state is AuthFailure){
                             ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(state.error)),

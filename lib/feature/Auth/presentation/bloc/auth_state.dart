@@ -9,7 +9,9 @@ final class AuthLoading extends AuthState {}
 
 final class AuthSuccess extends AuthState {
   final UserEntity user; 
-  AuthSuccess(this.user); 
+  final AuthSource source;
+  AuthSuccess({ required this.user,
+  required this.source}); 
 }
 
 final class AuthFailure extends AuthState{
@@ -24,3 +26,9 @@ class Unauthenticated extends AuthState{}
 class AppUnonboarded extends AuthState{}
 
 class Appboarded extends AuthState{}
+
+enum AuthSource{
+  login,
+  signUp,
+  google,
+}
