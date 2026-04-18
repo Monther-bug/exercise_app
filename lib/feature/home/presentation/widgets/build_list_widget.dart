@@ -62,7 +62,7 @@ class BuildListWidget extends StatelessWidget {
                         icon: Icon(isFav
                           ? Icons.favorite:
                           Icons.favorite_border_outlined,
-                          size: context.isMobile ? 2.wp : 2.wp,
+                          size: context.isMobile ? 1.5.wp : 2.wp,
                           color: AppColors.primary,
                         )
                       );                        
@@ -77,7 +77,7 @@ class BuildListWidget extends StatelessWidget {
                     },
                     icon: Icon(
                       Icons.arrow_forward_ios,
-                      size: context.isMobile ? 2.wp : 2.wp,
+                      size: context.isMobile ? 1.5.wp : 2.wp,
                       color: AppColors.primary,
                     ),
                   ),

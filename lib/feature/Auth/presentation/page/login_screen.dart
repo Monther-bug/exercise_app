@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:exercise_app/core/presentation/bloc/local_bloc.dart';
 import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/theme/app_text_styles.dart';
 import 'package:exercise_app/core/utils/form_validators.dart';
+import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/widgets/text_form_feild.dart';
@@ -16,6 +18,7 @@ class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -24,6 +27,21 @@ class LoginScreen extends StatelessWidget {
       child: SizedBox(
         width: context.isMobile ? 100.wp : 75.wp,
         child: Scaffold(
+          appBar: AppBar(
+            actions: [IconButton(
+              onPressed: (){
+                final currentState = context.read<LocalBloc>().state;
+                final newState = currentState.locale.languageCode == 'en'
+                  ? const Locale('ar')
+                  : const Locale('en');
+                context.read<LocalBloc>().add(ChangeLanguage(newState));
+              }, 
+              icon: Icon(
+                Icons.language,
+                size: context.isMobile? 1.5.wp: 2.wp,
+                color: AppColors.primary,
+              ))],
+          ),
           body: Form(
             key: formKey,
             child: Padding(
@@ -52,7 +70,7 @@ class LoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [                        
                           Text(
-                            'Login page',
+                            l10n.loginTitle,
                             style: AppTextStyles.titleLarge.copyWith(
                               color: AppColors.primary,
                             ),
@@ -61,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Email',
+                                l10n.emailLabel,
                                 style: AppTextStyles.titleSmall.copyWith(
                                   color: AppColors.primary,
                                 ),
@@ -73,8 +91,8 @@ class LoginScreen extends StatelessWidget {
                             controller: emailController,
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
-                            validator: FormValidators.validateEmail,
-                            hintText: 'name@domain.com',
+                            validator: (value) => FormValidators.validateEmail(value, l10n),
+                            hintText: l10n.emailHint,
                             prefixIcon: Icon(
                               Icons.email,
                               size: context.isMobile? 1.5.wp:2.wp,
@@ -85,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Password',
+                                l10n.passwordLabel,
                                 style: AppTextStyles.titleSmall.copyWith(
                                   color: AppColors.primary,
                                 ),
@@ -98,11 +116,11 @@ class LoginScreen extends StatelessWidget {
                             builder: (context, value, child) {
                               return Customtextfeild(
                                 obscureText: value,
-                                validator: FormValidators.validatePassword,
+                                validator: (input) => FormValidators.validatePassword(input, l10n),
                                 controller: passwordController,
                                 keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
-                                hintText: 'Password',
+                                hintText: l10n.passwordLabel,
                                 prefixIcon: Icon(
                                   Icons.lock,
                                   size: context.isMobile? 1.5.wp:2.wp,
@@ -129,12 +147,12 @@ class LoginScreen extends StatelessWidget {
                               context.router.replace(MyHomePageRoute(title: ''));
                               if(state.source == AuthSource.login){
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Logged in')),
+                                SnackBar(content: Text(l10n.loginSuccessMessage)),
                               ); // Success!
                               }                          
                             } else if (state is AuthFailure) {                              
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(state.error)),
+                                SnackBar(content: Text(localizeMessage(context, state.error))),
                               );
                             }
                             },
@@ -170,7 +188,7 @@ class LoginScreen extends StatelessWidget {
                                       child: Padding(
                                         padding:  EdgeInsets.symmetric(horizontal: 2.wp),
                                         child: Text(
-                                          'Login',
+                                          l10n.loginButton,
                                           style: AppTextStyles.titleSmall.copyWith(
                                             color: AppColors.primary
                                           ),
@@ -186,7 +204,7 @@ class LoginScreen extends StatelessWidget {
                                     )),                                    
                                     Padding(
                                       padding:  EdgeInsets.symmetric(horizontal: 1.wp),
-                                      child: Text('OR CONNECT WITH',
+                                      child: Text(l10n.orConnectWith,
                                       style: AppTextStyles.titleSmall.copyWith(
                                         color : AppColors.greyText,
                                         fontSize: context.isMobile? 9: 10
@@ -212,7 +230,7 @@ class LoginScreen extends StatelessWidget {
                                         ),
                                       ),
                                     child: Text(
-                                        'Google',
+                                        l10n.googleButton,
                                         style: AppTextStyles.titleSmall)
                                                                     ),
                                   )
@@ -226,7 +244,7 @@ class LoginScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "don't have an account? ",
+                                '${l10n.dontHaveAccount} ',
                                 style: AppTextStyles.bodySmall.copyWith(
                                   color: AppColors.greyText
                                 ),
@@ -236,7 +254,7 @@ class LoginScreen extends StatelessWidget {
                                   context.pushRoute(SignUpScreenRoute());
                                 },
                                 child: Text(
-                                  'Sign up',
+                                  l10n.signUpLink,
                                   style: AppTextStyles.titleSmall.copyWith(
                                     color: AppColors.primary
                                   ),

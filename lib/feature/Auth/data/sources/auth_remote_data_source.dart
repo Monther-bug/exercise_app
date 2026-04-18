@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -53,7 +54,7 @@ class AuthRemoteDataSource {
       return _firebaseAuth.currentUser;
     }
     on FirebaseAuthException catch(e){
-      throw Exception('Sign up failed [${e.code}]: [${e.message}]');
+      throw Exception('${AppMessageKey.signUpFailed} [${e.code}]: [${e.message}]');
     }   
   }
 
@@ -67,7 +68,7 @@ class AuthRemoteDataSource {
       return _firebaseAuth.currentUser;
     }
     on FirebaseAuthException catch(e){
-      throw Exception('login failed [${e.code}]: [${e.message}]');
+      throw Exception('${AppMessageKey.loginFailed} [${e.code}]: [${e.message}]');
     }   
   }
 

@@ -1,27 +1,29 @@
+import 'package:exercise_app/l10n/app_localizations.dart';
+
 class FormValidators {
-  static String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) return 'Email is required';
-    
+  static String? validateEmail(String? value, AppLocalizations l10n) {
+    if (value == null || value.isEmpty) return l10n.emailRequired;
+
     final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (!emailRegExp.hasMatch(value)) {
-      return 'Please enter a valid email address';
+      return l10n.validEmailRequired;
     }
     return null;
   }
 
-  static String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) return 'Password is required';
-    if (value.length < 6) return 'Password must be at least 6 characters';
+  static String? validatePassword(String? value, AppLocalizations l10n) {
+    if (value == null || value.isEmpty) return l10n.passwordRequired;
+    if (value.length < 6) return l10n.passwordMinLength;
     return null;
   }
 
-  static String? validateName(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Name is required';
+  static String? validateName(String? value, AppLocalizations l10n) {
+    if (value == null || value.isEmpty) {
+      return l10n.nameRequired;
+    }
+    if (value.length < 2) {
+      return l10n.nameMinLength;
+    }
+    return null;
   }
-  if (value.length < 2) {
-    return 'Name must be at least 2 characters long';
-  }
-  return null;
-}
 }

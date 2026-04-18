@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:exercise_app/core/presentation/bloc/local_bloc.dart';
 import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
+import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/feature/error/presentation/empty_view.dart';
@@ -54,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Icons.search, 
                 color: AppColors.primary,
                 size: context.isMobile? 1.5.wp:2.wp),
-              hintText: 'Search',
+              hintText: context.l10n.searchHint,
               onChanged: (value){
                 context.read<SearchBloc>().add(SearchingEvent(value));
               },
@@ -75,7 +77,20 @@ class _MyHomePageState extends State<MyHomePage> {
               //context.isMobile? 4.wp: 2.wp,
               size: 2.wp,
               color: AppColors.primary,
-            )),],
+            )),
+            IconButton(
+              onPressed: (){
+                final currentState = context.read<LocalBloc>().state;
+                final newState = currentState.locale.languageCode == 'en'
+                  ? const Locale('ar')
+                  : const Locale('en');
+                context.read<LocalBloc>().add(ChangeLanguage(newState));
+              }, 
+              icon: Icon(
+                Icons.language,
+                size: context.isMobile? 1.5.wp: 2.wp,
+                color: AppColors.primary,
+              ))],
         ),
         body: 
         BlocBuilder<SearchBloc, SearchState>(

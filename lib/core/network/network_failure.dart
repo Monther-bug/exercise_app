@@ -1,14 +1,16 @@
+import 'package:exercise_app/core/utils/l10n_extension.dart';
+
 sealed class NetworkFailure {
   final String message;
   const NetworkFailure(this.message);
 }
 
 class NoConnectionfailure extends NetworkFailure{
-  const NoConnectionfailure(): super('no internet connection');
+  const NoConnectionfailure(): super(AppMessageKey.noInternetConnection);
 }
 //401
 class UnauthorizedFailure extends NetworkFailure {
-  const UnauthorizedFailure() : super('Session expired. Please log in again.');
+  const UnauthorizedFailure() : super(AppMessageKey.sessionExpired);
 }
 
 //500
@@ -18,20 +20,20 @@ class ServerFailure extends NetworkFailure {
 
 //400
 class BadRequestFailure extends NetworkFailure {
-  const BadRequestFailure() : super('Invalid request. Please check your input.');
+  const BadRequestFailure() : super(AppMessageKey.invalidRequest);
 }
  
 
 //404
 class NotFoundFailure extends NetworkFailure {
-  const NotFoundFailure() : super('Requested resource not found.');
+  const NotFoundFailure() : super(AppMessageKey.resourceNotFound);
 }
 
 //422
 class ValidationFailure extends NetworkFailure {
-  const ValidationFailure() : super('Invalid data provided.');
+  const ValidationFailure() : super(AppMessageKey.invalidDataProvided);
 }
 
 class TimeoutFailure extends NetworkFailure {
-  const TimeoutFailure() : super('Connection timed out.');
+  const TimeoutFailure() : super(AppMessageKey.connectionTimedOut);
 }

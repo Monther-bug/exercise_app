@@ -1,6 +1,7 @@
 
 
 import 'package:exercise_app/core/theme/app_text_styles.dart';
+import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:screentasia/screentasia.dart';
 
@@ -19,7 +20,7 @@ void showInstructionsBottomSheet (
             child: Column(
               children: [
                  Text(
-                      "Instructions",
+                      context.l10n.instructionsTitle,
                       style: AppTextStyles.titleMedium,
                     ),
                 SizedBox(height: 1.hp),

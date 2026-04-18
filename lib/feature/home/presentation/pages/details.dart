@@ -3,9 +3,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/theme/app_images.dart';
 import 'package:exercise_app/core/theme/app_text_styles.dart';
+import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
-import 'package:exercise_app/feature/home/presentation/bloc/exercise_bloc.dart';
 import 'package:exercise_app/feature/home/presentation/widgets/instructions_bottom_sheet.dart';
 import 'package:exercise_app/my_app.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +20,10 @@ class ExerciseDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {    
+    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(        
-        leading: IconButton(
+        leading: IconButton(   
           onPressed: (){
             appRouter.pop();
           }, 
@@ -31,7 +32,7 @@ class ExerciseDetails extends StatelessWidget {
             size: context.isMobile? 2.wp: 2.wp,
             color: AppColors.primary,
           )),
-        title: Text('Exercise Details',
+        title: Text(l10n.exerciseDetailsTitle,
           style: AppTextStyles.titleLarge.copyWith(
             color: AppColors.primary
           )      
@@ -67,7 +68,7 @@ class ExerciseDetails extends StatelessWidget {
                   SizedBox(height: 0.5.hp),
 
                   Text(
-                    '${exerciseOBG.type} training',
+                    l10n.exerciseTypeTraining(exerciseOBG.type),
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.greyText,
                     ),
@@ -96,7 +97,7 @@ class ExerciseDetails extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                Text('Difficulty',
+                                Text(l10n.difficultyLabel,
                                   style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primary)),
                                 Text(exerciseOBG.difficulty,
                                 style: AppTextStyles.titleLarge.copyWith(color: AppColors.primary)
@@ -124,7 +125,7 @@ class ExerciseDetails extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                Text('Muscle',
+                                Text(l10n.muscleLabel,
                                   style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primary)),
                                 Text(exerciseOBG.muscle,
                                 style: AppTextStyles.titleLarge.copyWith(color: AppColors.primary)
@@ -143,7 +144,7 @@ class ExerciseDetails extends StatelessWidget {
 
                         SizedBox(width: 1.wp),
 
-                        Text('Equipments',
+                        Text(l10n.equipmentsLabel,
                         style: AppTextStyles.titleLarge.copyWith(color: AppColors.primary))                      
                       ],),
                       
@@ -175,7 +176,7 @@ class ExerciseDetails extends StatelessWidget {
                             showInstructionsBottomSheet(context, exerciseOBG.instructions);
                           },
                           icon: Icon(Icons.menu_book),
-                          label: Text("View Instructions"),
+                          label: Text(l10n.viewInstructions),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
                             foregroundColor: AppColors.neutural,

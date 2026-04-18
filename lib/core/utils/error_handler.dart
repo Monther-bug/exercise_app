@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:exercise_app/core/network/network_failure.dart';
+import 'package:exercise_app/core/utils/l10n_extension.dart';
 
 
 // class ErrorHandler {
@@ -51,7 +52,7 @@ class ErrorHandler extends Interceptor {
           break;
         
         case 500:
-          err = err.copyWith(error: const ServerFailure('Server Error'));
+          err = err.copyWith(error: const ServerFailure(AppMessageKey.serverError));
           break;
 
         case 400: 
@@ -67,7 +68,7 @@ class ErrorHandler extends Interceptor {
         break;
 
         default:
-          err = err.copyWith(error: const ServerFailure('Unknown server error'));
+          err = err.copyWith(error: const ServerFailure(AppMessageKey.unknownServerError));
       }
     }
 

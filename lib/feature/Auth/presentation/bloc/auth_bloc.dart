@@ -1,5 +1,6 @@
 
 import 'package:exercise_app/core/services/local_storage_service.dart';
+import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/feature/Auth/domain/entities/user_entity.dart';
 import 'package:exercise_app/feature/Auth/domain/repository/auth_repository.dart';
 import 'package:exercise_app/feature/Auth/domain/usecases/google_sign_in_usecase.dart';
@@ -57,7 +58,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthSuccess(user:user,  source: AuthSource.login));
         }
         else{
-          emit(AuthFailure("Login failed"));
+          emit(AuthFailure(AppMessageKey.loginFailed));
         }
       } catch(e){
         emit(AuthFailure(e.toString()));
@@ -72,7 +73,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthSuccess(user: user, source: AuthSource.signUp));
         }
         else{
-          emit(AuthFailure('Sign up failed'));
+          emit(AuthFailure(AppMessageKey.signUpFailed));
         }
       } catch(e){
         emit(AuthFailure(e.toString()));
