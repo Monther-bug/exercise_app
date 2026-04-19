@@ -23,18 +23,18 @@ class SharedPreferencesService implements LocalStorageService{
   Future<void> resetOnboarding() async{  
     await prefs.remove(_key);
   }
-  @override
-  Future<void> saveToken(String token) async {    
-    await prefs.setString('auth_token', token);
-  }
+  // @override
+  // Future<void> saveToken(String token) async {    
+  //   await prefs.setString('auth_token', token);
+  // }
 
-  @override
-  String? getToken() {
-    return prefs.getString('auth_token');
-  }
+  // @override
+  // String? getToken() {
+  //   return prefs.getString('auth_token');
+  // }
 
-  @override
-  Future<void> clear() async {
-    await prefs.remove('auth_token');
-  }
+  // @override
+  // Future<void> clear() async {
+  //   await prefs.remove('auth_token');
+  // }
 }

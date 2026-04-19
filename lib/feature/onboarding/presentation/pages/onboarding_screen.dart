@@ -17,8 +17,7 @@ class OnboardingScreen extends StatelessWidget {
         BlocListener<OnBoardingBloc, OnBoardingState>(
           listener: (context, state) {
             if (state is OnboardingCompleted) {
-              context.read<AuthBloc>().add(OnboardingFinished());
-              
+              context.read<AuthBloc>().add(OnboardingFinished());              
             }
           },
         ),

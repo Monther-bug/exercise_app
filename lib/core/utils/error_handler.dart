@@ -44,7 +44,6 @@ class ErrorHandler extends Interceptor {
           break;
       }
 
-
     if(statusCode != null){
       switch(statusCode){
         case 401: 
@@ -70,11 +69,7 @@ class ErrorHandler extends Interceptor {
         default:
           err = err.copyWith(error: const ServerFailure(AppMessageKey.unknownServerError));
       }
-    }
-
-    
-
-      
+    }          
       handler.next(err);
     
   }

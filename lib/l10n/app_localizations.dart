@@ -221,6 +221,12 @@ abstract class AppLocalizations {
   /// **'Favorites'**
   String get favoritesTitle;
 
+  /// No description provided for @noFavoritesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'You have no favorites yet'**
+  String get noFavoritesYet;
+
   /// No description provided for @exerciseDetailsTitle.
   ///
   /// In en, this message translates to:

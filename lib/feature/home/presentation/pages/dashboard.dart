@@ -3,7 +3,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/utils/l10n_extension.dart';
+import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
+import 'package:exercise_app/my_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class DashboardPage extends StatelessWidget {
@@ -11,29 +14,34 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  AutoTabsScaffold(
-      routes: [
-        MyHomePageRoute(title: ''), // index 0
-        FavoritesPageRoute(),        
-      ],
-      bottomNavigationBuilder: (context, TabsRouter){
-        return BottomNavigationBar(
-          currentIndex: TabsRouter.activeIndex,
-          onTap: TabsRouter.setActiveIndex,
-          selectedItemColor: AppColors.primary,
-          unselectedItemColor: AppColors.greyText,
-          items: [
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.home_outlined),
-              label: context.l10n.homeTab,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.favorite_outline),
-              label: context.l10n.favoritesTab,
-            ),
-          ]);
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if(state is Unauthenticated){appRouter.replaceAll([LoginScreenRoute()]);}
       },
+      child: AutoTabsScaffold(
+        routes: [
+          MyHomePageRoute(title: ''), // index 0
+          FavoritesPageRoute(),
+        ],
+        bottomNavigationBuilder: (context, TabsRouter) {
+          return BottomNavigationBar(
+            currentIndex: TabsRouter.activeIndex,
+            onTap: TabsRouter.setActiveIndex,
+            selectedItemColor: AppColors.primary,
+            unselectedItemColor: AppColors.greyText,
+            items: [
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.home_outlined),
+                label: context.l10n.homeTab,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.favorite_outline),
+                label: context.l10n.favoritesTab,
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
-

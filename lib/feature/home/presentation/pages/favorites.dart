@@ -35,7 +35,7 @@ class FavoritesPage extends StatelessWidget {
               favorite: false,);
             }           
             else{
-              return Center(child : Text(context.l10n.noDataFound));
+              return Center(child : Text(context.l10n.noFavoritesYet));
             } 
           }
           return Center(child: CircularProgressIndicator());

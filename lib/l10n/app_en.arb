@@ -20,6 +20,7 @@
   "homeTab": "Home",
   "favoritesTab": "Favorites",
   "favoritesTitle": "Favorites",
+  "noFavoritesYet": "You have no favorites yet",
   "exerciseDetailsTitle": "Exercise Details",
   "difficultyLabel": "Difficulty",
   "muscleLabel": "Muscle",

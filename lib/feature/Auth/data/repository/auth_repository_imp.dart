@@ -23,24 +23,24 @@ class AuthRepositoryImp implements AuthRepository{
   @override 
   Future <UserEntity?> signUpUser(String name, String email, String password) async{
     final firebaseUser = await remoteDataSource.singnUp(name, email, password);
-    if(firebaseUser != null){
-      final token = await firebaseUser.getIdToken();
-      if(token != null){
-       await storageService.saveToken(token);
-      }
-    }
+    // if(firebaseUser != null){
+    //   final token = await firebaseUser.getIdToken();
+    //   if(token != null){
+    //    await storageService.saveToken(token);
+    //   }
+    // }
     return firebaseUser?.toEntity();
   }
   
   @override 
   Future <UserEntity?> loginUser(String email, String password) async{
     final firebaseUser = await remoteDataSource.login(email, password);
-    if(firebaseUser != null){
-      final token = await firebaseUser.getIdToken();
-      if(token != null){
-       await storageService.saveToken(token);
-      }
-    }
+    // if(firebaseUser != null){
+    //   final token = await firebaseUser.getIdToken();
+    //   if(token != null){
+    //    await storageService.saveToken(token);
+    //   }
+    // }
     
     return firebaseUser?.toEntity();
   }  
@@ -54,6 +54,6 @@ class AuthRepositoryImp implements AuthRepository{
   @override 
   Future <void> logout() async{
     await remoteDataSource.logout();
-    await storageService.clear();
+    //await storageService.clear();
   }
 }

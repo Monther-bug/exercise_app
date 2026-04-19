@@ -81,6 +81,10 @@ class ExerciseDetails extends StatelessWidget {
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.primary,
+                                width: 1
+                              ),
                               color: AppColors.neutural,
                               boxShadow: [BoxShadow(
                                 color: AppColors.shadow.withOpacity(0.3),
@@ -89,11 +93,13 @@ class ExerciseDetails extends StatelessWidget {
                               offset: const Offset(2, 2),
                                         
                               )],
-                              borderRadius: BorderRadius.circular(context.isMobile?3.wp: 2.wp )
+                              //context.isMobile?1.5.wp: 2.wp 
+                              borderRadius: BorderRadius.circular(12)
                           
                             ),
                             child:Padding(
-                              padding:  EdgeInsets.all(context.isMobile?2.wp: 1.wp),
+                              //context.isMobile?1.wp: 1.wp
+                              padding:  EdgeInsets.all(1.wp),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -110,18 +116,24 @@ class ExerciseDetails extends StatelessWidget {
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.primary,
+                                width: 1
+                              ),
                               color: AppColors.neutural,
                               boxShadow: [BoxShadow(
                                 color: AppColors.shadow.withOpacity(0.3),
                                 blurRadius: 4,
                               spreadRadius: 0,
                               offset: const Offset(2, 2),
+                              //context.isMobile?1.5.wp: 2.wp
                                         
-                              )],borderRadius: BorderRadius.circular(context.isMobile?3.wp: 2.wp)
+                              )],borderRadius: BorderRadius.circular(12)
                           
                             ),
                             child:Padding(
-                              padding:  EdgeInsets.all(context.isMobile?2.wp: 1.wp),
+                              //context.isMobile?2.wp: 1.wp
+                              padding:  EdgeInsets.all(1.wp),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -139,7 +151,8 @@ class ExerciseDetails extends StatelessWidget {
 
                       Row(children: [
                         Icon(Icons.handyman,
-                        size: context.isMobile?5.wp:2.wp,
+                        //context.isMobile?2.wp:2.wp,
+                        size: 2.wp,
                         color: AppColors.primary),
 
                         SizedBox(width: 1.wp),
@@ -157,7 +170,7 @@ class ExerciseDetails extends StatelessWidget {
                           spacing: 8,
                           runSpacing: 8,
                           children: exerciseOBG.equipments.map((e) {
-                            return Chip(
+                            return Chip(                             
                               label: Text(e),
                               avatar: Icon(Icons.fitness_center, size: 16),
                               backgroundColor: AppColors.neutural,
@@ -165,38 +178,64 @@ class ExerciseDetails extends StatelessWidget {
                           }).toList(),
                         ),
                       ),
-                        SizedBox(height: 5.hp),
+                      SizedBox(height: 2.hp),
 
                       
 
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton.icon(
-                          onPressed: () {
-                            showInstructionsBottomSheet(context, exerciseOBG.instructions);
-                          },
-                          icon: Icon(Icons.menu_book),
-                          label: Text(l10n.viewInstructions),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: AppColors.neutural,
-                            padding: EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                      )
-
-                     
-  
-
-
+                      // SizedBox(
+                      //   width: double.infinity,
+                      //   child: ElevatedButton.icon(
+                      //     onPressed: () {
+                      //       showInstructionsBottomSheet(context, exerciseOBG.instructions);
+                      //     },
+                      //     icon: Icon(Icons.menu_book),
+                      //     label: Text(l10n.viewInstructions),
+                      //     style: ElevatedButton.styleFrom(
+                      //       backgroundColor: AppColors.primary,
+                      //       foregroundColor: AppColors.neutural,
+                      //       padding: EdgeInsets.symmetric(vertical: 14),
+                      //       shape: RoundedRectangleBorder(
+                      //         borderRadius: BorderRadius.circular(12),
+                      //       ),
+                      //     ),
+                      //   ),                        
+                      // ),    
+                    
+                                       
               ],),
             ),
           ),
         ),
-      )
+      ),
+      bottomNavigationBar: 
+      Padding(
+        padding:  EdgeInsets.all(1.wp),
+        child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () {
+              showInstructionsBottomSheet(context, exerciseOBG.instructions);
+            },
+            icon: Icon(Icons.menu_book),
+            label: Text(l10n.viewInstructions),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: AppColors.neutural,
+              padding: EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),                        
+        ),
+      ),    
+      // floatingActionButton:  
+      // FloatingActionButton(
+      //   shape: const CircleBorder(),
+      //   backgroundColor: AppColors.primary,
+      //   onPressed: (){ showInstructionsBottomSheet(context, exerciseOBG.instructions);},
+      //   child: Icon(Icons.menu_book_outlined,
+      //   color: AppColors.neutural,) ,),
     );
   }
 }

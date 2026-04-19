@@ -144,7 +144,7 @@ class LoginScreen extends StatelessWidget {
                           BlocConsumer<AuthBloc, AuthState>(
                             listener: (context, state) {
                             if (state is AuthSuccess) {                                
-                              context.router.replace(MyHomePageRoute(title: ''));
+                              context.router.replaceAll([ MyHomePageRoute(title: '')]);
                               if(state.source == AuthSource.login){
                                 ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text(l10n.loginSuccessMessage)),
@@ -178,7 +178,7 @@ class LoginScreen extends StatelessWidget {
                                       },
                                       style: ElevatedButton.styleFrom(                                      
                                         backgroundColor:
-                                            AppColors.secondary, // Background color
+                                            AppColors.primary, // Background color
                                         foregroundColor: AppColors.neutural, // Splash/text default color
                                         // minimumSize: Size(double.infinity, 50), // Responsive height placeholder
                                         shape: RoundedRectangleBorder(
@@ -190,7 +190,7 @@ class LoginScreen extends StatelessWidget {
                                         child: Text(
                                           l10n.loginButton,
                                           style: AppTextStyles.titleSmall.copyWith(
-                                            color: AppColors.primary
+                                            color: AppColors.onSecondary
                                           ),
                                         ),
                                       ),
@@ -251,7 +251,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: () {
-                                  context.pushRoute(SignUpScreenRoute());
+                                  context.replaceRoute(SignUpScreenRoute());
                                 },
                                 child: Text(
                                   l10n.signUpLink,

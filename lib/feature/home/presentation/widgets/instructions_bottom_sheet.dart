@@ -10,6 +10,7 @@ void showInstructionsBottomSheet (
   String instructions){
     showModalBottomSheet(
       context: context, 
+      showDragHandle: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),

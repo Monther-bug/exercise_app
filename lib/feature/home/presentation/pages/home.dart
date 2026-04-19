@@ -41,82 +41,80 @@ class _MyHomePageState extends State<MyHomePage> {
         context.pushRoute(EmptyViewRoute());
         }
       },
-       child:  Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          toolbarHeight: 10.hp,
-          // title: Padding(padding: EdgeInsets.all(1.wp), child: 
-          // SearchBar(
-           
-          // )),
-          title: Customtextfeild(
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.search,
-              prefixIcon:  Icon(
-                Icons.search, 
-                color: AppColors.primary,
-                size: context.isMobile? 1.5.wp:2.wp),
-              hintText: context.l10n.searchHint,
-              onChanged: (value){
-                context.read<SearchBloc>().add(SearchingEvent(value));
-              },
-              onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
-              borderRadius: 1,
+       child:  Center(
+         child: SizedBox(
+          width: context.isMobile?100.wp:75.wp,
+           child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              toolbarHeight: 10.hp,
+              // title: Padding(padding: EdgeInsets.all(1.wp), child: 
+              // SearchBar(
+               
+              // )),
+              title: Customtextfeild(             
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.search, 
+                  prefixIcon:  Icon(
+                    Icons.search, 
+                    color: AppColors.primary,
+                    size: context.isMobile? 1.5.wp:2.wp),
+                  hintText: context.l10n.searchHint,
+                  onChanged: (value){
+                    context.read<SearchBloc>().add(SearchingEvent(value));
+                  },
+                  onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
+                  borderRadius: 1.wp,
+                ),            
+                actions: [ IconButton(
+                onPressed: (){context.read<AuthBloc>().add(LogoutRequested());}, 
+                icon: Icon(
+                  Icons.login_outlined,
+                  //context.isMobile? 4.wp: 2.wp,
+                  size: 2.wp,
+                  color: AppColors.primary,
+                )),
+                IconButton(
+                  onPressed: (){
+                    final currentState = context.read<LocalBloc>().state;
+                    final newState = currentState.locale.languageCode == 'en'
+                      ? const Locale('ar')
+                      : const Locale('en');
+                    context.read<LocalBloc>().add(ChangeLanguage(newState));
+                  }, 
+                  icon: Icon(
+                    Icons.language,
+                    size: context.isMobile? 1.5.wp: 2.wp,
+                    color: AppColors.primary,
+                  ))],
             ),
-          // leading: IconButton(
-          //   onPressed: (){context.read<AuthBloc>().add(LogoutRequested());}, 
-          //   icon: Icon(
-          //     Icons.login_outlined,
-          //     size: context.isMobile? 4.wp: 2.wp,
-          //     color: AppColors.primary,
-          //   )),
-            actions: [ IconButton(
-            onPressed: (){context.read<AuthBloc>().add(LogoutRequested());}, 
-            icon: Icon(
-              Icons.login_outlined,
-              //context.isMobile? 4.wp: 2.wp,
-              size: 2.wp,
-              color: AppColors.primary,
-            )),
-            IconButton(
-              onPressed: (){
-                final currentState = context.read<LocalBloc>().state;
-                final newState = currentState.locale.languageCode == 'en'
-                  ? const Locale('ar')
-                  : const Locale('en');
-                context.read<LocalBloc>().add(ChangeLanguage(newState));
-              }, 
-              icon: Icon(
-                Icons.language,
-                size: context.isMobile? 1.5.wp: 2.wp,
-                color: AppColors.primary,
-              ))],
-        ),
-        body: 
-        BlocBuilder<SearchBloc, SearchState>(
-          builder: (context, state) {
-            if (state is SearchLoading) {
-              return Center(child: CircularProgressIndicator());
-            } else if (state is Searchfailed) {
-              return GlobalErrorView(message: state.message);
-            } else if (state is SearchEmpty) {
-              return EmptyView();
-            } else if (state is SearchSuccessful) {
-              final list = state.data;
-              return BuildListWidget(list: list);              
-            }
-          
-            return BlocBuilder<ExerciseBloc, ExerciseState>(
+            body: 
+            BlocBuilder<SearchBloc, SearchState>(
               builder: (context, state) {
-                if (state is ExerciseLoaded) {
-                  var list = state.exercises;
-                  return BuildListWidget(list: list);
-                }                
-                return Center(child: CircularProgressIndicator());
-              },
-            );
-          }
-       )
+                if (state is SearchLoading) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (state is Searchfailed) {
+                  return GlobalErrorView(message: state.message);
+                } else if (state is SearchEmpty) {
+                  return EmptyView();
+                } else if (state is SearchSuccessful) {
+                  final list = state.data;
+                  return BuildListWidget(list: list);              
+                }
+              
+                return BlocBuilder<ExerciseBloc, ExerciseState>(
+                  builder: (context, state) {
+                    if (state is ExerciseLoaded) {
+                      var list = state.exercises;
+                      return BuildListWidget(list: list);
+                    }                
+                    return Center(child: CircularProgressIndicator());
+                  },
+                );
+              }
+           )
+           ),
+         ),
        )
     );
   }

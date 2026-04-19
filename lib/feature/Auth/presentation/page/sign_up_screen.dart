@@ -167,6 +167,7 @@ class SignUpScreen extends StatelessWidget {
                         BlocConsumer<AuthBloc, AuthState>(
                           listener: (context, state) {
                             if(state is AuthSuccess){
+                              context.router.replaceAll([MyHomePageRoute(title: '')]);
                               if(state.source == AuthSource.signUp){
                                 ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text(l10n.signUpSuccessMessage))
@@ -199,9 +200,9 @@ class SignUpScreen extends StatelessWidget {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
-                                      AppColors.secondary,// Background color
+                                      AppColors.primary,// Background color
                                   foregroundColor:
-                                      AppColors.secondary, // Splash/text default color                                
+                                      AppColors.primary, // Splash/text default color                                
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(context.isMobile? 4.wp: 2.wp),
                                   ),
@@ -209,7 +210,7 @@ class SignUpScreen extends StatelessWidget {
                                 child: Text(
                                   l10n.signUpButton,
                                   style: AppTextStyles.titleSmall.copyWith(
-                                    color: AppColors.primary,
+                                    color: AppColors.onSecondary,
                                   ),
                                 ),
                               ),
@@ -228,7 +229,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                context.pushRoute(LoginScreenRoute());
+                                context.replaceRoute(LoginScreenRoute());
                               },
                               child: Text(
                                 l10n.loginLink,
