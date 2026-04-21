@@ -9,14 +9,15 @@ import 'package:exercise_app/feature/Auth/domain/usecases/google_sign_in_usecase
 import 'package:exercise_app/feature/Auth/domain/usecases/login_usecase.dart';
 import 'package:exercise_app/feature/Auth/domain/usecases/sign_up_usecase.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
-import 'package:exercise_app/feature/home/data/model/exercise_local_model.dart';
 import 'package:exercise_app/feature/home/data/repositories/exercise_repository.dart';
+import 'package:exercise_app/feature/home/data/repositories/favorites_repository_imp.dart';
 import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
 import 'package:exercise_app/feature/home/bloc/exercise_bloc.dart';
 import 'package:exercise_app/feature/home/bloc/search_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exercise_app/feature/home/domain/repositories/favorites_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final locator = GetIt.instance;
@@ -25,9 +26,10 @@ bool _isInitialized = false;
 Future<void> init() async {
   if (_isInitialized) return;
 
-  final firestore = FirebaseFirestore.instance;
+  
   final sharedPrefs = await SharedPreferences.getInstance();
-  locator.registerLazySingleton<FirebaseFirestore>(() => firestore);
+  locator.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+  locator.registerLazySingleton<FirebaseFirestore>(() =>  FirebaseFirestore.instance);
   locator.registerLazySingleton<LocalStorageService>(() => SharedPreferencesService(sharedPrefs));
   locator.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSource());
   locator.registerLazySingleton<AuthRepository>(
@@ -35,6 +37,8 @@ Future<void> init() async {
      
      ),
   );
+  locator.registerLazySingleton<FavoritesRepository>(() => FavoritesRepositoryImp());
+
   locator.registerLazySingleton<LoginUsecase>(
     () => LoginUsecase(),
   );
@@ -63,9 +67,7 @@ Future<void> init() async {
     () => SearchBloc()
   );
 
-   Hive.registerAdapter(ExerciseLocalModelAdapter());
-  final box = await Hive.openBox<ExerciseLocalModel>('favorites');
-  locator.registerLazySingleton<Box<ExerciseLocalModel>>(() => box);
+ 
 
   _isInitialized = true;
 }
