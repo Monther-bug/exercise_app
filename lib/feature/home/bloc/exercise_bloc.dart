@@ -1,5 +1,6 @@
 
 import 'package:exercise_app/core/di/injection_container.dart';
+import 'package:exercise_app/feature/home/data/model/request/exercise_request.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
 import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
     on<DisplayExercise>((event, emit) async{
       emit(ExerciseLoading());
       
-        final result = await repository.getExercise(null);           
+        final result = await repository.getExercise(EcerciseRequest(name: ''));           
         result.fold(
         (failure) => emit(ExerciseError(failure.message)),
         (exercises) {if (exercises.isEmpty) {

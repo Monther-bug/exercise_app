@@ -1,4 +1,5 @@
 import 'package:exercise_app/core/di/injection_container.dart';
+import 'package:exercise_app/feature/home/data/model/request/exercise_request.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
 import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +18,13 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final repo = locator<ExerciseRepository>();
   SearchBloc() : super(SearchInitial()) {       
     on<SearchingEvent>((event, emit) async{
-       final query = event.data.trim();
+       final query = event.data.name.trim();
         if(query.isEmpty){     
           emit(SearchInitial());
           return;
         }
       emit(SearchLoading());
-      final result = await repo.getExercise(query);
+      final result = await repo.getExercise(event.data);
       result.fold(
         (failure) => emit(Searchfailed(failure.message)),
         (searchResult) {
