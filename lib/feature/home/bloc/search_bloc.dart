@@ -1,3 +1,4 @@
+import 'package:exercise_app/core/di/injection_container.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
 import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,9 @@ EventTransformer<T> debounce<T>(Duration duration) {
  }
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  final ExerciseRepository repo;
-  SearchBloc(this.repo) : super(SearchInitial()) {       
+
+  final repo = locator<ExerciseRepository>();
+  SearchBloc() : super(SearchInitial()) {       
     on<SearchingEvent>((event, emit) async{
        final query = event.data.trim();
         if(query.isEmpty){     

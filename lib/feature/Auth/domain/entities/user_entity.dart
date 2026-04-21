@@ -1,6 +1,6 @@
 class UserEntity {
   final String id;
-  final String email;
+  final String? email;
   final String? displayName;
   
 

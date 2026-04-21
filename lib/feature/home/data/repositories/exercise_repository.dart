@@ -3,6 +3,7 @@
 
 
 import 'package:dio/dio.dart';
+import 'package:exercise_app/core/di/injection_container.dart';
 import 'package:exercise_app/core/network/api_client.dart';
 import 'package:exercise_app/core/network/network_failure.dart';
 import 'package:exercise_app/core/utils/l10n_extension.dart';
@@ -11,9 +12,8 @@ import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
 import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
 import 'package:fpdart/fpdart.dart';
 
-class ExerciseRepositoryImp implements ExerciseRepository{
-  final ApiClient apiClient;
-  ExerciseRepositoryImp(this.apiClient);
+class ExerciseRepositoryImp extends ExerciseRepository{
+  final apiClient = locator<ApiClient>();
   @override
     Future<Either<NetworkFailure, List<ExerciseEntity>>> getExercise(String? name) async {       
   try {

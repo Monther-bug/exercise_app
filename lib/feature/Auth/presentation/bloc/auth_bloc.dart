@@ -1,6 +1,9 @@
 
+import 'package:exercise_app/core/di/injection_container.dart';
 import 'package:exercise_app/core/services/local_storage_service.dart';
 import 'package:exercise_app/core/utils/l10n_extension.dart';
+import 'package:exercise_app/feature/Auth/data/models/request/login_request.dart';
+import 'package:exercise_app/feature/Auth/data/models/request/sign_up_request.dart';
 import 'package:exercise_app/feature/Auth/domain/entities/user_entity.dart';
 import 'package:exercise_app/feature/Auth/domain/repository/auth_repository.dart';
 import 'package:exercise_app/feature/Auth/domain/usecases/google_sign_in_usecase.dart';
@@ -13,18 +16,13 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final LocalStorageService _storage;
-  final AuthRepository authRepository;
-  final LoginUsecase loginUsecase;
-  final SignUpUsecase signUpUsecase;
-  final GoogleSignInUsecase googleSignInUsecase;
-  AuthBloc(  
-    this.authRepository,
-    this.loginUsecase,
-    this.signUpUsecase,
-    this._storage,
-    this.googleSignInUsecase
-  ): super(AuthInitial()) {
+  final _storage = locator<LocalStorageService>();
+  final authRepository = locator<AuthRepository>();
+  final loginUsecase = locator<LoginUsecase>();
+  final signUpUsecase = locator<SignUpUsecase>();
+  final googleSignInUsecase = locator<GoogleSignInUsecase>();
+  
+  AuthBloc(): super(AuthInitial()) {
     on<AppStarted>((event, emit) async{
       final hasSeenOnboarding = await _storage.hasSeenOnboarding();
       if(!hasSeenOnboarding){
@@ -54,7 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginSubmitted>((event, emit) async{       
       emit(AuthLoading());
       try{
-        final user = await loginUsecase(event.email, event.password);
+        final user = await loginUsecase(event.request);
         if(user!= null){
           emit(AuthSuccess(user:user,  source: AuthSource.login));
         }
@@ -69,7 +67,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpSubmitted>((event, emit) async{       
       emit(AuthLoading());
       try{
-        final user = await signUpUsecase(event.name,event.email, event.password);
+        final user = await signUpUsecase(event.request);
         if(user!= null){
           emit(AuthSuccess(user: user, source: AuthSource.signUp));
         }

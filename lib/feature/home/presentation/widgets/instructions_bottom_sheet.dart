@@ -1,5 +1,6 @@
 
 import 'package:exercise_app/core/utils/l10n_extension.dart';
+import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:screentasia/screentasia.dart';
 
@@ -16,7 +17,7 @@ void showInstructionsBottomSheet (
         final textTheme = Theme.of(context).textTheme;
         return SingleChildScrollView(
           child: Padding(
-            padding:  EdgeInsets.all(5.wp),
+            padding:  EdgeInsets.all(context.isMobile?5.wp: 2.wp),
             child: SizedBox(
               height: 60.hp,
               child: Column(

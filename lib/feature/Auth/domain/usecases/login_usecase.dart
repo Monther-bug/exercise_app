@@ -1,12 +1,14 @@
+import 'package:exercise_app/core/di/injection_container.dart';
+import 'package:exercise_app/feature/Auth/data/models/request/login_request.dart';
 import 'package:exercise_app/feature/Auth/domain/entities/user_entity.dart';
 import 'package:exercise_app/feature/Auth/domain/repository/auth_repository.dart';
 
 
 class LoginUsecase {
-  final AuthRepository repository;
-  LoginUsecase(this.repository);
+  final repository = locator<AuthRepository>();
+  
 
-  Future <UserEntity?> call (String email, String password) async{
-    return await repository.loginUser(email, password);
+  Future <UserEntity?> call (LoginRequest request) async{
+    return await repository.loginUser(request);
   }
 }

@@ -1,4 +1,5 @@
 
+import 'package:exercise_app/core/di/injection_container.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
 import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,10 @@ part 'exercise_event.dart';
 part 'exercise_state.dart';
 
 class ExerciseBloc extends Bloc<ExerciseEvent, ExerciseState> {
-  final ExerciseRepository repository;
+  //final ExerciseRepository repository;
+  final repository = locator<ExerciseRepository>();
 
-  ExerciseBloc(this.repository) : super(ExerciseInitial()) {
+  ExerciseBloc() : super(ExerciseInitial()) {
     on<DisplayExercise>((event, emit) async{
       emit(ExerciseLoading());
       

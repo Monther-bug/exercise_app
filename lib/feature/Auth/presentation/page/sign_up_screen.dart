@@ -6,6 +6,7 @@ import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/utils/form_validators.dart';
 import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
+import 'package:exercise_app/feature/Auth/data/models/request/sign_up_request.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/widgets/text_form_feild.dart';
 import 'package:flutter/material.dart';
@@ -189,9 +190,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         if (formKey.currentState?.validate() ?? false) {
                                           context.read<AuthBloc>().add(
                                             SignUpSubmitted(
-                                              name: nameController.text,
-                                              email: emailController.text,
-                                              password: passwordController.text,
+                                              // name: nameController.text,
+                                              // email: emailController.text,
+                                              // password: passwordController.text,
+                                              request: SignUpRequest(
+                                                name: nameController.text, 
+                                                email: emailController.text, 
+                                                password: passwordController.text)
                                             ),
                                           );
                                         }

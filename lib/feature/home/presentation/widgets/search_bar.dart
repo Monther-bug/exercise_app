@@ -1,6 +1,6 @@
 import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
-import 'package:exercise_app/feature/home/presentation/bloc/search_bloc.dart';
+import 'package:exercise_app/feature/home/bloc/search_bloc.dart';
 import 'package:exercise_app/widgets/text_form_feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -4,7 +4,7 @@ import 'package:exercise_app/core/theme/app_images.dart';
 import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
-import 'package:exercise_app/feature/home/presentation/bloc/favorites_bloc.dart';
+import 'package:exercise_app/feature/home/bloc/favorites_bloc.dart';
 import 'package:exercise_app/feature/home/presentation/widgets/instructions_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

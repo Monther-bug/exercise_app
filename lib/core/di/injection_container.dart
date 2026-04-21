@@ -12,8 +12,9 @@ import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/feature/home/data/model/exercise_local_model.dart';
 import 'package:exercise_app/feature/home/data/repositories/exercise_repository.dart';
 import 'package:exercise_app/feature/home/domain/repositories/exercise_repo.dart';
-import 'package:exercise_app/feature/home/presentation/bloc/exercise_bloc.dart';
-import 'package:exercise_app/feature/home/presentation/bloc/search_bloc.dart';
+import 'package:exercise_app/feature/home/bloc/exercise_bloc.dart';
+import 'package:exercise_app/feature/home/bloc/search_bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,34 +25,28 @@ bool _isInitialized = false;
 Future<void> init() async {
   if (_isInitialized) return;
 
+  final firestore = FirebaseFirestore.instance;
   final sharedPrefs = await SharedPreferences.getInstance();
+  locator.registerLazySingleton<FirebaseFirestore>(() => firestore);
   locator.registerLazySingleton<LocalStorageService>(() => SharedPreferencesService(sharedPrefs));
   locator.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSource());
   locator.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImp(
-      locator<AuthRemoteDataSource>(),
-      locator<LocalStorageService>()),
+     
+     ),
   );
   locator.registerLazySingleton<LoginUsecase>(
-    () => LoginUsecase(locator<AuthRepository>()),
+    () => LoginUsecase(),
   );
   locator.registerLazySingleton<SignUpUsecase>(
-    () => SignUpUsecase(locator<AuthRepository>()),
+    () => SignUpUsecase(),
   );
   locator.registerLazySingleton<GoogleSignInUsecase>(
-    () => GoogleSignInUsecase(locator<AuthRepository>()),
+    () => GoogleSignInUsecase(),
   );
 
   if (!locator.isRegistered<AuthBloc>()) {
-    locator.registerLazySingleton<AuthBloc>(
-      () => AuthBloc(
-        locator<AuthRepository>(),
-        locator<LoginUsecase>(),
-        locator<SignUpUsecase>(),
-        locator<LocalStorageService>(),
-        locator<GoogleSignInUsecase>()
-      ),
-    );
+    locator.registerLazySingleton<AuthBloc>(() => AuthBloc());
   }
 
   locator.registerLazySingleton<Dio>(() => Dio());
@@ -59,13 +54,13 @@ Future<void> init() async {
   locator.registerLazySingleton<ApiClient>(() => ApiClient());  
   
   locator.registerLazySingleton<ExerciseRepository>(
-    () => ExerciseRepositoryImp(locator<ApiClient>()),
+    () => ExerciseRepositoryImp(),
   );
   locator.registerFactory<ExerciseBloc>(
-    () => ExerciseBloc(locator<ExerciseRepository>())
+    () => ExerciseBloc()
   );
   locator.registerFactory<SearchBloc>(
-    () => SearchBloc(locator<ExerciseRepository>())
+    () => SearchBloc()
   );
 
    Hive.registerAdapter(ExerciseLocalModelAdapter());
