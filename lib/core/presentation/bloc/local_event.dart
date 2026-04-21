@@ -7,3 +7,6 @@ class ChangeLanguage extends LocalEvent{
   final Locale newLang;
   ChangeLanguage(this.newLang);
 }
+
+final class TehmeToggle extends LocalEvent {}
+

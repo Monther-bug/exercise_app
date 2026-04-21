@@ -1,5 +1,6 @@
 import 'package:exercise_app/core/di/injection_container.dart';
 import 'package:exercise_app/core/presentation/bloc/local_bloc.dart';
+import 'package:exercise_app/core/presentation/bloc/theme_bloc.dart';
 import 'package:exercise_app/core/routing/app_router.dart';
 import 'package:exercise_app/core/services/local_storage_service.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => locator<AuthBloc>()..add(AppStarted())),
         BlocProvider(create: (_) => locator<SearchBloc>()),
         BlocProvider(create: (_) => FavoritesBloc()..add(LoadFavorites())),        
-        BlocProvider(create: (_) => LocalBloc()),        
+        BlocProvider(create: (_) => LocalBloc()),                 
       ],
       child: MultiBlocListener(
         listeners: [
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
               supportedLocales: AppLocalizations.supportedLocales,
               locale: state.locale,
               onGenerateTitle: (context) => context.l10n.appTitle,
-              themeMode:ThemeMode.dark,
+              themeMode:state.themeMode,
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 colorScheme: ColorScheme.light(

@@ -33,64 +33,80 @@ class _MyHomePageState extends State<MyHomePage> {
     final colorScheme = Theme.of(context).colorScheme;
     return BlocListener<ExerciseBloc, ExerciseState>(
       listener: (context, state) {
-         if (state is ExerciseError) {
+        if (state is ExerciseError) {
           String message = state.error;
           context.pushRoute(GlobalErrorViewRoute(message: message));
-        }  
+        }
         if (state is ExerciseEmpty) {
-        context.pushRoute(EmptyViewRoute());
+          context.pushRoute(EmptyViewRoute());
         }
       },
-       child:  Center(
-         child: SizedBox(
-          width: context.isMobile?100.wp:75.wp,
-           child: Scaffold(
+      child: Center(
+        child: SizedBox(
+          width: context.isMobile ? 100.wp : 75.wp,
+          child: Scaffold(
             appBar: AppBar(
-              
               backgroundColor: Colors.transparent,
               toolbarHeight: 10.hp,
-              // title: Padding(padding: EdgeInsets.all(1.wp), child: 
+              // title: Padding(padding: EdgeInsets.all(1.wp), child:
               // SearchBar(
-               
+
               // )),
-              title: Customtextfeild(             
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.search, 
-                  prefixIcon:  Icon(
-                    Icons.search, 
-                    color: colorScheme.primary,
-                    size: context.isMobile? 5.wp:2.wp),
-                  hintText: context.l10n.searchHint,
-                  onChanged: (value){
-                    context.read<SearchBloc>().add(SearchingEvent(value));
-                  },
-                  onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
-                  borderRadius: 1.wp,
-                ),            
-                actions: [ IconButton(
-                onPressed: (){context.read<AuthBloc>().add(LogoutRequested());}, 
-                icon: Icon(
-                  Icons.login_outlined,
-                  //context.isMobile? 4.wp: 2.wp,
-                  size: context.isMobile? 5.wp: 2.wp,
+              title: Customtextfeild(
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.search,
+                prefixIcon: Icon(
+                  Icons.search,
                   color: colorScheme.primary,
-                )),
+                  size: context.isMobile ? 5.wp : 2.wp,
+                ),
+                hintText: context.l10n.searchHint,
+                onChanged: (value) {
+                  context.read<SearchBloc>().add(SearchingEvent(value));
+                },
+                onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
+                borderRadius: 1.wp,
+              ),
+              actions: [
+                //   IconButton(
+                // onPressed: (){context.read<AuthBloc>().add(LogoutRequested());},
+                // icon: Icon(
+                //   Icons.login_outlined,
+                //   //context.isMobile? 4.wp: 2.wp,
+                //   size: context.isMobile? 5.wp: 2.wp,
+                //   color: colorScheme.primary,
+                // )),
+                BlocBuilder<LocalBloc, LocalState>(
+                  builder: (context, state) {
+                    return IconButton(
+                      onPressed: () {
+                        context.read<LocalBloc>().add(TehmeToggle());
+                      },
+                      icon: Icon(state.themeMode == ThemeMode.dark
+                        ? Icons.light_mode
+                        :Icons.dark_mode,
+                        size: context.isMobile ? 5.wp : 2.wp,
+                        color: colorScheme.primary,),
+                    );
+                  },
+                ),
                 IconButton(
-                  onPressed: (){
+                  onPressed: () {
                     final currentState = context.read<LocalBloc>().state;
                     final newState = currentState.locale.languageCode == 'en'
-                      ? const Locale('ar')
-                      : const Locale('en');
+                        ? const Locale('ar')
+                        : const Locale('en');
                     context.read<LocalBloc>().add(ChangeLanguage(newState));
-                  }, 
+                  },
                   icon: Icon(
                     Icons.language,
-                    size: context.isMobile? 5.wp: 2.wp,
+                    size: context.isMobile ? 5.wp : 2.wp,
                     color: colorScheme.primary,
-                  ))],
+                  ),
+                ),
+              ],
             ),
-            body: 
-            BlocBuilder<SearchBloc, SearchState>(
+            body: BlocBuilder<SearchBloc, SearchState>(
               builder: (context, state) {
                 if (state is SearchLoading) {
                   return Center(child: CircularProgressIndicator());
@@ -100,24 +116,23 @@ class _MyHomePageState extends State<MyHomePage> {
                   return EmptyView();
                 } else if (state is SearchSuccessful) {
                   final list = state.data;
-                  return BuildListWidget(list: list);              
+                  return BuildListWidget(list: list);
                 }
-              
+
                 return BlocBuilder<ExerciseBloc, ExerciseState>(
                   builder: (context, state) {
                     if (state is ExerciseLoaded) {
                       var list = state.exercises;
                       return BuildListWidget(list: list);
-                    }                
+                    }
                     return Center(child: CircularProgressIndicator());
                   },
                 );
-              }
-           )
-           ),
-         ),
-       )
+              },
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
-
