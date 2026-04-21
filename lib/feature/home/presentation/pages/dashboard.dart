@@ -1,7 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:exercise_app/core/routing/app_router.gr.dart';
-import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/my_app.dart';
@@ -27,8 +26,8 @@ class DashboardPage extends StatelessWidget {
           return BottomNavigationBar(
             currentIndex: TabsRouter.activeIndex,
             onTap: TabsRouter.setActiveIndex,
-            selectedItemColor: AppColors.primary,
-            unselectedItemColor: AppColors.greyText,
+            selectedItemColor: Theme.of(context).colorScheme.primary,
+            unselectedItemColor: Theme.of(context).colorScheme.onSurfaceVariant,
             items: [
               BottomNavigationBarItem(
                 icon: const Icon(Icons.home_outlined),

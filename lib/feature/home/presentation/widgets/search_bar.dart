@@ -1,4 +1,3 @@
-import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/home/presentation/bloc/search_bloc.dart';
@@ -21,7 +20,7 @@ class SearchBar extends StatelessWidget {
       textInputAction: TextInputAction.search,
       prefixIcon:  Icon(
         Icons.search, 
-        color: AppColors.primary,
+        color: Theme.of(contextt).colorScheme.primary,
         size: contextt.isMobile? 4.wp:2.wp),
       hintText: contextt.l10n.searchHint,
       onChanged: (value){

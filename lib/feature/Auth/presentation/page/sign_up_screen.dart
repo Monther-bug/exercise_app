@@ -1,8 +1,273 @@
+// import 'package:auto_route/auto_route.dart';
+// import 'package:exercise_app/core/presentation/bloc/local_bloc.dart';
+// import 'package:exercise_app/core/routing/app_router.gr.dart';
+// import 'package:exercise_app/core/utils/form_validators.dart';
+// import 'package:exercise_app/core/utils/l10n_extension.dart';
+// import 'package:exercise_app/core/utils/responsive_extension.dart';
+// import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
+// import 'package:exercise_app/widgets/text_form_feild.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// // ...existing code...
+// import 'package:screentasia/screentasia.dart';
+
+// @RoutePage()
+// class SignUpScreen extends StatefulWidget {
+//   const SignUpScreen({super.key});
+
+//   @override
+//   State<SignUpScreen> createState() => _SignUpScreenState();
+// }
+
+// class _SignUpScreenState extends State<SignUpScreen> {
+//   final TextEditingController emailController = TextEditingController();
+//   final TextEditingController passwordController = TextEditingController();
+//   final TextEditingController nameController = TextEditingController();
+//   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+//   final ValueNotifier<bool> obscureNotifier = ValueNotifier<bool>(true);
+
+//   @override
+//   void dispose() {
+//     emailController.dispose();
+//     passwordController.dispose();
+//     nameController.dispose();
+//     obscureNotifier.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final l10n = context.l10n;
+//     final textTheme = Theme.of(context).textTheme;
+//     final colorScheme = Theme.of(context).colorScheme;
+//     return Scaffold(
+//       appBar: AppBar(
+//         automaticallyImplyLeading: false,
+//          title: Text(
+//           l10n.signUpTitle,
+//           style: textTheme.titleMedium?.copyWith(
+//             color: colorScheme.primary,
+//           )),
+//         actions: [IconButton(
+//           onPressed: (){
+//             final currentState = context.read<LocalBloc>().state;
+//             final newState = currentState.locale.languageCode == 'en'
+//               ? const Locale('ar')
+//               : const Locale('en');
+//             context.read<LocalBloc>().add(ChangeLanguage(newState));
+//           }, 
+//           icon: Icon(
+//             Icons.language,
+//             size: context.isMobile? 5.wp: 2.wp,
+//             color: colorScheme.primary,
+//           ))],
+//       ),
+//       body: SingleChildScrollView(
+//         child: Center(
+//           child: SizedBox(
+//             width: context.isMobile ? 90.wp : 75.wp,
+//             child: Form(
+//               key: formKey,
+//               child: Padding(
+//                 padding:  EdgeInsets.all(8.0),
+//                 child: Center(
+//                   child: Container(
+//                     //width: 40.wp,
+//                     height:context.isMobile?100.hp:  70.hp,
+//                     decoration: BoxDecoration(
+//                       color: colorScheme.background,
+//                       borderRadius: BorderRadius.circular(2.wp),
+//                     ),
+//                     child: Padding(
+//                       padding:  EdgeInsets.all(2.wp),
+//                       child: Column(
+//                         //mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//                           SizedBox(height: 2.hp),
+//                           Row(
+//                             children: [
+//                               Text(
+//                                 l10n.userName,
+//                                 style: textTheme.titleSmall?.copyWith(
+//                                   color: colorScheme.primary,
+//                                   fontSize: context.isMobile? 10: 12
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                           SizedBox(height: 1.hp),
+//                           Customtextfeild(
+//                             controller: nameController,
+//                             keyboardType: TextInputType.name,
+//                             textInputAction: TextInputAction.next,
+//                             validator: (value) => FormValidators.validateName(value, l10n),
+//                              hintText: l10n.userName,
+//                                   prefixIcon: Icon(
+//                                     Icons.person,                                  
+//                                     size: context.isMobile? 5.wp:2.wp,
+//                                     color: colorScheme.onSurfaceVariant,
+//                                   ),
+//                           ),
+//                           SizedBox(height: 2.hp),
+//                           Row(
+//                             children: [
+//                               Text(
+//                                 l10n.emailLabel,
+//                                 style: textTheme.titleSmall?.copyWith(
+//                                   color: colorScheme.primary,
+//                                   fontSize: context.isMobile? 10: 12
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                           SizedBox(height: 1.hp),
+//                           Customtextfeild(
+//                             controller: emailController,
+//                             keyboardType: TextInputType.emailAddress,
+//                             textInputAction: TextInputAction.next,
+//                             validator: (value) => FormValidators.validateEmail(value, l10n),
+//                              hintText: l10n.emailHint,
+//                               prefixIcon: Icon(
+//                                 Icons.email,                              
+//                                 size: context.isMobile? 5.wp:2.wp,
+//                                 color: colorScheme.onSurfaceVariant,
+//                               ),
+//                           ),
+//                           SizedBox(height: 2.hp),
+//                           Row(
+//                             children: [
+//                               Text(
+//                                 l10n.passwordLabel,
+//                                 style: textTheme.titleSmall?.copyWith(
+//                                   color: colorScheme.primary,
+//                                   fontSize: context.isMobile? 10: 12
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                           SizedBox(height: 1.hp),
+//                           ValueListenableBuilder(
+//                             valueListenable: obscureNotifier,
+//                             builder: (context, value, child) {
+//                               return Customtextfeild(
+//                                 controller: passwordController,
+//                                 validator: (input) => FormValidators.validatePassword(input, l10n),
+//                                 keyboardType: TextInputType.emailAddress,
+//                                 textInputAction: TextInputAction.done,
+//                                 obscureText: value,
+//                                 suffixIcon: IconButton(icon: Icon(value
+//                                 ?Icons.visibility
+//                                 :Icons.visibility_off,                              
+//                                 color: colorScheme.primary,
+//                                 size: context.isMobile? 5.wp:2.wp,),
+//                                 onPressed:(){
+//                                   obscureNotifier.value =
+//                                   !obscureNotifier.value;
+//                                 } ,),
+//                                  hintText: l10n.passwordLabel,
+//                                   prefixIcon: Icon(
+//                                     Icons.lock,                                  
+//                                     size: context.isMobile? 5.wp:2.wp,
+//                                     color: colorScheme.onSurfaceVariant,
+//                                   ),
+//                               );
+//                             }
+//                           ),
+                
+//                           SizedBox(height: 2.hp),
+//                           BlocConsumer<AuthBloc, AuthState>(
+//                             listener: (context, state) {
+//                               if(state is AuthSuccess){
+//                                  context.router.replaceAll([DashboardPageRoute()]);
+//                                 if(state.source == AuthSource.signUp){
+//                                   ScaffoldMessenger.of(context).showSnackBar(
+//                                   SnackBar(content: Text(l10n.signUpSuccessMessage))
+//                                 );
+//                                 }                             
+//                               } else if(state is AuthFailure){
+//                               ScaffoldMessenger.of(context).showSnackBar(
+//                               SnackBar(content: Text(localizeMessage(context, state.error))),
+//                             );
+//                               }
+//                             },
+//                             builder: (context, state) {
+//                               if(state is AuthLoading){
+//                                 return CircularProgressIndicator();
+//                               }
+                            
+//                               return SizedBox(
+//                                 width: double.infinity,
+//                                 child: ElevatedButton(
+//                                   onPressed: () {
+//                                     if(formKey.currentState!.validate()){
+//                                       context.read<AuthBloc>().add(
+//                                       SignUpSubmitted(
+//                                         name: nameController.text,
+//                                         email: emailController.text,
+//                                         password: passwordController.text,
+//                                       ),
+//                                     );
+//                                     }                                
+//                                   },
+//                                   style: ElevatedButton.styleFrom(
+//                                     backgroundColor:
+//                                         colorScheme.primary,
+//                                     foregroundColor:
+//                                         colorScheme.onPrimary,
+//                                     shape: RoundedRectangleBorder(
+//                                       borderRadius: BorderRadius.circular(context.isMobile? 4.wp: 2.wp),
+//                                     ),
+//                                   ),
+//                                   child: Text(
+//                                     l10n.signUpButton,
+//                                     style: textTheme.titleSmall?.copyWith(
+//                                       color: colorScheme.onPrimary,
+//                                     ),
+//                                   ),
+//                                 ),
+//                               );
+//                             },
+//                           ),
+//                           SizedBox(height: 2.hp),
+//                           Row(
+//                             mainAxisAlignment: MainAxisAlignment.center,
+//                             children: [
+//                               Text(
+//                                 '${l10n.alreadyHaveAccount} ',
+//                                 style: textTheme.bodySmall?.copyWith(
+//                                   color: colorScheme.onSurfaceVariant,
+//                                 ),
+//                               ),
+//                               InkWell(
+//                                 onTap: () {
+//                                   context.replaceRoute(LoginScreenRoute());
+//                                 },
+//                                 child: Text(
+//                                   l10n.loginLink,
+//                                   style: textTheme.titleSmall?.copyWith(
+//                                     color: colorScheme.primary
+//                                   ),
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
 import 'package:auto_route/auto_route.dart';
-import 'package:exercise_app/core/presentation/bloc/local_bloc.dart';
 import 'package:exercise_app/core/routing/app_router.gr.dart';
-import 'package:exercise_app/core/theme/app_colors.dart';
-import 'package:exercise_app/core/theme/app_text_styles.dart';
 import 'package:exercise_app/core/utils/form_validators.dart';
 import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
@@ -10,243 +275,264 @@ import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/widgets/text_form_feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// ...existing code...
 import 'package:screentasia/screentasia.dart';
 
 @RoutePage()
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final ValueNotifier<bool> obscureNotifier = ValueNotifier<bool>(true);
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    nameController.dispose();
+    obscureNotifier.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    final TextEditingController nameController = TextEditingController();
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    final ValueNotifier<bool> obscureNotifier = ValueNotifier<bool>(true);
-    return Center(
-      child: SizedBox(
-        width: context.isMobile ? 100.wp : 75.wp,
-        child: Scaffold(
-          appBar: AppBar(
-            actions: [IconButton(
-              onPressed: (){
-                final currentState = context.read<LocalBloc>().state;
-                final newState = currentState.locale.languageCode == 'en'
-                  ? const Locale('ar')
-                  : const Locale('en');
-                context.read<LocalBloc>().add(ChangeLanguage(newState));
-              }, 
-              icon: Icon(
-                Icons.language,
-                size: context.isMobile? 1.5.wp: 2.wp,
-                color: AppColors.primary,
-              ))],
-          ),
-          body: Form(
-            key: formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Container(
-                  //width: 40.wp,
-                  height:context.isMobile?100.hp:  70.hp,
-                  decoration: BoxDecoration(
-                    color: AppColors.neutural,
-                    borderRadius: BorderRadius.circular(2.wp),
-                    boxShadow: [
-                      BoxShadow(
-                        color:AppColors.shadow.withOpacity(0.3),
-                        blurRadius: 4,
-                        spreadRadius: 0,
-                        offset: const Offset(2, 2),
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Scaffold(
+      backgroundColor: colorScheme.background, // #F8F7FF
+      body: SingleChildScrollView(
+        child: Center(
+          child: SizedBox(
+             width: context.isMobile ? 90.wp : 75.wp,
+            child: Column(
+              children: [
+                // 1. BRANDING HEADER
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.only(
+                    top: 8.hp, 
+                    left: 6.wp, 
+                    right: 6.wp, 
+                    bottom: 3.hp
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "JOIN THE\nCLUB",
+                        style: textTheme.titleLarge?.copyWith(
+                          height: 0.95,
+                          fontSize: 42,
+                          fontWeight: FontWeight.w900,
+                          color: const Color(0xFF1E293B),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        "Start your high-performance journey today.",
+                        style: textTheme.bodyMedium?.copyWith(
+                          color: const Color(0xFF74739E), // AppColors.mutedGrey
+                        ),
                       ),
                     ],
                   ),
-                  child: Padding(
-                    padding:  EdgeInsets.all(2.wp),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          l10n.signUpTitle,
-                          style: AppTextStyles.titleLarge.copyWith(
-                            color: AppColors.primary
-                          ),
-                        ),
-                        SizedBox(height: 2.hp),
-                        Row(
-                          children: [
-                            Text(
-                              l10n.userName,
-                              style: AppTextStyles.titleSmall.copyWith(
-                                color: AppColors.primary
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 1.hp),
-                        Customtextfeild(
-                          controller: nameController,
-                          keyboardType: TextInputType.name,
-                          textInputAction: TextInputAction.next,
-                          validator: (value) => FormValidators.validateName(value, l10n),
-                           hintText: l10n.userName,
-                                prefixIcon: Icon(
-                                  Icons.person,                                  
-                                  size: context.isMobile? 1.5.wp:2.wp,
-                                  color: AppColors.greyText ,
-                                ),
-                        ),
-                        SizedBox(height: 2.hp),
-                        Row(
-                          children: [
-                            Text(
-                              l10n.emailLabel,
-                              style: AppTextStyles.titleSmall.copyWith(
-                                color: AppColors.primary
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 1.hp),
-                        Customtextfeild(
-                          controller: emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          textInputAction: TextInputAction.next,
-                          validator: (value) => FormValidators.validateEmail(value, l10n),
-                           hintText: l10n.emailHint,
-                            prefixIcon: Icon(
-                              Icons.email,                              
-                              size: context.isMobile? 1.5.wp:2.wp,
-                              color: AppColors.greyText,
-                            ),
-                        ),
-                        SizedBox(height: 2.hp),
-                        Row(
-                          children: [
-                            Text(
-                              l10n.passwordLabel,
-                              style: AppTextStyles.titleSmall.copyWith(
-                                color:AppColors.primary
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 1.hp),
-                        ValueListenableBuilder(
-                          valueListenable: obscureNotifier,
-                          builder: (context, value, child) {
-                            return Customtextfeild(
-                              controller: passwordController,
-                              validator: (input) => FormValidators.validatePassword(input, l10n),
-                              keyboardType: TextInputType.emailAddress,
-                              textInputAction: TextInputAction.done,
-                              obscureText: value,
-                              suffixIcon: IconButton(icon: Icon(value
-                              ?Icons.visibility
-                              :Icons.visibility_off,                              
-                              color: AppColors.primary,                              
-                              size: context.isMobile? 1.5.wp:2.wp,),
-                              onPressed:(){
-                                obscureNotifier.value =
-                                !obscureNotifier.value;
-                              } ,),
-                               hintText: l10n.passwordLabel,
-                                prefixIcon: Icon(
-                                  Icons.lock,                                  
-                                  size: context.isMobile? 1.5.wp:2.wp,
-                                  color: AppColors.greyText ,
-                                ),
+                ),
+            
+                // 2. SIGN UP FORM CARD
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 3.wp),
+                  padding: EdgeInsets.all(7.wp),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surface, // #F2EFFF
+                    borderRadius: BorderRadius.circular(40),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 25,
+                        offset: const Offset(0, 10),
+                      )
+                    ],
+                  ),
+                  child: Form(
+                    key: formKey,
+                    child: BlocConsumer<AuthBloc, AuthState>(
+                      listener: (context, state) {
+                        if (state is AuthSuccess) {
+                          context.router.replaceAll([const DashboardPageRoute()]);
+                          if (state.source == AuthSource.signUp) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(l10n.signUpSuccessMessage)),
                             );
                           }
-                        ),
-    
-                        SizedBox(height: 2.hp),
-                        BlocConsumer<AuthBloc, AuthState>(
-                          listener: (context, state) {
-                            if(state is AuthSuccess){
-                              context.router.replaceAll([MyHomePageRoute(title: '')]);
-                              if(state.source == AuthSource.signUp){
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(l10n.signUpSuccessMessage))
-                              );
-                              }                             
-                            } else if(state is AuthFailure){
-                            ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(localizeMessage(context, state.error))),
+                        } else if (state is AuthFailure) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(state.error)), 
                           );
-                            }
-                          },
-                          builder: (context, state) {
-                            if(state is AuthLoading){
-                              return CircularProgressIndicator();
-                            }
-                          
-                            return SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if(formKey.currentState!.validate()){
-                                    context.read<AuthBloc>().add(
-                                    SignUpSubmitted(
-                                      name: nameController.text,
-                                      email: emailController.text,
-                                      password: passwordController.text,
-                                    ),
-                                  );
-                                  }                                
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      AppColors.primary,// Background color
-                                  foregroundColor:
-                                      AppColors.primary, // Splash/text default color                                
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(context.isMobile? 4.wp: 2.wp),
-                                  ),
-                                ),
-                                child: Text(
-                                  l10n.signUpButton,
-                                  style: AppTextStyles.titleSmall.copyWith(
-                                    color: AppColors.onSecondary,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        SizedBox(height: 2.hp),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        }
+                      },
+                      builder: (context, state) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              '${l10n.alreadyHaveAccount} ',
-                              style: AppTextStyles.bodySmall.copyWith(
-                                color: AppColors.greyText,
-                              ),
+                            _buildLabel(textTheme, l10n.userName, colorScheme.primary),
+                            Customtextfeild(
+                               keyboardType: TextInputType.name,
+                              textInputAction: TextInputAction.next,
+                              controller: nameController,
+                              hintText: "ALEX RIVERA",
+                              validator: (v) => FormValidators.validateName(v, l10n),
                             ),
-                            InkWell(
-                              onTap: () {
-                                context.replaceRoute(LoginScreenRoute());
+                            
+                            const SizedBox(height: 20),
+                            
+                            _buildLabel(textTheme, l10n.emailLabel, colorScheme.primary),
+                            Customtextfeild(
+                              keyboardType: TextInputType.emailAddress,
+                              textInputAction: TextInputAction.next,
+                              controller: emailController,
+                              hintText: "ALEX@PULSE.FIT",
+                              
+                              validator: (v) => FormValidators.validateEmail(v, l10n),
+                            ),
+            
+                            const SizedBox(height: 20),
+            
+                            _buildLabel(textTheme, "CREATE PASSWORD", colorScheme.primary),
+                            ValueListenableBuilder(
+                              valueListenable: obscureNotifier,
+                              builder: (context, value, child) {
+                                return Customtextfeild(
+                                  keyboardType: TextInputType.emailAddress,
+                                  textInputAction: TextInputAction.done,
+                                  controller: passwordController,
+                                  obscureText: value,
+                                  hintText: "••••••••",
+                                  validator: (v) => FormValidators.validatePassword(v, l10n),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(value ? Icons.visibility_off : Icons.visibility),
+                                    onPressed: () => obscureNotifier.value = !value,
+                                    color: colorScheme.primary,
+                                  ),
+                                );
                               },
-                              child: Text(
-                                l10n.loginLink,
-                                style: AppTextStyles.titleSmall.copyWith(
-                                  color: AppColors.primary
-                                ),
+                            ),
+            
+                            const SizedBox(height: 20),
+            
+                            
+            
+                 
+            
+                            // ACTION BUTTON
+                            state is AuthLoading
+                                ? const Center(child: CircularProgressIndicator())
+                                : Container(
+                                    width: double.infinity,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          colorScheme.primary, // #3E65FF
+                                          const Color(0xFFB255A0), // #B255A0 (accentMagenta)
+                                        ],
+                                      ),
+                                    ),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        if (formKey.currentState?.validate() ?? false) {
+                                          context.read<AuthBloc>().add(
+                                            SignUpSubmitted(
+                                              name: nameController.text,
+                                              email: emailController.text,
+                                              password: passwordController.text,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.transparent,
+                                        shadowColor: Colors.transparent,
+                                        shape: const StadiumBorder(),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "START TRAINING",
+                                            style: textTheme.titleMedium?.copyWith(
+                                              fontWeight: FontWeight.w900,
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          const Icon(Icons.arrow_forward, color: Colors.white),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+            
+                            const SizedBox(height: 30),
+            
+                            // FOOTER
+                            Center(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Already have a pulse?",
+                                    style: textTheme.bodySmall?.copyWith(color: const Color(0xFF74739E), fontSize: 13),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => context.replaceRoute(LoginScreenRoute()),
+                                    child: Text(
+                                      "LOGIN TO ACCOUNT",
+                                      style: textTheme.titleSmall?.copyWith(
+                                        fontWeight: FontWeight.w900,
+                                        color: colorScheme.primary,
+                                        letterSpacing: 1.1,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
-                        ),
-                      ],
+                        );
+                      },
                     ),
                   ),
                 ),
-              ),
+                SizedBox(height: 5.hp),
+              ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLabel(TextTheme textTheme, String text, Color color) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8, left: 4),
+      child: Text(
+        text.toUpperCase(),
+        style: textTheme.titleSmall?.copyWith(
+          fontSize: 11,
+          fontWeight: FontWeight.bold,
+          color: color,
+          letterSpacing: 1.2,
         ),
       ),
     );

@@ -39,6 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       });
 
     on<AuthCheck> ((event, emit) async{
+
       emit(AuthLoading());
       final user = authRepository.getCurrentUSer();
       if(user != null){
@@ -47,6 +48,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       else{
         emit(Unauthenticated());
       }
+      
     });
 
     on<LoginSubmitted>((event, emit) async{       

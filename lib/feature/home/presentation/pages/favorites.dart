@@ -1,7 +1,5 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:exercise_app/core/theme/app_colors.dart';
-import 'package:exercise_app/core/theme/app_text_styles.dart';
 import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/feature/home/presentation/bloc/favorites_bloc.dart';
 import 'package:exercise_app/feature/home/presentation/widgets/build_list_widget.dart';
@@ -19,8 +17,8 @@ class FavoritesPage extends StatelessWidget {
     return  Scaffold(
       appBar: AppBar(              
         title: Text(context.l10n.favoritesTitle,
-          style: AppTextStyles.titleMedium.copyWith(
-            color: AppColors.primary
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: Theme.of(context).colorScheme.primary
           )      
         ),          
       ),

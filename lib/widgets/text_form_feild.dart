@@ -1,9 +1,6 @@
-import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// ...existing code...
-import 'package:screentasia/screentasia.dart';
 
 
 class Customtextfeild extends StatelessWidget {  
@@ -77,8 +74,8 @@ class Customtextfeild extends StatelessWidget {
       hintText:hintText ,
       hintStyle: 
         TextStyle(
-          color:AppColors.greyText , 
-          fontSize:12
+          color: theme.colorScheme.onSurfaceVariant,
+          fontSize:context.isMobile? 10: 12
           // context.isMobile
           // ? 12
           // // .ap(
@@ -103,7 +100,7 @@ class Customtextfeild extends StatelessWidget {
         ),         
       prefixIcon: prefixIcon, 
       suffixIcon: suffixIcon,         
-      fillColor:color?? theme.colorScheme.background,
+      fillColor:color?? theme.colorScheme.surface,
       filled: true,  
           
       enabledBorder: OutlineInputBorder(

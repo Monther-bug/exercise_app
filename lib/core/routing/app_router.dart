@@ -14,7 +14,7 @@ class AppRouter extends $AppRouter  {
       page: DashboardPageRoute.page,
       guards:  [OnboardingGuard() ,AuthGuard()],
       children: [ 
-        AutoRoute(page: MyHomePageRoute.page, path: 'home'),
+        AutoRoute(page: MyHomePageRoute.page, path: 'home/:title'),
         AutoRoute(page: FavoritesPageRoute.page,path: 'favorites')
       ]),
     AutoRoute(page: OnboardingScreenRoute.page, ),
@@ -22,7 +22,9 @@ class AppRouter extends $AppRouter  {
     AutoRoute(page: SignUpScreenRoute.page, ),
     AutoRoute(page: GlobalErrorViewRoute.page, ),
     AutoRoute(page: EmptyViewRoute.page, ),
-    AutoRoute(page: ExerciseDetailsRoute.page,),
+    CustomRoute(page: ExerciseDetailsRoute.page,
+    transitionsBuilder: TransitionsBuilders.slideLeftWithFade, // Smooth slide from right
+      durationInMilliseconds: 700,),
     // AutoRoute(page: FavoritesPageRoute.page,)
   ];
 }
