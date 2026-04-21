@@ -418,6 +418,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'page'**
   String get onboardingDescription3;
+
+  /// No description provided for @loginPowerYourAmbition.
+  ///
+  /// In en, this message translates to:
+  /// **'POWER YOUR AMBITION'**
+  String get loginPowerYourAmbition;
+
+  /// No description provided for @loginRecoveryHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'YOUR NEXT\nRECOVERY\nIS EARNED.'**
+  String get loginRecoveryHeadline;
+
+  /// No description provided for @loginJourneySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Access your training protocols and track every beat of your journey.'**
+  String get loginJourneySubtitle;
+
+  /// No description provided for @loginWelcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back'**
+  String get loginWelcomeBack;
+
+  /// No description provided for @loginContinueStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue your streak today.'**
+  String get loginContinueStreak;
+
+  /// No description provided for @loginStartSession.
+  ///
+  /// In en, this message translates to:
+  /// **'START SESSION'**
+  String get loginStartSession;
+
+  /// No description provided for @loginOrTrackWith.
+  ///
+  /// In en, this message translates to:
+  /// **'OR TRACK WITH'**
+  String get loginOrTrackWith;
+
+  /// No description provided for @continueWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get continueWithGoogle;
+
+  /// No description provided for @loginNewToPulse.
+  ///
+  /// In en, this message translates to:
+  /// **'New to PULSE?'**
+  String get loginNewToPulse;
+
+  /// No description provided for @loginCreateAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get loginCreateAccount;
+
+  /// No description provided for @passwordHintMasked.
+  ///
+  /// In en, this message translates to:
+  /// **'••••••••'**
+  String get passwordHintMasked;
+
+  /// No description provided for @signUpJoinTheClub.
+  ///
+  /// In en, this message translates to:
+  /// **'JOIN THE\nCLUB'**
+  String get signUpJoinTheClub;
+
+  /// No description provided for @signUpJourneySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your high-performance journey today.'**
+  String get signUpJourneySubtitle;
+
+  /// No description provided for @signUpCreatePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'CREATE PASSWORD'**
+  String get signUpCreatePassword;
+
+  /// No description provided for @signUpStartTraining.
+  ///
+  /// In en, this message translates to:
+  /// **'START TRAINING'**
+  String get signUpStartTraining;
+
+  /// No description provided for @signUpAlreadyHavePulse.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have a pulse?'**
+  String get signUpAlreadyHavePulse;
+
+  /// No description provided for @signUpLoginToAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'LOGIN TO ACCOUNT'**
+  String get signUpLoginToAccount;
+
+  /// No description provided for @signUpNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'ALEX RIVERA'**
+  String get signUpNameHint;
+
+  /// No description provided for @signUpEmailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'ALEX@PULSE.FIT'**
+  String get signUpEmailHint;
+
+  /// No description provided for @typeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get typeLabel;
+
+  /// No description provided for @supportingMuscles.
+  ///
+  /// In en, this message translates to:
+  /// **'Supporting: Glutes, Core, Lower Back'**
+  String get supportingMuscles;
+
+  /// No description provided for @targetedMuscleGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'TARGETED MUSCLE GROUP'**
+  String get targetedMuscleGroup;
+
+  /// No description provided for @equipmentSubstituteNote.
+  ///
+  /// In en, this message translates to:
+  /// **'*Substitute with heavy dumbbells if a barbell is unavailable.'**
+  String get equipmentSubstituteNote;
+
+  /// No description provided for @addToFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'ADD TO FAVORITES'**
+  String get addToFavorites;
+
+  /// No description provided for @viewDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get viewDetails;
+
+  /// No description provided for @defaultDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'45m'**
+  String get defaultDuration;
+
+  /// No description provided for @defaultCalories.
+  ///
+  /// In en, this message translates to:
+  /// **'420 kcal'**
+  String get defaultCalories;
+
+  /// No description provided for @onboardingStayInMomentum.
+  ///
+  /// In en, this message translates to:
+  /// **'STAY IN MOMENTUM'**
+  String get onboardingStayInMomentum;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingStartTraining.
+  ///
+  /// In en, this message translates to:
+  /// **'START TRAINING'**
+  String get onboardingStartTraining;
+
+  /// No description provided for @onboardingMoveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'MOVE'**
+  String get onboardingMoveTitle;
+
+  /// No description provided for @onboardingMoveBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'MOVE'**
+  String get onboardingMoveBackground;
+
+  /// No description provided for @onboardingMoveDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Precision tracking meets editorial elegance. Transform your peak performance into a visual masterpiece.'**
+  String get onboardingMoveDescription;
+
+  /// No description provided for @onboardingReadyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'READY?'**
+  String get onboardingReadyTitle;
+
+  /// No description provided for @onboardingReadyBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'WORK'**
+  String get onboardingReadyBackground;
+
+  /// No description provided for @onboardingReadyDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Your peak performance begins at the next tap. No excuses.'**
+  String get onboardingReadyDescription;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

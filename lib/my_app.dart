@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
               supportedLocales: AppLocalizations.supportedLocales,
               locale: state.locale,
               onGenerateTitle: (context) => context.l10n.appTitle,
-              themeMode:ThemeMode.light ,
+              themeMode:ThemeMode.dark,
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 colorScheme: ColorScheme.light(

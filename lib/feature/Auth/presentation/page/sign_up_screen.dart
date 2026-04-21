@@ -330,17 +330,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "JOIN THE\nCLUB",
+                        l10n.signUpJoinTheClub,
                         style: textTheme.titleLarge?.copyWith(
                           height: 0.95,
                           fontSize: 42,
                           fontWeight: FontWeight.w900,
-                          color: const Color(0xFF1E293B),
+                         // color: const Color(0xFF1E293B),
                         ),
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        "Start your high-performance journey today.",
+                        l10n.signUpJourneySubtitle,
                         style: textTheme.bodyMedium?.copyWith(
                           color: const Color(0xFF74739E), // AppColors.mutedGrey
                         ),
@@ -358,7 +358,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     borderRadius: BorderRadius.circular(40),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: colorScheme.shadow.withOpacity(0.05),
                         blurRadius: 25,
                         offset: const Offset(0, 10),
                       )
@@ -377,7 +377,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           }
                         } else if (state is AuthFailure) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(state.error)), 
+                            SnackBar(content: Text(localizeMessage(context, state.error))), 
                           );
                         }
                       },
@@ -390,7 +390,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                keyboardType: TextInputType.name,
                               textInputAction: TextInputAction.next,
                               controller: nameController,
-                              hintText: "ALEX RIVERA",
+                              hintText: l10n.signUpNameHint,
                               validator: (v) => FormValidators.validateName(v, l10n),
                             ),
                             
@@ -401,14 +401,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.next,
                               controller: emailController,
-                              hintText: "ALEX@PULSE.FIT",
+                              hintText: l10n.signUpEmailHint,
                               
                               validator: (v) => FormValidators.validateEmail(v, l10n),
                             ),
             
                             const SizedBox(height: 20),
             
-                            _buildLabel(textTheme, "CREATE PASSWORD", colorScheme.primary),
+                            _buildLabel(textTheme, l10n.signUpCreatePassword, colorScheme.primary),
                             ValueListenableBuilder(
                               valueListenable: obscureNotifier,
                               builder: (context, value, child) {
@@ -417,7 +417,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   textInputAction: TextInputAction.done,
                                   controller: passwordController,
                                   obscureText: value,
-                                  hintText: "••••••••",
+                                  hintText: l10n.passwordHintMasked,
                                   validator: (v) => FormValidators.validatePassword(v, l10n),
                                   suffixIcon: IconButton(
                                     icon: Icon(value ? Icons.visibility_off : Icons.visibility),
@@ -470,7 +470,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            "START TRAINING",
+                                            l10n.signUpStartTraining,
                                             style: textTheme.titleMedium?.copyWith(
                                               fontWeight: FontWeight.w900,
                                               color: Colors.white,
@@ -491,13 +491,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               child: Column(
                                 children: [
                                   Text(
-                                    "Already have a pulse?",
+                                    l10n.signUpAlreadyHavePulse,
                                     style: textTheme.bodySmall?.copyWith(color: const Color(0xFF74739E), fontSize: 13),
                                   ),
                                   TextButton(
                                     onPressed: () => context.replaceRoute(LoginScreenRoute()),
                                     child: Text(
-                                      "LOGIN TO ACCOUNT",
+                                      l10n.signUpLoginToAccount,
                                       style: textTheme.titleSmall?.copyWith(
                                         fontWeight: FontWeight.w900,
                                         color: colorScheme.primary,

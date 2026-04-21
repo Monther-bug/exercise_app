@@ -22,6 +22,7 @@
 //   }
 // }
 import 'package:exercise_app/core/utils/responsive_extension.dart';
+import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:screentasia/screentasia.dart';
 
@@ -44,6 +45,7 @@ class OnboardingPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final l10n = context.l10n;
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -88,7 +90,7 @@ class OnboardingPageWidget extends StatelessWidget {
                 if (!isLastPage) ...[
                   // Style for Page 1: "STAY IN MOMENTUM"
                   Text(
-                    "STAY IN MOMENTUM",
+                    l10n.onboardingStayInMomentum,
                     style: textTheme.titleSmall?.copyWith(
                       color: Colors.white70,
                       letterSpacing: 4,
@@ -173,7 +175,7 @@ class OnboardingPageWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      isLastPage ? "START TRAINING" : "Next",
+                      isLastPage ? l10n.onboardingStartTraining : l10n.onboardingNext,
                       style: textTheme.titleMedium?.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

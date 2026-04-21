@@ -93,7 +93,7 @@ class _LoginScreenState extends State<SecondLogin> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
-                            "POWER YOUR AMBITION",
+                            l10n.loginPowerYourAmbition,
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<SecondLogin> {
                         const SizedBox(height: 20),
                         // Main Headline
                         Text(
-                          "YOUR NEXT\nRECOVERY\nIS EARNED.",
+                          l10n.loginRecoveryHeadline,
                           style: TextStyle(
                             height: 0.95,
                             fontSize: 42,
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<SecondLogin> {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          "Access your training protocols and track every beat of your journey.",
+                          l10n.loginJourneySubtitle,
                           style: textTheme.bodyMedium?.copyWith(
                             color: const Color(0xFF74739E), // AppColors.mutedGrey
                             height: 1.4,
@@ -143,14 +143,14 @@ class _LoginScreenState extends State<SecondLogin> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Welcome Back",
+                          l10n.loginWelcomeBack,
                           style: textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.w800,
                             color: const Color(0xFF1E293B),
                           ),
                         ),
                         Text(
-                          "Continue your streak today.",
+                          l10n.loginContinueStreak,
                           style: textTheme.bodySmall?.copyWith(
                             color: const Color(0xFF74739E),
                           ),
@@ -159,7 +159,7 @@ class _LoginScreenState extends State<SecondLogin> {
               
                         // EMAIL SECTION
                         Text(
-                          "EMAIL ADDRESS",
+                          l10n.emailLabel.toUpperCase(),
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.bold,
@@ -173,7 +173,7 @@ class _LoginScreenState extends State<SecondLogin> {
                           textInputAction: TextInputAction.next,
                           validator: (value) => FormValidators.validateEmail(value, l10n),
                           controller: emailController,
-                          hintText: "runner@email.com",
+                          hintText: l10n.emailHint,
                           prefixIcon: Icon(
                             Icons.email_outlined,
                             color: colorScheme.onSurfaceVariant,
@@ -184,7 +184,7 @@ class _LoginScreenState extends State<SecondLogin> {
               
                         // PASSWORD SECTION
                         Text(
-                          "PASSWORD",
+                          l10n.passwordLabel.toUpperCase(),
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.bold,
@@ -202,7 +202,7 @@ class _LoginScreenState extends State<SecondLogin> {
                               obscureText: value,
                               validator: (input) => FormValidators.validatePassword(input, l10n),
                               controller: passwordController,
-                              hintText: "••••••••",
+                              hintText: l10n.passwordHintMasked,
                               prefixIcon: Icon(
                                 Icons.lock_outline,
                                 color: colorScheme.onSurfaceVariant,
@@ -272,7 +272,7 @@ class _LoginScreenState extends State<SecondLogin> {
                                   elevation: 0,
                                 ),
                                 child: Text(
-                                  "START SESSION",
+                                  l10n.loginStartSession,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w900,
                                     color: Colors.white,
@@ -297,7 +297,7 @@ class _LoginScreenState extends State<SecondLogin> {
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 16),
                               child: Text(
-                                "OR TRACK WITH",
+                                l10n.loginOrTrackWith,
                                 style: TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
@@ -341,7 +341,7 @@ class _LoginScreenState extends State<SecondLogin> {
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  "Continue with Google",
+                                  l10n.continueWithGoogle,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: const Color(0xFF1E293B),
@@ -361,13 +361,13 @@ class _LoginScreenState extends State<SecondLogin> {
                             onTap: () => context.replaceRoute(SignUpScreenRoute()),
                             child: RichText(
                               text: TextSpan(
-                                text: "New to PULSE? ",
+                                text: '${l10n.loginNewToPulse} ',
                                 style: TextStyle(
                                   color: const Color(0xFF74739E),
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: "Create Account",
+                                    text: l10n.loginCreateAccount,
                                     style: TextStyle(
                                       color: colorScheme.primary,
                                       fontWeight: FontWeight.bold,

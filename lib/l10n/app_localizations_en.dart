@@ -171,4 +171,112 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingDescription3 => 'page';
+
+  @override
+  String get loginPowerYourAmbition => 'POWER YOUR AMBITION';
+
+  @override
+  String get loginRecoveryHeadline => 'YOUR NEXT\nRECOVERY\nIS EARNED.';
+
+  @override
+  String get loginJourneySubtitle => 'Access your training protocols and track every beat of your journey.';
+
+  @override
+  String get loginWelcomeBack => 'Welcome Back';
+
+  @override
+  String get loginContinueStreak => 'Continue your streak today.';
+
+  @override
+  String get loginStartSession => 'START SESSION';
+
+  @override
+  String get loginOrTrackWith => 'OR TRACK WITH';
+
+  @override
+  String get continueWithGoogle => 'Continue with Google';
+
+  @override
+  String get loginNewToPulse => 'New to PULSE?';
+
+  @override
+  String get loginCreateAccount => 'Create Account';
+
+  @override
+  String get passwordHintMasked => '••••••••';
+
+  @override
+  String get signUpJoinTheClub => 'JOIN THE\nCLUB';
+
+  @override
+  String get signUpJourneySubtitle => 'Start your high-performance journey today.';
+
+  @override
+  String get signUpCreatePassword => 'CREATE PASSWORD';
+
+  @override
+  String get signUpStartTraining => 'START TRAINING';
+
+  @override
+  String get signUpAlreadyHavePulse => 'Already have a pulse?';
+
+  @override
+  String get signUpLoginToAccount => 'LOGIN TO ACCOUNT';
+
+  @override
+  String get signUpNameHint => 'ALEX RIVERA';
+
+  @override
+  String get signUpEmailHint => 'ALEX@PULSE.FIT';
+
+  @override
+  String get typeLabel => 'Type';
+
+  @override
+  String get supportingMuscles => 'Supporting: Glutes, Core, Lower Back';
+
+  @override
+  String get targetedMuscleGroup => 'TARGETED MUSCLE GROUP';
+
+  @override
+  String get equipmentSubstituteNote => '*Substitute with heavy dumbbells if a barbell is unavailable.';
+
+  @override
+  String get addToFavorites => 'ADD TO FAVORITES';
+
+  @override
+  String get viewDetails => 'View Details';
+
+  @override
+  String get defaultDuration => '45m';
+
+  @override
+  String get defaultCalories => '420 kcal';
+
+  @override
+  String get onboardingStayInMomentum => 'STAY IN MOMENTUM';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingStartTraining => 'START TRAINING';
+
+  @override
+  String get onboardingMoveTitle => 'MOVE';
+
+  @override
+  String get onboardingMoveBackground => 'MOVE';
+
+  @override
+  String get onboardingMoveDescription => 'Precision tracking meets editorial elegance. Transform your peak performance into a visual masterpiece.';
+
+  @override
+  String get onboardingReadyTitle => 'READY?';
+
+  @override
+  String get onboardingReadyBackground => 'WORK';
+
+  @override
+  String get onboardingReadyDescription => 'Your peak performance begins at the next tap. No excuses.';
 }

@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:exercise_app/core/theme/app_images.dart';
+import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
 import 'package:exercise_app/feature/home/presentation/bloc/favorites_bloc.dart';
@@ -20,8 +21,9 @@ class ExerciseDetails extends StatelessWidget {
   Widget build(BuildContext context) {    
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = context.l10n;
     return Scaffold(
-  backgroundColor: const Color(0xFFF8F7FF), // Your light surface color
+  backgroundColor: colorScheme.background, // Your light surface color
   body: Center(
     child: SizedBox(
       width: context.isMobile? 100.wp: 50.wp,
@@ -73,6 +75,7 @@ class ExerciseDetails extends StatelessWidget {
       
           // 2. THE CONTENT (White Card & Beyond)
           SliverToBoxAdapter(
+          
             child: Padding(
               padding:  EdgeInsets.only(top: 5.wp, left: 5.wp, right: 5.wp),
               child: Column(
@@ -80,6 +83,7 @@ class ExerciseDetails extends StatelessWidget {
                   Container(
                     decoration:  BoxDecoration(
                       //Color(0xFFF2EFFF),
+                    //color: colorScheme.surface,
                     color: colorScheme.surface,
                     borderRadius: BorderRadius.circular(40),
                     ),
@@ -100,7 +104,7 @@ class ExerciseDetails extends StatelessWidget {
                               children: [
                             // 1. THE SUBTITLE
                                Text(
-                                "TARGETED MUSCLE GROUP",
+                                l10n.targetedMuscleGroup,
                                 style: textTheme.titleSmall?.copyWith(
                                 color:colorScheme.primary, // Your primaryBlue
                                 fontWeight: FontWeight.bold,
@@ -120,9 +124,9 @@ class ExerciseDetails extends StatelessWidget {
                                     color: const Color(0xFFDCE7FF), // Very light version of your blue
                                     borderRadius: BorderRadius.circular(15),
                                   ),
-                                  child: const Icon(
+                                  child:  Icon(
                                     Icons.accessibility_new, // Or a custom body SVG
-                                    color: Color(0xFF3B82F6),
+                                    color: colorScheme.primary,
                                     size: 35,
                                   ),
                                 ),
@@ -138,11 +142,11 @@ class ExerciseDetails extends StatelessWidget {
                                         style: textTheme.titleLarge?.copyWith(
                                           fontSize: 28,
                                           fontWeight: FontWeight.w900,
-                                          color: const Color(0xFF1E293B), // Deep slate for readability
+                                         // color: const Color(0xFF1E293B), // Deep slate for readability
                                         ),
                                       ),
                                       Text(
-                                        "Supporting: Glutes, Core, Lower Back",
+                                        l10n.supportingMuscles,
                                         style:  textTheme.titleMedium?.copyWith(
                                           color: const Color(0xFF64748B), // Muted grey text
                                         ),
@@ -168,7 +172,7 @@ class ExerciseDetails extends StatelessWidget {
                                               child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                Text('TYPE',
+                                                Text(l10n.typeLabel.toUpperCase(),
                                                 style: textTheme.bodySmall,),
                                                 Text(exerciseOBG.type.toUpperCase(),
                                                 style: textTheme.titleMedium?.copyWith(
@@ -190,7 +194,7 @@ class ExerciseDetails extends StatelessWidget {
                                               child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                Text('DIFFICULTY',
+                                                Text(l10n.difficultyLabel.toUpperCase(),
                                                 style: textTheme.bodySmall,),
                                                 Text(exerciseOBG.difficulty.toUpperCase(),
                                                 style: textTheme.titleMedium?.copyWith(
@@ -219,7 +223,7 @@ class ExerciseDetails extends StatelessWidget {
                     children: [
                       // 1. HEADER
                       Text(
-                        "EQUIPMENT",
+                        l10n.equipmentsLabel.toUpperCase(),
                         style: textTheme.titleMedium?.copyWith(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -263,7 +267,7 @@ class ExerciseDetails extends StatelessWidget {
                       // 3. OPTIONAL DIVIDER & FOOTER NOTE
                       Divider(color:colorScheme.onSecondary.withOpacity(0.2), height: 30),
                       Text(
-                        "*Substitute with heavy dumbbells if a barbell is unavailable.",
+                        l10n.equipmentSubstituteNote,
                         style: textTheme.bodySmall?.copyWith(
                           fontSize: 12,
                           fontStyle: FontStyle.italic,
@@ -305,7 +309,7 @@ class ExerciseDetails extends StatelessWidget {
                               elevation: 0, // Handled by Container for better control
                             ),
                             child: Text(
-                              "VIEW INSTRUCTIONS",
+                              l10n.viewInstructions.toUpperCase(),
                               style: textTheme.titleMedium?.copyWith(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w900,
@@ -337,7 +341,7 @@ class ExerciseDetails extends StatelessWidget {
                                 const Icon(Icons.favorite, size: 20),
                                 const SizedBox(width: 10),
                                 Text(
-                                  "ADD TO FAVORITES",
+                                  l10n.addToFavorites,
                                   style: textTheme.titleMedium?.copyWith(
                                     fontSize: 16,                                    
                                     fontWeight: FontWeight.w900,

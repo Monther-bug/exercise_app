@@ -92,6 +92,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
 import 'package:exercise_app/core/theme/app_images.dart';
+import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
 import 'package:exercise_app/feature/home/presentation/bloc/favorites_bloc.dart';
@@ -114,6 +115,7 @@ class BuildListWidget extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
+    final l10n = context.l10n;
 
     return ListView.builder(
       itemCount: list.length,
@@ -228,9 +230,9 @@ class BuildListWidget extends StatelessWidget {
                     const SizedBox(height: 16),
                     Row(
                       children: [
-                        _buildStatIcon(textTheme, Icons.access_time_filled, "45m", colorScheme.shadow.withOpacity(0.7)),
+                        _buildStatIcon(textTheme, Icons.access_time_filled, l10n.defaultDuration, colorScheme.shadow.withOpacity(0.7)),
                         const SizedBox(width: 16),
-                        _buildStatIcon(textTheme, Icons.bolt, "420 kcal", colorScheme.shadow.withOpacity(0.7)),
+                        _buildStatIcon(textTheme, Icons.bolt, l10n.defaultCalories, colorScheme.shadow.withOpacity(0.7)),
                         const Spacer(),
                         // VIEW DETAILS BUTTON
                         ElevatedButton(
@@ -247,7 +249,7 @@ class BuildListWidget extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            "View Details",
+                            l10n.viewDetails,
                             style: textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
                           ),
                         ),

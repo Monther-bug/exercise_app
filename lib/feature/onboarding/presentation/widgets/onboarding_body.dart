@@ -99,18 +99,18 @@ class _OnboardingBodyState extends State<OnboardingBody> {
         children: [
           // PAGE 1: MOVE
           OnboardingPageWidget(
-            title: "MOVE",
-            backgroundText: "MOVE",
+            title: l10n.onboardingMoveTitle,
+            backgroundText: l10n.onboardingMoveBackground,
             isLastPage: false,
-            description: "Precision tracking meets editorial elegance. Transform your peak performance into a visual masterpiece.",
+            description: l10n.onboardingMoveDescription,
             onNext: () => _handleNavigation(0),
           ),
           // PAGE 2: READY?
           OnboardingPageWidget(
-            title: "READY?",
-            backgroundText: "WORK",
+            title: l10n.onboardingReadyTitle,
+            backgroundText: l10n.onboardingReadyBackground,
             isLastPage: true,
-            description: "Your peak performance begins at the next tap. No excuses.",
+            description: l10n.onboardingReadyDescription,
             onNext: () => _handleNavigation(1),
           ),
         ],

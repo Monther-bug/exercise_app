@@ -171,4 +171,112 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingDescription3 => 'الصفحة';
+
+  @override
+  String get loginPowerYourAmbition => 'غذ قوتك بالطموح';
+
+  @override
+  String get loginRecoveryHeadline => 'تعافيك\nالتالي\nمستحق.';
+
+  @override
+  String get loginJourneySubtitle => 'ادخل بروتوكولات تدريبك وتابع كل نبضة في رحلتك.';
+
+  @override
+  String get loginWelcomeBack => 'مرحبًا بعودتك';
+
+  @override
+  String get loginContinueStreak => 'واصل سلسلتك اليوم.';
+
+  @override
+  String get loginStartSession => 'ابدأ الجلسة';
+
+  @override
+  String get loginOrTrackWith => 'أو المتابعة عبر';
+
+  @override
+  String get continueWithGoogle => 'المتابعة باستخدام جوجل';
+
+  @override
+  String get loginNewToPulse => 'جديد على PULSE؟';
+
+  @override
+  String get loginCreateAccount => 'إنشاء حساب';
+
+  @override
+  String get passwordHintMasked => '••••••••';
+
+  @override
+  String get signUpJoinTheClub => 'انضم إلى\nالنادي';
+
+  @override
+  String get signUpJourneySubtitle => 'ابدأ رحلتك عالية الأداء اليوم.';
+
+  @override
+  String get signUpCreatePassword => 'أنشئ كلمة مرور';
+
+  @override
+  String get signUpStartTraining => 'ابدأ التدريب';
+
+  @override
+  String get signUpAlreadyHavePulse => 'لديك حساب PULSE بالفعل؟';
+
+  @override
+  String get signUpLoginToAccount => 'تسجيل الدخول إلى الحساب';
+
+  @override
+  String get signUpNameHint => 'أليكس ريفيرا';
+
+  @override
+  String get signUpEmailHint => 'ALEX@PULSE.FIT';
+
+  @override
+  String get typeLabel => 'النوع';
+
+  @override
+  String get supportingMuscles => 'مساند: الألوية، الجذع، أسفل الظهر';
+
+  @override
+  String get targetedMuscleGroup => 'مجموعة العضلات المستهدفة';
+
+  @override
+  String get equipmentSubstituteNote => '*استبدل بالدمبل الثقيل إذا لم يتوفر البار.';
+
+  @override
+  String get addToFavorites => 'أضف إلى المفضلة';
+
+  @override
+  String get viewDetails => 'عرض التفاصيل';
+
+  @override
+  String get defaultDuration => '45د';
+
+  @override
+  String get defaultCalories => '420 سعرة';
+
+  @override
+  String get onboardingStayInMomentum => 'حافظ على الزخم';
+
+  @override
+  String get onboardingNext => 'التالي';
+
+  @override
+  String get onboardingStartTraining => 'ابدأ التدريب';
+
+  @override
+  String get onboardingMoveTitle => 'تحرّك';
+
+  @override
+  String get onboardingMoveBackground => 'تحرّك';
+
+  @override
+  String get onboardingMoveDescription => 'تتبع دقيق يلتقي بأناقة مرئية. حوّل أداءك العالي إلى تجربة ملهمة.';
+
+  @override
+  String get onboardingReadyTitle => 'جاهز؟';
+
+  @override
+  String get onboardingReadyBackground => 'اعمل';
+
+  @override
+  String get onboardingReadyDescription => 'أفضل أداء لديك يبدأ بالنقرة التالية. بلا أعذار.';
 }
