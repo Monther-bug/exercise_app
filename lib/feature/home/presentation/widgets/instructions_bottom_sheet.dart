@@ -16,17 +16,20 @@ void showInstructionsBottomSheet (
         final textTheme = Theme.of(context).textTheme;
         return SingleChildScrollView(
           child: Padding(
-            padding:  EdgeInsets.all(1.wp),
-            child: Column(
-              children: [
-                 Text(
-                      context.l10n.instructionsTitle,
-                      style: textTheme.titleMedium,
-                    ),
-                SizedBox(height: 1.hp),
-                Text(instructions, 
-                  style: textTheme.bodyMedium) ,
-              ],
+            padding:  EdgeInsets.all(5.wp),
+            child: SizedBox(
+              height: 60.hp,
+              child: Column(
+                children: [
+                   Text(
+                        context.l10n.instructionsTitle,
+                        style: textTheme.titleMedium,
+                      ),
+                  SizedBox(height: 1.hp),
+                  Text(instructions, 
+                    style: textTheme.bodyMedium) ,
+                ],
+              ),
             ),
           )
         );

@@ -1,6 +1,5 @@
 import 'package:exercise_app/core/di/injection_container.dart';
 import 'package:exercise_app/core/presentation/bloc/local_bloc.dart';
-import 'package:exercise_app/core/presentation/bloc/theme_bloc.dart';
 import 'package:exercise_app/core/routing/app_router.dart';
 import 'package:exercise_app/core/services/local_storage_service.dart';
 import 'package:exercise_app/core/theme/app_colors.dart';
@@ -44,6 +43,7 @@ class MyApp extends StatelessWidget {
             listener: (context, state) {
               appRouter.reevaluateGuards();
             },
+            
           ),
         ],
         child: BlocBuilder<LocalBloc, LocalState>(

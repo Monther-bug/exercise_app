@@ -140,7 +140,7 @@ class ExerciseDetails extends StatelessWidget {
                                       Text(
                                         exerciseOBG.muscle.toUpperCase(),
                                         style: textTheme.titleLarge?.copyWith(
-                                          fontSize: 28,
+                                          fontSize: context.isMobile? 24: 28,
                                           fontWeight: FontWeight.w900,
                                          // color: const Color(0xFF1E293B), // Deep slate for readability
                                         ),
@@ -252,7 +252,7 @@ class ExerciseDetails extends StatelessWidget {
                               Text(
                                 item.toUpperCase(),
                                 style: textTheme.titleMedium?.copyWith(
-                                   fontSize: 16,
+                                   fontSize: context.isMobile? 12: 16,
                                     fontWeight: FontWeight.w900,
                                     letterSpacing: 1.1,
                                     color: colorScheme.onSecondary
@@ -269,7 +269,7 @@ class ExerciseDetails extends StatelessWidget {
                       Text(
                         l10n.equipmentSubstituteNote,
                         style: textTheme.bodySmall?.copyWith(
-                          fontSize: 12,
+                          fontSize: 11,
                           fontStyle: FontStyle.italic,
                           color:colorScheme.onSecondary.withOpacity(0.7),
                         ),
@@ -311,7 +311,7 @@ class ExerciseDetails extends StatelessWidget {
                             child: Text(
                               l10n.viewInstructions.toUpperCase(),
                               style: textTheme.titleMedium?.copyWith(
-                                fontSize: 16,
+                                fontSize: context.isMobile? 12: 16,
                                 fontWeight: FontWeight.w900,
                                 letterSpacing: 1.2,
                                 color: colorScheme.onSecondary
@@ -343,7 +343,7 @@ class ExerciseDetails extends StatelessWidget {
                                 Text(
                                   l10n.addToFavorites,
                                   style: textTheme.titleMedium?.copyWith(
-                                    fontSize: 16,                                    
+                                    fontSize: context.isMobile? 12: 16,                                    
                                     fontWeight: FontWeight.w900,
                                     letterSpacing: 1.2,
                                     color: colorScheme.primary
@@ -368,194 +368,5 @@ class ExerciseDetails extends StatelessWidget {
   ),
 );
     
-
-    // 3. THE ELEGANT TEXT (Using Cairo and your design tokens)
-   
-    // return Scaffold(
-    //   appBar: AppBar(        
-    //     leading: IconButton(   
-    //       onPressed: (){
-    //         appRouter.pop();
-    //       }, 
-    //       icon: Icon(
-    //         Icons.arrow_back_ios,
-    //         size: context.isMobile? 5.wp: 2.wp,
-    //         color: colorScheme.primary,
-    //       )),
-    //     title: Text(l10n.exerciseDetailsTitle,
-    //       style: textTheme.titleLarge?.copyWith(
-    //         color: colorScheme.primary
-    //       )      
-    //     ),          
-    //   ),
-    //   body: Center(
-    //     child: SizedBox( width: context.isMobile? 100.wp: 50.wp,
-    //       child: SingleChildScrollView(
-    //         child: Padding(
-    //           padding: const EdgeInsets.all(8.0),
-    //           child: Column(
-    //             mainAxisAlignment: MainAxisAlignment.start,
-    //             children: [
-                 
-    //               ClipRRect(
-    //                 borderRadius: BorderRadius.circular(16), 
-    //                 child: Image.asset(
-    //                   AppImages.exercise,
-    //                   width: context.isMobile ? 60.wp : 30.wp,
-    //                 ),
-    //               ),
-
-    //               SizedBox(height: 2.hp),
-
-    //               Text(
-    //                 exerciseOBG.name,
-    //                 style: textTheme.titleLarge?.copyWith(
-    //                   color: colorScheme.primary,
-    //                   fontWeight: FontWeight.bold,
-    //                 ),
-    //               ),
-
-    //               SizedBox(height: 0.5.hp),
-
-    //               Text(
-    //                 l10n.exerciseTypeTraining(exerciseOBG.type),
-    //                 style: textTheme.bodyMedium?.copyWith(
-    //                   color: colorScheme.onSurfaceVariant,
-    //                 ),
-    //               ),
-              
-    //               SizedBox(height: 5.hp,),
-    //                 Row(
-    //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //                   children: [
-    //                     Expanded(
-    //                       child: Container(
-    //                         decoration: BoxDecoration(
-    //                           border: Border.all(
-    //                             color: colorScheme.primary,
-    //                             width: 1
-    //                           ),
-    //                           color: colorScheme.surface,
-    //                           boxShadow: [BoxShadow(
-    //                             color: colorScheme.shadow.withOpacity(0.3),
-    //                             blurRadius: 4,
-    //                           spreadRadius: 0,
-    //                           offset: const Offset(2, 2),
-                                        
-    //                           )],
-    //                           //context.isMobile?1.5.wp: 2.wp 
-    //                           borderRadius: BorderRadius.circular(12)
-                          
-    //                         ),
-    //                         child:Padding(
-    //                           //context.isMobile?1.wp: 1.wp
-    //                           padding:  EdgeInsets.all(1.wp),
-    //                           child: Column(
-    //                             crossAxisAlignment: CrossAxisAlignment.start,
-    //                             children: [
-    //                             Text(l10n.difficultyLabel,
-    //                               style: textTheme.bodyMedium?.copyWith(color: colorScheme.primary)),
-    //                             Text(exerciseOBG.difficulty,
-    //                             style: textTheme.titleLarge?.copyWith(color: colorScheme.primary)
-    //                             )                        
-    //                           ],),
-    //                         ), 
-    //                       ),
-    //                     ),
-    //                     SizedBox(width: 1.wp,),
-    //                     Expanded(
-    //                       child: Container(
-    //                         decoration: BoxDecoration(
-    //                           border: Border.all(
-    //                             color: colorScheme.primary,
-    //                             width: 1
-    //                           ),
-    //                           color: colorScheme.surface,
-    //                           boxShadow: [BoxShadow(
-    //                             color: colorScheme.shadow.withOpacity(0.3),
-    //                             blurRadius: 4,
-    //                           spreadRadius: 0,
-    //                           offset: const Offset(2, 2),
-    //                           //context.isMobile?1.5.wp: 2.wp
-                                        
-    //                           )],borderRadius: BorderRadius.circular(12)
-                          
-    //                         ),
-    //                         child:Padding(
-    //                           //context.isMobile?2.wp: 1.wp
-    //                           padding:  EdgeInsets.all(1.wp),
-    //                           child: Column(
-    //                             crossAxisAlignment: CrossAxisAlignment.start,
-    //                             children: [
-    //                             Text(l10n.muscleLabel,
-    //                               style: textTheme.bodyMedium?.copyWith(color: colorScheme.primary)),
-    //                             Text(exerciseOBG.muscle,
-    //                             style: textTheme.titleLarge?.copyWith(color: colorScheme.primary)
-    //                             )                        
-    //                           ],),
-    //                         ), 
-    //                       ),
-    //                     )
-    //                   ],),
-    //                   SizedBox(height: 5.hp),
-
-    //                   Row(children: [
-    //                     Icon(Icons.handyman,
-    //                     //context.isMobile?2.wp:2.wp,
-    //                     size:context.isMobile?5.wp:2.wp,
-    //                     color: colorScheme.primary),
-
-    //                     SizedBox(width: 1.wp),
-
-    //                     Text(l10n.equipmentsLabel,
-    //                     style: textTheme.titleLarge?.copyWith(color: colorScheme.primary))                      
-    //                   ],),
-                      
-    //                   SizedBox(height: 1.hp),
-                             
-                      
-    //                   Align(
-    //                     alignment: AlignmentDirectional.centerStart,
-    //                     child: Wrap(
-    //                       spacing: 8,
-    //                       runSpacing: 8,
-    //                       children: exerciseOBG.equipments.map((e) {
-    //                         return Chip(                             
-    //                           label: Text(e),
-    //                           avatar: Icon(Icons.fitness_center, size: 14),
-    //                           backgroundColor: colorScheme.surface,
-    //                         );
-    //                       }).toList(),
-    //                     ),
-    //                   ),
-    //                   SizedBox(height: 2.hp),
-    //           ],),
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    //   bottomNavigationBar: 
-    //   Padding(
-    //     padding:  EdgeInsets.all(1.wp),
-    //     child: SizedBox(
-    //       width: double.infinity,
-    //       child: ElevatedButton.icon(
-    //         onPressed: () {
-    //           showInstructionsBottomSheet(context, exerciseOBG.instructions);
-    //         },
-    //         icon: Icon(Icons.menu_book),
-    //         label: Text(l10n.viewInstructions),
-    //         style: ElevatedButton.styleFrom(
-    //           backgroundColor: colorScheme.primary,
-    //           foregroundColor: colorScheme.onPrimary,
-    //           padding: EdgeInsets.symmetric(vertical: 14),
-    //           shape: RoundedRectangleBorder(
-    //             borderRadius: BorderRadius.circular(12),
-    //           ),
-    //         ),
-    //       ),                        
-    //     ),
-    //   ),    
-    // );
   }
 }
