@@ -30,9 +30,9 @@ class ExerciseRepositoryImp extends ExerciseRepository{
       queryParameters: params
     );
     final List<dynamic> data = response.data;    
-    // final exercises = data.map((json) => ExerciseModel.fromJson(json)).toList().cast<ExerciseEntity>();
-    final exercises = (data).
-      map((json) => ExerciseModel.fromJson(json).toEntity()).toList();
+    final exercises = data.map((json) => ExerciseModel.fromJson(json)).toList().cast<ExerciseEntity>();
+    // final exercises = (data).
+    //   map((json) => ExerciseModel.fromJson(json).toEntity()).toList();
 
     return right(exercises);
    

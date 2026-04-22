@@ -13,6 +13,10 @@ ExerciseModel({
 });
 
 factory ExerciseModel.fromJson(Map<String, dynamic> json) {
+  //  final rawEquipments = json['equipments'];
+  // final rawEquipment = json['equipment'];
+
+  
     return ExerciseModel(
       name: json['name'] ?? '',
       type: json['type'] ?? '',
@@ -20,6 +24,11 @@ factory ExerciseModel.fromJson(Map<String, dynamic> json) {
       difficulty: json['difficulty']?? '',
       // equipments: json['equipments'] ?? '',
       equipments: List<String>.from(json['equipments']??[]),
+      // equipments: rawEquipments is List
+      //     ? List<String>.from(rawEquipments)
+      //     : rawEquipment is String && rawEquipment.isNotEmpty
+      //         ? [rawEquipment]
+      //         : <String>[],
       instructions: json['instructions'] ?? '',
       safetyInfo: json['safety_info'] ?? ''
     );
