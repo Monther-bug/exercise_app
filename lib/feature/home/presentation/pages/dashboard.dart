@@ -6,6 +6,7 @@ import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/my_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 @RoutePage()
 class DashboardPage extends StatelessWidget {
@@ -23,21 +24,28 @@ class DashboardPage extends StatelessWidget {
           FavoritesPageRoute(),
         ],
         bottomNavigationBuilder: (context, TabsRouter) {
-          return BottomNavigationBar(
-            currentIndex: TabsRouter.activeIndex,
-            onTap: TabsRouter.setActiveIndex,
-            selectedItemColor: Theme.of(context).colorScheme.primary,
-            unselectedItemColor: Theme.of(context).colorScheme.onSurfaceVariant,
-            items: [
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.home_outlined),
-                label: context.l10n.homeTab,
-              ),
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.favorite_outline),
-                label: context.l10n.favoritesTab,
-              ),
-            ],
+          return Container(
+            color: Theme.of(context).colorScheme.surface,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            child: GNav(
+              selectedIndex: TabsRouter.activeIndex,
+              onTabChange: TabsRouter.setActiveIndex,
+              color: Theme.of(context).colorScheme.secondary,
+              activeColor: Theme.of(context).colorScheme.surface,
+              tabBackgroundColor: Theme.of(context).colorScheme.primaryContainer,
+              gap: 8,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              tabs: [
+                GButton(
+                  icon: Icons.home_outlined,
+                  text: context.l10n.homeTab,
+                ),
+                GButton(
+                  icon: Icons.favorite_outline,
+                  text: context.l10n.favoritesTab,
+                ),
+              ],
+            ),
           );
         },
       ),
