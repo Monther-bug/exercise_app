@@ -7,6 +7,7 @@ import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
 import 'package:exercise_app/feature/home/bloc/favorites_bloc.dart';
+import 'package:exercise_app/feature/home/presentation/widgets/build_stat_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:screentasia/screentasia.dart';
@@ -141,9 +142,20 @@ class BuildListWidget extends StatelessWidget {
                     const SizedBox(height: 16),
                     Row(
                       children: [
-                        _buildStatIcon(textTheme, Icons.access_time_filled, l10n.defaultDuration, colorScheme.shadow.withOpacity(0.7)),
+                        
+                        BuildStatIcon(
+                          textTheme: textTheme, 
+                          icon: Icons.access_time_filled, 
+                          label: l10n.defaultDuration, 
+                          color: colorScheme.shadow.withOpacity(0.7)),
+                       
                         const SizedBox(width: 16),
-                        _buildStatIcon(textTheme, Icons.bolt, l10n.defaultCalories, colorScheme.shadow.withOpacity(0.7)),
+                        BuildStatIcon(
+                          textTheme: textTheme, 
+                          icon: Icons.bolt, 
+                          label:  l10n.defaultCalories, 
+                          color: colorScheme.shadow.withOpacity(0.7)),
+                       
                         const Spacer(),
                         // VIEW DETAILS BUTTON
                         ElevatedButton(
@@ -176,20 +188,5 @@ class BuildListWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildStatIcon(TextTheme textTheme, IconData icon, String label, Color color) {
-    return Row(
-      children: [
-        Icon(icon, size: 18, color: color),
-        const SizedBox(width: 4),
-        Text(
-          label,
-          style: textTheme.bodySmall?.copyWith(
-            color: color,
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
-    );
-  }
+  
 }
