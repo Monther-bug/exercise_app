@@ -96,6 +96,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noDataFound => 'No data found';
 
   @override
+  String get noResults => 'No results match your search';
+
+  @override
   String get appTitle => 'Exercise app';
 
   @override

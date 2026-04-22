@@ -26,16 +26,18 @@ class DashboardPage extends StatelessWidget {
         bottomNavigationBuilder: (context, TabsRouter) {
           return Container(
             color: Theme.of(context).colorScheme.surface,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: GNav(
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            child: GNav(              
               selectedIndex: TabsRouter.activeIndex,
               onTabChange: TabsRouter.setActiveIndex,
               color: Theme.of(context).colorScheme.secondary,
               activeColor: Theme.of(context).colorScheme.surface,
               tabBackgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              gap: 8,
+              gap: 7,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              tabs: [
+              tabs: 
+              [
                 GButton(
                   icon: Icons.home_outlined,
                   text: context.l10n.homeTab,

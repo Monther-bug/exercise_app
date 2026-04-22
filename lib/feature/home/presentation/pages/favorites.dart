@@ -18,7 +18,7 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(              
+      appBar: AppBar(          
         title: Text(context.l10n.favoritesTitle,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
             color: Theme.of(context).colorScheme.primary,

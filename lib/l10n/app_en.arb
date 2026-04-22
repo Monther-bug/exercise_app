@@ -28,6 +28,7 @@
   "viewInstructions": "View Instructions",
   "instructionsTitle": "Instructions",
   "noDataFound": "No data found",
+  "noResults":"No results match your search",
   "appTitle": "Exercise app",
   "exerciseTypeTraining": "{type} training",
   "@exerciseTypeTraining": {

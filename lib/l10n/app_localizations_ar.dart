@@ -96,6 +96,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noDataFound => 'لا توجد بيانات';
 
   @override
+  String get noResults => 'لا توجد نتائج';
+
+  @override
   String get appTitle => 'تطبيق التمارين';
 
   @override

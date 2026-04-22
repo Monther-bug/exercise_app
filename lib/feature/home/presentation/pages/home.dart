@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // SearchBar(
         
                 // )),
-                title: Customtextfeild(
+                title: Customtextfeild(                  
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.search,
                   prefixIcon: Icon(
@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     context.read<SearchBloc>().add(SearchingEvent(EcerciseRequest(name: value)));
                   },
                   onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
-                  borderRadius: 1.wp,
+                  //borderRadius: 3.wp,
                 ),
                 actions: [
                   //   IconButton(
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   } else if (state is Searchfailed) {
                     return GlobalErrorView(message: state.message);
                   } else if (state is SearchEmpty) {
-                    return EmptyView();
+                    return EmptyView(message: context.l10n.noResults,);
                   } else if (state is SearchSuccessful) {
                     final list = state.data;
                     return BuildListWidget(list: list);

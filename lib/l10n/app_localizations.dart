@@ -269,6 +269,12 @@ abstract class AppLocalizations {
   /// **'No data found'**
   String get noDataFound;
 
+  /// No description provided for @noResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No results match your search'**
+  String get noResults;
+
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:

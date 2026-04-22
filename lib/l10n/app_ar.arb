@@ -28,6 +28,7 @@
   "viewInstructions": "عرض التعليمات",
   "instructionsTitle": "التعليمات",
   "noDataFound": "لا توجد بيانات",
+  "noResults":"لا توجد نتائج",
   "appTitle": "تطبيق التمارين",
   "exerciseTypeTraining": "تمرين {type}",
   "@exerciseTypeTraining": {
