@@ -4,6 +4,6 @@ part of 'search_bloc.dart';
 sealed class SearchEvent {}
 
 class SearchingEvent extends SearchEvent{
-  final String data;
+  final EcerciseRequest data;
   SearchingEvent(this.data);
 }

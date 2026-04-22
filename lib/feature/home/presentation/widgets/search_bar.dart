@@ -1,6 +1,7 @@
 import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/home/bloc/search_bloc.dart';
+import 'package:exercise_app/feature/home/data/model/request/exercise_request.dart';
 import 'package:exercise_app/widgets/text_form_feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +25,7 @@ class SearchBar extends StatelessWidget {
         size: contextt.isMobile? 4.wp:2.wp),
       hintText: contextt.l10n.searchHint,
       onChanged: (value){
-        contextt.read<SearchBloc>().add(SearchingEvent(value));
+        contextt.read<SearchBloc>().add(SearchingEvent(EcerciseRequest(name: value)));
       },
       onFieldSubmitted: (value) => FocusScope.of(contextt).unfocus(),
       borderRadius: 1,

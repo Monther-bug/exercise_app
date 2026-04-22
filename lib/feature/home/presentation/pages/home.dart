@@ -6,6 +6,7 @@ import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 import 'package:exercise_app/feature/error/presentation/empty_view.dart';
 import 'package:exercise_app/feature/error/presentation/global_error_view.dart';
+import 'package:exercise_app/feature/home/data/model/request/exercise_request.dart';
 import 'package:exercise_app/feature/home/domain/enitites/exercise_entity.dart';
 import 'package:exercise_app/feature/home/bloc/exercise_bloc.dart';
 import 'package:exercise_app/feature/home/bloc/search_bloc.dart';
@@ -68,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   hintText: context.l10n.searchHint,
                   onChanged: (value) {
-                    context.read<SearchBloc>().add(SearchingEvent(value));
+                    context.read<SearchBloc>().add(SearchingEvent(EcerciseRequest(name: value)));
                   },
                   onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
                   borderRadius: 1.wp,
