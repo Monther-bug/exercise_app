@@ -9,10 +9,10 @@ import 'package:exercise_app/core/routing/gaurds/onboarding_guard.dart';
 class AppRouter extends $AppRouter  {
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: SplashScreenRoute.page , path: '/', initial: true),    
+    AutoRoute(page: AppRootScreenRoute.page , path: '/', initial: true),    
     AutoRoute(
       page: DashboardPageRoute.page,
-      guards:  [OnboardingGuard() ,AuthGuard()],
+      guards:  [OnboardingGuard()],
       children: [ 
         AutoRoute(page: MyHomePageRoute.page, path: 'home/:title'),
         AutoRoute(page: FavoritesPageRoute.page,path: 'favorites')

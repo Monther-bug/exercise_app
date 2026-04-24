@@ -6,4 +6,5 @@ class AppImages{
   static const String details = 'assets/details.png';
   static const String home = 'assets/home.png';
   
+  
 }

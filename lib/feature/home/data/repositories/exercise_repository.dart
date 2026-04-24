@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:dio/dio.dart';
 import 'package:exercise_app/core/di/injection_container.dart';
 import 'package:exercise_app/core/network/api_client.dart';

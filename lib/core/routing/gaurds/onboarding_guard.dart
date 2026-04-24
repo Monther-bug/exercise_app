@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:exercise_app/core/di/injection_container.dart';
 import 'package:exercise_app/core/routing/app_router.gr.dart';
-import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
+import 'package:exercise_app/feature/onboarding/bloc/on_boarding_bloc.dart';
 
 // class OnboardingGuard  extends AutoRouteGuard{
 //   @override
@@ -31,7 +31,7 @@ import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
 class OnboardingGuard extends AutoRouteGuard {
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) {
-    final state = locator<AuthBloc>().state;
+    final state =locator<OnBoardingBloc>().state;
 
     if (state is AppUnonboarded) {
       router.push(OnboardingScreenRoute());

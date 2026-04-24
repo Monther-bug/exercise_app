@@ -3,15 +3,17 @@ import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class AuthRemoteDataSource {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+import '../../../../core/di/injection_container.dart';
+
+class AuthRemoteDataSource {  
   final GoogleSignIn googleSignIn = GoogleSignIn.instance;
 
   Future<UserCredential?> signInWithGoogle() async{
     try{
       if (kIsWeb) {
         final provider = GoogleAuthProvider();
-        return await _firebaseAuth.signInWithPopup(provider);
+        //return await locator<FirebaseAuth>().signInWithPopup(provider);
+        return await locator<FirebaseAuth>().signInWithPopup(provider);
       }
 
       final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
@@ -24,7 +26,7 @@ class AuthRemoteDataSource {
 
       final credential = GoogleAuthProvider.credential(idToken: googleAuth.idToken);
 
-      return await _firebaseAuth.signInWithCredential(credential);
+      return await locator<FirebaseAuth>().signInWithCredential(credential);
     }on FirebaseAuthException catch (e) {
     final code = e.code.toLowerCase();        
     if (code.contains('closed') || 
@@ -44,14 +46,14 @@ class AuthRemoteDataSource {
 
   Future <User?> singnUp(String name , String email, String password) async{
     try{
-      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+      final credential = await locator<FirebaseAuth>().createUserWithEmailAndPassword(
         email: email, 
         password: password
       );
 
       await credential.user?.updateDisplayName(name);
       await credential.user?.reload();
-      return _firebaseAuth.currentUser;
+      return locator<FirebaseAuth>().currentUser;
     }
     on FirebaseAuthException catch(e){
       throw Exception('${AppMessageKey.signUpFailed} [${e.code}]: [${e.message}]');
@@ -61,11 +63,11 @@ class AuthRemoteDataSource {
 
   Future <User?> login(String email, String password) async{
     try{
-      await _firebaseAuth.signInWithEmailAndPassword(
+      await locator<FirebaseAuth>().signInWithEmailAndPassword(
         email: email, 
         password: password
       );    
-      return _firebaseAuth.currentUser;
+      return locator<FirebaseAuth>().currentUser;
     }
     on FirebaseAuthException catch(e){
       throw Exception('${AppMessageKey.loginFailed} [${e.code}]: [${e.message}]');
@@ -73,11 +75,16 @@ class AuthRemoteDataSource {
   }
 
   Future <void> logout() async{
-    await _firebaseAuth.signOut();
+    await locator<FirebaseAuth>().signOut();
+
+    // Ensure native Google session is also cleared so next sign-in can switch accounts.
+    if (!kIsWeb) {
+      await googleSignIn.signOut();
+    }
   }
 
   User? getCurrentUSer(){
-    return _firebaseAuth.currentUser;
+    return locator<FirebaseAuth>().currentUser;
   }
 }
 

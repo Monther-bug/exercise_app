@@ -8,10 +8,13 @@ import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/Auth/data/models/request/sign_up_request.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
+import 'package:exercise_app/feature/Auth/presentation/bloc/auth_status_bloc/bloc/auth_status_bloc.dart';
 import 'package:exercise_app/widgets/text_form_feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:screentasia/screentasia.dart';
+
+import '../bloc/auth_Action_bloc/bloc/auth_action_bloc.dart';
 
 @RoutePage()
 class SignUpScreen extends StatefulWidget {
@@ -102,10 +105,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   child: Form(
                     key: formKey,
-                    child: BlocConsumer<AuthBloc, AuthState>(
+                    child: BlocConsumer<AuthActionBloc, AuthActionState>(
                       listener: (context, state) {
                         if (state is AuthSuccess) {
-                          context.router.replaceAll([const DashboardPageRoute()]);
+                          context.read<AuthStatusBloc>().add(AuthCheck());
                           if (state.source == AuthSource.signUp) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(l10n.signUpSuccessMessage)),
@@ -171,7 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                  
             
                             // ACTION BUTTON
-                            state is AuthLoading
+                            state is AuthActionLoading
                                 ? const Center(child: CircularProgressIndicator())
                                 : Container(
                                     width: double.infinity,
@@ -188,7 +191,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     child: ElevatedButton(
                                       onPressed: () {
                                         if (formKey.currentState?.validate() ?? false) {
-                                          context.read<AuthBloc>().add(
+                                          context.read<AuthActionBloc>().add(
                                             SignUpSubmitted(
                                               // name: nameController.text,
                                               // email: emailController.text,

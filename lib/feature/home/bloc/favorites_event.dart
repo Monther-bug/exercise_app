@@ -12,3 +12,5 @@ final class ToggleFavorites extends FavoritesEvent{
 }
 
 final class LoadFavorites extends FavoritesEvent{}
+
+final class ClearFavorites extends FavoritesEvent{}

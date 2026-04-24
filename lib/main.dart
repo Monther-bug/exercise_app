@@ -1,6 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:exercise_app/core/di/injection_container.dart' as di;
-import 'package:exercise_app/my_app.dart';
+import 'package:exercise_app/app/my_app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

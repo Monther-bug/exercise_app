@@ -2,11 +2,13 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/utils/l10n_extension.dart';
-import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
-import 'package:exercise_app/my_app.dart';
+import 'package:exercise_app/app/my_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+
+import '../../../Auth/presentation/bloc/auth_status_bloc/bloc/auth_status_bloc.dart';
+import '../../bloc/favorites_bloc.dart';
 
 @RoutePage()
 class DashboardPage extends StatelessWidget {
@@ -14,11 +16,15 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
+    return 
+    BlocListener<AuthStatusBloc, AuthStatusState>(
       listener: (context, state) {
-        if(state is Unauthenticated){appRouter.replaceAll([LoginScreenRoute()]);}
+        if(state is Unauthenticated){
+          appRouter.replaceAll([LoginScreenRoute()]);
+          context.read<FavoritesBloc>().add(ClearFavorites());}
       },
-      child: AutoTabsScaffold(
+      child: 
+      AutoTabsScaffold(
         routes: [
           MyHomePageRoute(title: ''), // index 0
           FavoritesPageRoute(),
@@ -50,7 +56,7 @@ class DashboardPage extends StatelessWidget {
             ),
           );
         },
-      ),
+      )
     );
   }
 }

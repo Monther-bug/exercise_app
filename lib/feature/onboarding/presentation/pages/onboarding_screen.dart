@@ -6,30 +6,34 @@ import 'package:exercise_app/feature/onboarding/presentation/widgets/onboarding_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../Auth/presentation/bloc/auth_status_bloc/bloc/auth_status_bloc.dart';
+
 @RoutePage()
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
+    return 
+    MultiBlocListener(
       listeners: [
         BlocListener<OnBoardingBloc, OnBoardingState>(
           listener: (context, state) {
             if (state is OnboardingCompleted) {
-              context.read<AuthBloc>().add(OnboardingFinished());              
+              context.read<AuthStatusBloc>().add(AuthCheck());              
             }
           },
         ),
-        BlocListener<AuthBloc, AuthState>(
-          listener: (context, state) {
-            if(state is Authenticated || state is Unauthenticated){
-              context.router.replace(MyHomePageRoute(title: ''));
-            }
-          },
-        ),
+        // BlocListener<AuthBloc, AuthState>(
+        //   listener: (context, state) {
+        //     if(state is Authenticated || state is Unauthenticated){
+        //       context.router.replace(MyHomePageRoute(title: ''));
+        //     }
+        //   },
+        // ),
       ],
-      child: (OnboardingBody()),
-    );
+      child: (
+        OnboardingBody()));
+    
   }
 }

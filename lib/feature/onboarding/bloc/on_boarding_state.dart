@@ -11,3 +11,7 @@ final class OnBoardingInitial extends OnBoardingState {}
 // }
 
 class OnboardingCompleted extends OnBoardingState{}
+
+class AppUnonboarded extends OnBoardingState{}
+
+class Appboarded extends OnBoardingState{}

@@ -91,6 +91,13 @@ flutter:
   assets:
     - assets/
     - .env
+
+flutter_native_splash: 
+  color: '#ffffff'
+  web: true
+  android: true
+  ios: true    
+  image: 'assets/Screenshot 2026-04-21 073000.png'
   
   
 

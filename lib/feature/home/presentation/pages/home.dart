@@ -4,6 +4,7 @@ import 'package:exercise_app/core/routing/app_router.gr.dart';
 import 'package:exercise_app/core/utils/l10n_extension.dart';
 import 'package:exercise_app/core/utils/responsive_extension.dart';
 import 'package:exercise_app/feature/Auth/presentation/bloc/auth_bloc.dart';
+import 'package:exercise_app/feature/Auth/presentation/bloc/auth_status_bloc/bloc/auth_status_bloc.dart';
 import 'package:exercise_app/feature/error/presentation/empty_view.dart';
 import 'package:exercise_app/feature/error/presentation/global_error_view.dart';
 import 'package:exercise_app/feature/home/data/model/request/exercise_request.dart';
@@ -15,6 +16,10 @@ import 'package:exercise_app/widgets/text_form_feild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:screentasia/screentasia.dart';
+
+import '../../../../core/di/injection_container.dart';
+import '../../../Auth/domain/repository/auth_repository.dart';
+import '../../bloc/favorites_bloc.dart';
 
 @RoutePage()
 class MyHomePage extends StatefulWidget {
@@ -32,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+
     return BlocListener<ExerciseBloc, ExerciseState>(
       listener: (context, state) {
         if (state is ExerciseError) {
@@ -59,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 // SearchBar(
         
                 // )),
+                
                 title: Customtextfeild(                  
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.search,
@@ -75,14 +82,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   //borderRadius: 3.wp,
                 ),
                 actions: [
-                  //   IconButton(
-                  // onPressed: (){context.read<AuthBloc>().add(LogoutRequested());},
-                  // icon: Icon(
-                  //   Icons.login_outlined,
-                  //   //context.isMobile? 4.wp: 2.wp,
-                  //   size: context.isMobile? 5.wp: 2.wp,
-                  //   color: colorScheme.primary,
-                  // )),
+                    IconButton(
+                  onPressed: (){
+                    context.read<AuthStatusBloc>().add(LogoutRequested());
+                    
+                    },
+                  icon: Icon(
+                    Icons.logout_outlined,
+                    //context.isMobile? 4.wp: 2.wp,
+                    size: context.isMobile? 5.wp: 2.wp,
+                    color: colorScheme.primary,
+                  )),
                   BlocBuilder<LocalBloc, LocalState>(
                     builder: (context, state) {
                       return IconButton(

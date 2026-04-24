@@ -5,4 +5,6 @@ sealed class OnBoardingEvent {}
 
 // class CheckOnboarding extends OnBoardingEvent{}
 
+class AppStarted extends OnBoardingEvent{}
+
 class CompleteOnboarding extends OnBoardingEvent{}

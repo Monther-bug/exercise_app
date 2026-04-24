@@ -28,5 +28,9 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       }
       
     });
+
+    on<ClearFavorites>((event, emit) {
+      emit(FavoritesLoaded(exercise: const []));
+    });
   }
 }
